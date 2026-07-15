@@ -1,0 +1,31 @@
+{
+  "_comentario": "Adjacência física de teclas no layout ABNT2 (teclado PT-BR/PT padrão de PC), linha a linha. Cada letra lista as teclas fisicamente vizinhas (esquerda/direita na mesma linha, e as duas mais próximas na linha de cima/baixo). Escopo desta primeira versão: só letras base sem acento — teclas mortas acentuadas (~ ´ ` ^) ficam para uma extensão futura documentada, não escondida.",
+  "adjacencias": {
+    "q": ["w", "a"],
+    "w": ["q", "e", "a", "s"],
+    "e": ["w", "r", "s", "d"],
+    "r": ["e", "t", "d", "f"],
+    "t": ["r", "y", "f", "g"],
+    "y": ["t", "u", "g", "h"],
+    "u": ["y", "i", "h", "j"],
+    "i": ["u", "o", "j", "k"],
+    "o": ["i", "p", "k", "l"],
+    "p": ["o", "l"],
+    "a": ["q", "w", "s", "z"],
+    "s": ["a", "w", "e", "d", "z", "x"],
+    "d": ["s", "e", "r", "f", "x", "c"],
+    "f": ["d", "r", "t", "g", "c", "v"],
+    "g": ["f", "t", "y", "h", "v", "b"],
+    "h": ["g", "y", "u", "j", "b", "n"],
+    "j": ["h", "u", "i", "k", "n", "m"],
+    "k": ["j", "i", "o", "l", "m"],
+    "l": ["k", "o", "p"],
+    "z": ["a", "s", "x"],
+    "x": ["z", "s", "d", "c"],
+    "c": ["x", "d", "f", "v"],
+    "v": ["c", "f", "g", "b"],
+    "b": ["v", "g", "h", "n"],
+    "n": ["b", "h", "j", "m"],
+    "m": ["n", "j", "k"]
+  }
+}

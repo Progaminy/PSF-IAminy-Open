@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aulas — PSF-IAminy</title>
+<link rel="stylesheet" href="/estatico/estilo.css">
+<style>
+  :root { --acento-mat: #1f8f83; }
+  @media (prefers-color-scheme: dark) { :root { --acento-mat: #5ec9c0; } }
+
+  html, body { height: 100%; margin: 0; }
+  #app { height: 100vh; display: grid; grid-template-columns: 300px 1fr; }
+
+  #lateral { border-right: 1px solid var(--borda); display: flex; flex-direction: column; padding: 14px; overflow: hidden; }
+  #lateral a.voltar { font-size: 0.75rem; color: var(--texto-suave); text-decoration: none; }
+  #lateral a.voltar:hover { color: var(--acento); }
+  #lateral h1 { font-size: 1.05rem; margin: 8px 0 12px; }
+
+  #areas { display: flex; gap: 6px; margin-bottom: 10px; }
+  .area-btn { flex: 1; font-size: 0.78rem; padding: 7px; border-radius: var(--raio); border: 1px solid var(--borda); background: transparent; color: var(--texto-suave); cursor: pointer; }
+  .area-btn.ativo[data-area="portugues"] { background: var(--acento); color: var(--acento-texto); border-color: var(--acento); }
+  .area-btn.ativo[data-area="matematica"] { background: var(--acento-mat); color: var(--acento-texto); border-color: var(--acento-mat); }
+  .area-btn.ativo[data-area="problemas"] { background: #b8620a; color: #fff; border-color: #b8620a; }
+
+  .aberto-badge { display: inline-block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 10px; background: rgba(184, 98, 10, 0.15); color: #b8620a; margin-bottom: 8px; }
+  .aula .bloco { font-size: 0.68rem; color: var(--texto-suave); margin-bottom: 10px; }
+  .aula .plano li { font-size: 0.8rem; margin-bottom: 4px; }
+
+  #busca { width: 100%; font-size: 0.8rem; padding: 7px 9px; border-radius: var(--raio); border: 1px solid var(--borda); background: var(--bg-terciario); color: var(--texto); margin-bottom: 8px; box-sizing: border-box; }
+  #contador-pacotes { font-size: 0.68rem; color: var(--texto-suave); margin-bottom: 8px; }
+
+  #lista-pacotes { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; }
+  #lista-pacotes li { padding: 7px 9px; border-radius: var(--raio); cursor: pointer; font-size: 0.78rem; color: var(--texto-suave); }
+  #lista-pacotes li:hover { background: var(--bg-terciario); color: var(--texto); }
+  #lista-pacotes li.selecionado { background: var(--acento); color: var(--acento-texto); }
+  #lista-pacotes li .codigo { font-family: ui-monospace, monospace; font-size: 0.65rem; opacity: 0.75; display: block; }
+
+  #conteudo { overflow-y: auto; padding: 24px 32px; }
+  #vazio { color: var(--texto-suave); font-size: 0.85rem; }
+
+  .aula { max-width: 720px; margin: 0 auto 28px; padding: 18px 20px; background: var(--bg-secundario); border: 1px solid var(--borda); border-radius: var(--raio); }
+  .aula h2 { margin: 0 0 2px; font-size: 1.15rem; }
+  .aula .tema { font-size: 0.66rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .aula pre.texto-aula { white-space: pre-wrap; font-family: inherit; font-size: 0.86rem; line-height: 1.55; margin: 0 0 12px; }
+  .aula .incompleta { color: #b8620a; font-size: 0.72rem; margin-bottom: 8px; }
+
+  .acoes-aula { display: flex; gap: 8px; }
+  .acoes-aula button { font-size: 0.76rem; padding: 6px 12px; border-radius: 20px; border: 1px solid var(--borda); background: transparent; color: var(--texto-suave); cursor: pointer; }
+  .acoes-aula button:hover { color: var(--texto); border-color: var(--acento); }
+  .acoes-aula a.treinar { font-size: 0.76rem; padding: 6px 12px; border-radius: 20px; border: 1px solid var(--acento); background: var(--acento); color: var(--acento-texto); text-decoration: none; }
+
+  .painel-lista { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--borda); }
+  .painel-lista .item { font-size: 0.8rem; margin-bottom: 8px; }
+  .painel-lista .item .pergunta { color: var(--texto); }
+  .painel-lista .item .resposta { color: var(--texto-suave); margin-top: 2px; }
+  .painel-lista .item .tag { font-family: ui-monospace, monospace; font-size: 0.62rem; color: var(--texto-suave); margin-right: 6px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="lateral">
+    <a class="voltar" href="/">← voltar ao chat</a>
+    <h1>Aulas</h1>
+    <div id="areas" role="group" aria-label="Área do conhecimento">
+      <button class="area-btn ativo" data-area="portugues" aria-pressed="true">Português</button>
+      <button class="area-btn" data-area="matematica" aria-pressed="false">Matemática</button>
+      <button class="area-btn" data-area="problemas" aria-pressed="false">Em aberto</button>
+    </div>
+    <input id="busca" type="text" placeholder="Buscar pacote ou conceito…" aria-label="Buscar pacote ou conceito" autocomplete="off">
+    <div id="contador-pacotes" aria-live="polite"></div>
+    <ol id="lista-pacotes" role="listbox" aria-label="Pacotes"></ol>
+  </aside>
+  <main id="conteudo">
+    <div id="vazio">Escolha um pacote na barra lateral. Cada pacote é um trecho reto do grafo de dependências real — termina só quando encontra um entroncamento de verdade.</div>
+    <div id="aulas-pacote"></div>
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var estado = { area: "portugues", pacotes: [], pacoteAtual: null, problemas: [] };
+
+  var elAreas = document.querySelectorAll(".area-btn");
+  var elBusca = document.getElementById("busca");
+  var elLista = document.getElementById("lista-pacotes");
+  var elContador = document.getElementById("contador-pacotes");
+  var elVazio = document.getElementById("vazio");
+  var elAulasPacote = document.getElementById("aulas-pacote");
+
+  function carregarLista(area) {
+    if (area === "problemas") {
+      fetch("/api/problemas-abertos")
+        .then(function (r) { return r.json(); })
+        .then(function (dados) {
+          estado.problemas = dados.problemas || [];
+          renderizarLista();
+        });
+      return;
+    }
+    fetch("/api/aulas/" + area)
+      .then(function (r) { return r.json(); })
+      .then(function (dados) {
+        estado.pacotes = dados.pacotes || [];
+        renderizarLista();
+      });
+  }
+
+  function renderizarLista() {
+    if (estado.area === "problemas") {
+      renderizarListaProblemas();
+      return;
+    }
+    var filtro = elBusca.value.trim().toLowerCase();
+    elLista.innerHTML = "";
+    var visiveis = estado.pacotes.filter(function (p) {
+      if (!filtro) return true;
+      return p.codigo.toLowerCase().indexOf(filtro) !== -1 ||
+        p.conceitos.some(function (c) { return c.toLowerCase().indexOf(filtro) !== -1; });
+    });
+    elContador.textContent = visiveis.length + " de " + estado.pacotes.length + " pacotes";
+    visiveis.slice(0, 400).forEach(function (p) {
+      var li = document.createElement("li");
+      li.innerHTML = '<span class="codigo">' + p.codigo + "</span>" + p.conceitos.join(" → ");
+      li.setAttribute("role", "option");
+      li.setAttribute("tabindex", "0");
+      li.addEventListener("click", function () { selecionarPacote(p.codigo); });
+      li.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); selecionarPacote(p.codigo); }
+      });
+      var selecionado = estado.pacoteAtual === p.codigo;
+      li.setAttribute("aria-selected", selecionado ? "true" : "false");
+      if (selecionado) li.classList.add("selecionado");
+      elLista.appendChild(li);
+    });
+  }
+
+  function renderizarListaProblemas() {
+    var filtro = elBusca.value.trim().toLowerCase();
+    elLista.innerHTML = "";
+    var visiveis = estado.problemas.filter(function (p) {
+      return !filtro || p.titulo.toLowerCase().indexOf(filtro) !== -1 || p.bloco.toLowerCase().indexOf(filtro) !== -1;
+    });
+    elContador.textContent = visiveis.length + " de " + estado.problemas.length + " problemas em aberto";
+    visiveis.forEach(function (p) {
+      var li = document.createElement("li");
+      li.innerHTML = '<span class="codigo">' + p.id + " · " + p.bloco + "</span>" + p.titulo;
+      li.setAttribute("role", "option");
+      li.setAttribute("tabindex", "0");
+      li.addEventListener("click", function () { selecionarProblema(p); });
+      li.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); selecionarProblema(p); }
+      });
+      var selecionado = estado.pacoteAtual === p.id;
+      li.setAttribute("aria-selected", selecionado ? "true" : "false");
+      if (selecionado) li.classList.add("selecionado");
+      elLista.appendChild(li);
+    });
+  }
+
+  function selecionarProblema(problema) {
+    estado.pacoteAtual = problema.id;
+    renderizarLista();
+    elVazio.style.display = "none";
+    var art = document.createElement("article");
+    art.className = "aula";
+    art.innerHTML =
+      '<span class="aberto-badge">Em aberto -- sem prova PSF</span>' +
+      "<h2>" + problema.titulo + "</h2>" +
+      '<div class="bloco">' + problema.bloco + "</div>" +
+      "<pre class=\"texto-aula\"></pre>" +
+      '<div class="detail-label" style="font-size:0.68rem;color:var(--texto-suave);text-transform:uppercase;letter-spacing:0.06em;margin:14px 0 6px;">Plano de investigação</div>' +
+      "<ol class=\"plano\"></ol>";
+    art.querySelector(".texto-aula").textContent = problema.resposta;
+    var ol = art.querySelector(".plano");
+    (problema.plano_investigacao || []).forEach(function (passo) {
+      var li = document.createElement("li");
+      li.textContent = passo;
+      ol.appendChild(li);
+    });
+    elAulasPacote.innerHTML = "";
+    elAulasPacote.appendChild(art);
+  }
+
+  function selecionarPacote(codigo) {
+    estado.pacoteAtual = codigo;
+    renderizarLista();
+    elVazio.style.display = "none";
+    elAulasPacote.innerHTML = '<p style="color:var(--texto-suave);font-size:0.8rem;">A carregar…</p>';
+    fetch("/api/aulas/" + estado.area + "/" + encodeURIComponent(codigo))
+      .then(function (r) { return r.json(); })
+      .then(renderizarAulas);
+  }
+
+  var contadorPainel = 0;
+
+  function renderizarAulas(dados) {
+    elAulasPacote.innerHTML = "";
+    (dados.aulas || []).forEach(function (aula) {
+      var art = document.createElement("article");
+      art.className = "aula";
+      var idPainel = "painel-aula-" + (contadorPainel++);
+      var avisoIncompleta = aula.completa ? "" : '<div class="incompleta">Aula sem explicação ou exemplo completo -- honestamente sinalizado, não escondido.</div>';
+      art.innerHTML =
+        "<h2>" + aula.conceito + "</h2>" +
+        '<div class="tema">' + aula.tema + "</div>" +
+        avisoIncompleta +
+        "<pre class=\"texto-aula\"></pre>" +
+        '<div class="acoes-aula">' +
+        '<button data-acao="exercicios" aria-expanded="false" aria-controls="' + idPainel + '">Exercícios</button>' +
+        '<button data-acao="corrigir" aria-expanded="false" aria-controls="' + idPainel + '">Corrigir</button>' +
+        '<a class="treinar" target="_blank" href="/estatico/treinar.html?area=' + estado.area + '&pacote=' + encodeURIComponent(dados.codigo) + '">Treinar ↗</a>' +
+        "</div>" +
+        '<div class="painel-lista" id="' + idPainel + '" hidden aria-live="polite"></div>';
+      art.querySelector(".texto-aula").textContent = aula.texto;
+      var painel = art.querySelector(".painel-lista");
+      var btnExercicios = art.querySelector('[data-acao="exercicios"]');
+      var btnCorrigir = art.querySelector('[data-acao="corrigir"]');
+      btnExercicios.addEventListener("click", function () {
+        mostrarExercicios(painel, aula.exercicios);
+        btnExercicios.setAttribute("aria-expanded", "true");
+        btnCorrigir.setAttribute("aria-expanded", "false");
+      });
+      btnCorrigir.addEventListener("click", function () {
+        mostrarCorrigidos(painel, aula.corrigidos);
+        btnCorrigir.setAttribute("aria-expanded", "true");
+        btnExercicios.setAttribute("aria-expanded", "false");
+      });
+      elAulasPacote.appendChild(art);
+    });
+  }
+
+  function mostrarExercicios(painel, exercicios) {
+    painel.hidden = false;
+    painel.innerHTML = "";
+    if (!exercicios.length) {
+      painel.innerHTML = '<p style="color:var(--texto-suave);font-size:0.78rem;">Nenhum exercício possível -- este conceito não tem dependência, dependente, função ou exemplo suficiente registado.</p>';
+      return;
+    }
+    exercicios.forEach(function (ex) {
+      var div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = '<span class="tag">' + ex.tipo + '</span><span class="pergunta">' + ex.pergunta + "</span>";
+      painel.appendChild(div);
+    });
+  }
+
+  function mostrarCorrigidos(painel, corrigidos) {
+    painel.hidden = false;
+    painel.innerHTML = "";
+    corrigidos.forEach(function (c) {
+      var div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = '<div class="pergunta">' + c.pergunta + '</div><div class="resposta">✓ ' + c.resposta + "</div>";
+      painel.appendChild(div);
+    });
+  }
+
+  elAreas.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      elAreas.forEach(function (b) {
+        b.classList.toggle("ativo", b === btn);
+        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+      });
+      estado.area = btn.dataset.area;
+      estado.pacoteAtual = null;
+      elVazio.style.display = "";
+      elAulasPacote.innerHTML = "";
+      carregarLista(estado.area);
+    });
+  });
+  elBusca.addEventListener("input", renderizarLista);
+
+  carregarLista(estado.area);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,3982 @@
+[
+  {
+    "lema": "o",
+    "classe": "determinante",
+    "definicoes": [
+      "Artigo definido que individualiza um nome."
+    ],
+    "formas": {
+      "o": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "a": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "os": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "as": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "um",
+    "classe": "determinante",
+    "definicoes": [
+      "Artigo indefinido ou quantificador unitário."
+    ],
+    "formas": {
+      "um": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "uma": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "uns": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "umas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "menino",
+    "classe": "substantivo",
+    "definicoes": [
+      "Criança ou jovem do sexo masculino."
+    ],
+    "formas": {
+      "menino": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "meninos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "menina": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "meninas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "gato",
+    "classe": "substantivo",
+    "definicoes": [
+      "Mamífero felino doméstico."
+    ],
+    "formas": {
+      "gato": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "gatos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "gata": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "gatas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "casa",
+    "classe": "substantivo",
+    "definicoes": [
+      "Edifício destinado a habitação."
+    ],
+    "formas": {
+      "casa": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "casas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "motor",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sistema que produz movimento ou executa um processamento."
+    ],
+    "formas": {
+      "motor": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "motores": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "português",
+    "classe": "substantivo",
+    "definicoes": [
+      "Língua românica usada em Portugal, no Brasil, em Angola, Moçambique e outros países."
+    ],
+    "formas": {
+      "português": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "portugueses": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "portuguesa": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "portuguesas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "português",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Relativo à língua portuguesa ou a Portugal."
+    ],
+    "formas": {
+      "português": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "portugueses": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "portuguesa": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "portuguesas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "língua",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sistema de comunicação formado por sons, palavras, regras e usos sociais."
+    ],
+    "formas": {
+      "língua": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "línguas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "som",
+    "classe": "substantivo",
+    "definicoes": [
+      "Unidade acústica percebida pela audição."
+    ],
+    "formas": {
+      "som": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "sons": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "letra",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sinal gráfico usado para representar sons ou unidades da escrita."
+    ],
+    "formas": {
+      "letra": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "letras": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "palavra",
+    "classe": "substantivo",
+    "definicoes": [
+      "Unidade linguística que combina forma e significado."
+    ],
+    "formas": {
+      "palavra": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "palavras": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "frase",
+    "classe": "substantivo",
+    "definicoes": [
+      "Enunciado com sentido completo num contexto."
+    ],
+    "formas": {
+      "frase": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "frases": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "oração",
+    "classe": "substantivo",
+    "definicoes": [
+      "Unidade sintática organizada em torno de um verbo."
+    ],
+    "formas": {
+      "oração": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "orações": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "texto",
+    "classe": "substantivo",
+    "definicoes": [
+      "Conjunto organizado de frases ou enunciados."
+    ],
+    "formas": {
+      "texto": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "textos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "livro",
+    "classe": "substantivo",
+    "definicoes": [
+      "Obra composta por texto organizado em partes."
+    ],
+    "formas": {
+      "livro": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "livros": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "dicionário",
+    "classe": "substantivo",
+    "definicoes": [
+      "Repositório de palavras com informação lexical e significado."
+    ],
+    "formas": {
+      "dicionário": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "dicionários": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "gramática",
+    "classe": "substantivo",
+    "definicoes": [
+      "Conjunto de regras que descrevem a construção de palavras, frases e textos."
+    ],
+    "formas": {
+      "gramática": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "gramáticas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "alfabeto",
+    "classe": "substantivo",
+    "definicoes": [
+      "Conjunto ordenado de letras usadas por uma escrita."
+    ],
+    "formas": {
+      "alfabeto": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "alfabetos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "acento",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sinal gráfico que modifica a leitura ou a tonicidade de uma letra."
+    ],
+    "formas": {
+      "acento": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "acentos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ponto",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sinal de pontuação ou marca gráfica."
+    ],
+    "formas": {
+      "ponto": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "pontos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "significado",
+    "classe": "substantivo",
+    "definicoes": [
+      "Conteúdo semântico associado a uma forma linguística."
+    ],
+    "formas": {
+      "significado": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "significados": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "regra",
+    "classe": "substantivo",
+    "definicoes": [
+      "Critério que orienta ou valida uma construção linguística."
+    ],
+    "formas": {
+      "regra": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "regras": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "aplicação",
+    "classe": "substantivo",
+    "definicoes": [
+      "Uso prático de uma regra, método ou conhecimento."
+    ],
+    "formas": {
+      "aplicação": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "aplicações": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "construção",
+    "classe": "substantivo",
+    "definicoes": [
+      "Processo de formar uma estrutura a partir de partes menores."
+    ],
+    "formas": {
+      "construção": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "construções": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "atual",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Relativo ao estado presente de um processo."
+    ],
+    "formas": {
+      "atual": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "atuais": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "natural",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que segue uma ordem espontânea, orgânica ou esperada."
+    ],
+    "formas": {
+      "natural": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "naturais": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "isolado",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Separado dos demais elementos."
+    ],
+    "formas": {
+      "isolado": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "isolados": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "isolada": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "isoladas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "excelente",
+    "classe": "adjetivo",
+    "definicoes": [
+      "De qualidade muito elevada."
+    ],
+    "formas": {
+      "excelente": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "excelentes": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "bonito",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que apresenta beleza ou agrada aos sentidos."
+    ],
+    "formas": {
+      "bonito": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "bonitos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "bonita": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "bonitas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "grande",
+    "classe": "adjetivo",
+    "definicoes": [
+      "De dimensão, intensidade ou importância elevada."
+    ],
+    "formas": {
+      "grande": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "grandes": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "feliz",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que sente ou manifesta felicidade."
+    ],
+    "formas": {
+      "feliz": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "felizes": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "eu",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome pessoal da primeira pessoa do singular."
+    ],
+    "formas": {
+      "eu": {
+        "numero": "singular",
+        "pessoa": 1
+      }
+    }
+  },
+  {
+    "lema": "ele",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome pessoal da terceira pessoa."
+    ],
+    "formas": {
+      "ele": {
+        "genero": "masculino",
+        "numero": "singular",
+        "pessoa": 3
+      },
+      "ela": {
+        "genero": "feminino",
+        "numero": "singular",
+        "pessoa": 3
+      },
+      "eles": {
+        "genero": "masculino",
+        "numero": "plural",
+        "pessoa": 3
+      },
+      "elas": {
+        "genero": "feminino",
+        "numero": "plural",
+        "pessoa": 3
+      }
+    }
+  },
+  {
+    "lema": "nós",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome pessoal da primeira pessoa do plural."
+    ],
+    "formas": {
+      "nós": {
+        "numero": "plural",
+        "pessoa": 1
+      }
+    }
+  },
+  {
+    "lema": "ser",
+    "classe": "verbo",
+    "definicoes": [
+      "Existir ou apresentar determinada característica."
+    ],
+    "formas": {
+      "ser": {
+        "forma": "infinitivo"
+      },
+      "sou": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "é": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "somos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "são": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "fui": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "foi": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "fomos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "foram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "comer",
+    "classe": "verbo",
+    "definicoes": [
+      "Ingerir alimento."
+    ],
+    "formas": {
+      "comer": {
+        "forma": "infinitivo"
+      },
+      "como": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "come": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "comemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "comem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "estudar",
+    "classe": "verbo",
+    "definicoes": [
+      "Aplicar atenção à aprendizagem de algo."
+    ],
+    "formas": {
+      "estudar": {
+        "forma": "infinitivo"
+      },
+      "estudo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "estuda": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "estudamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "estudam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "não",
+    "classe": "adverbio",
+    "definicoes": [
+      "Advérbio de negação."
+    ],
+    "formas": {
+      "não": {}
+    }
+  },
+  {
+    "lema": "rapidamente",
+    "classe": "adverbio",
+    "definicoes": [
+      "De modo rápido."
+    ],
+    "formas": {
+      "rapidamente": {}
+    }
+  },
+  {
+    "lema": "de",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que exprime origem, posse, matéria ou relação."
+    ],
+    "formas": {
+      "de": {},
+      "do": {
+        "contracao": "de+o"
+      },
+      "da": {
+        "contracao": "de+a"
+      }
+    }
+  },
+  {
+    "lema": "em",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que frequentemente exprime lugar ou tempo."
+    ],
+    "formas": {
+      "em": {},
+      "no": {
+        "contracao": "em+o"
+      },
+      "na": {
+        "contracao": "em+a"
+      }
+    }
+  },
+  {
+    "lema": "com",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que pode exprimir companhia ou instrumento."
+    ],
+    "formas": {
+      "com": {}
+    }
+  },
+  {
+    "lema": "para",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que pode exprimir destino ou finalidade."
+    ],
+    "formas": {
+      "para": {}
+    }
+  },
+  {
+    "lema": "e",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Conjunção coordenativa aditiva."
+    ],
+    "formas": {
+      "e": {}
+    }
+  },
+  {
+    "lema": "mas",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Conjunção coordenativa adversativa."
+    ],
+    "formas": {
+      "mas": {}
+    }
+  },
+  {
+    "lema": "olá",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Saudação usada ao encontrar alguém."
+    ],
+    "formas": {
+      "olá": {}
+    }
+  },
+  {
+    "lema": "oi",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Saudação informal usada ao encontrar alguém."
+    ],
+    "formas": {
+      "oi": {}
+    }
+  },
+  {
+    "lema": "tchau",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Expressão de despedida informal."
+    ],
+    "formas": {
+      "tchau": {}
+    }
+  },
+  {
+    "lema": "adeus",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Expressão de despedida, geralmente definitiva ou formal."
+    ],
+    "formas": {
+      "adeus": {}
+    }
+  },
+  {
+    "lema": "obrigado",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Expressão de agradecimento."
+    ],
+    "formas": {
+      "obrigado": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "obrigada": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "obrigados": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "obrigadas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "desculpa",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Pedido de perdão ou forma de chamar a atenção com educação."
+    ],
+    "formas": {
+      "desculpa": {}
+    }
+  },
+  {
+    "lema": "parabéns",
+    "classe": "interjeicao",
+    "definicoes": [
+      "Expressão usada para felicitar alguém."
+    ],
+    "formas": {
+      "parabéns": {}
+    }
+  },
+  {
+    "lema": "dois",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 2."
+    ],
+    "formas": {
+      "dois": {
+        "genero": "masculino"
+      },
+      "duas": {
+        "genero": "feminino"
+      }
+    }
+  },
+  {
+    "lema": "três",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 3."
+    ],
+    "formas": {
+      "três": {}
+    }
+  },
+  {
+    "lema": "quatro",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 4."
+    ],
+    "formas": {
+      "quatro": {}
+    }
+  },
+  {
+    "lema": "cinco",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 5."
+    ],
+    "formas": {
+      "cinco": {}
+    }
+  },
+  {
+    "lema": "seis",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 6."
+    ],
+    "formas": {
+      "seis": {}
+    }
+  },
+  {
+    "lema": "sete",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 7."
+    ],
+    "formas": {
+      "sete": {}
+    }
+  },
+  {
+    "lema": "oito",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 8."
+    ],
+    "formas": {
+      "oito": {}
+    }
+  },
+  {
+    "lema": "nove",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 9."
+    ],
+    "formas": {
+      "nove": {}
+    }
+  },
+  {
+    "lema": "dez",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 10."
+    ],
+    "formas": {
+      "dez": {}
+    }
+  },
+  {
+    "lema": "cem",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 100."
+    ],
+    "formas": {
+      "cem": {}
+    }
+  },
+  {
+    "lema": "mil",
+    "classe": "numeral",
+    "definicoes": [
+      "Numeral cardinal que designa a quantidade 1000."
+    ],
+    "formas": {
+      "mil": {}
+    }
+  },
+  {
+    "lema": "estar",
+    "classe": "verbo",
+    "definicoes": [
+      "Encontrar-se num lugar, estado ou condição."
+    ],
+    "formas": {
+      "estar": {
+        "forma": "infinitivo"
+      },
+      "estou": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "está": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "estamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "estão": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "estive": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "esteve": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "estivemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "estiveram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ter",
+    "classe": "verbo",
+    "definicoes": [
+      "Possuir algo, ou usado como auxiliar de tempos compostos."
+    ],
+    "formas": {
+      "ter": {
+        "forma": "infinitivo"
+      },
+      "tenho": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "tem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "temos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "têm": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "tive": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "teve": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "tivemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "tiveram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "fazer",
+    "classe": "verbo",
+    "definicoes": [
+      "Realizar ou produzir algo."
+    ],
+    "formas": {
+      "fazer": {
+        "forma": "infinitivo"
+      },
+      "faço": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "faz": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "fazemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "fazem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "fiz": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "fez": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "fizemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "fizeram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ir",
+    "classe": "verbo",
+    "definicoes": [
+      "Deslocar-se para um lugar."
+    ],
+    "formas": {
+      "ir": {
+        "forma": "infinitivo"
+      },
+      "vou": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "vai": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "vamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "vão": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "fui": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "foi": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "fomos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "foram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "querer",
+    "classe": "verbo",
+    "definicoes": [
+      "Ter vontade ou desejo de algo."
+    ],
+    "formas": {
+      "querer": {
+        "forma": "infinitivo"
+      },
+      "quero": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "quer": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "queremos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "querem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "quis": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "quisemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "quiseram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "querer",
+    "classe": "verbo",
+    "definicoes": [
+      "Ter vontade ou desejo de algo."
+    ],
+    "formas": {
+      "quis": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      }
+    }
+  },
+  {
+    "lema": "poder",
+    "classe": "verbo",
+    "definicoes": [
+      "Ter capacidade, permissão ou possibilidade de fazer algo."
+    ],
+    "formas": {
+      "poder": {
+        "forma": "infinitivo"
+      },
+      "posso": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "pode": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "podemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "podem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "pude": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "pôde": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "pudemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "puderam": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "saber",
+    "classe": "verbo",
+    "definicoes": [
+      "Ter conhecimento de algo."
+    ],
+    "formas": {
+      "saber": {
+        "forma": "infinitivo"
+      },
+      "sei": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "sabe": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "sabemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "sabem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "soube": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "soubemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "souberam": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "saber",
+    "classe": "verbo",
+    "definicoes": [
+      "Ter conhecimento de algo."
+    ],
+    "formas": {
+      "soube": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      }
+    }
+  },
+  {
+    "lema": "dizer",
+    "classe": "verbo",
+    "definicoes": [
+      "Exprimir por palavras."
+    ],
+    "formas": {
+      "dizer": {
+        "forma": "infinitivo"
+      },
+      "digo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "diz": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "dizemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "dizem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "disse": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "dissemos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "disseram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "dizer",
+    "classe": "verbo",
+    "definicoes": [
+      "Exprimir por palavras."
+    ],
+    "formas": {
+      "disse": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      }
+    }
+  },
+  {
+    "lema": "ver",
+    "classe": "verbo",
+    "definicoes": [
+      "Perceber pela visão, ou compreender."
+    ],
+    "formas": {
+      "ver": {
+        "forma": "infinitivo"
+      },
+      "vejo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "vê": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "vemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "veem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "vi": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "viu": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "vimos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "viram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "dar",
+    "classe": "verbo",
+    "definicoes": [
+      "Entregar ou transmitir algo a alguém."
+    ],
+    "formas": {
+      "dar": {
+        "forma": "infinitivo"
+      },
+      "dou": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "dá": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "damos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "dão": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      },
+      "dei": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "deu": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "demos": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "deram": {
+        "tempo": "pretérito perfeito",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "pensar",
+    "classe": "verbo",
+    "definicoes": [
+      "Formar ideias na mente; refletir."
+    ],
+    "formas": {
+      "pensar": {
+        "forma": "infinitivo"
+      },
+      "penso": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "pensa": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "pensamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "pensam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "gostar",
+    "classe": "verbo",
+    "definicoes": [
+      "Sentir agrado ou preferência por algo."
+    ],
+    "formas": {
+      "gostar": {
+        "forma": "infinitivo"
+      },
+      "gosto": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "gosta": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "gostamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "gostam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "aprender",
+    "classe": "verbo",
+    "definicoes": [
+      "Adquirir conhecimento ou capacidade nova."
+    ],
+    "formas": {
+      "aprender": {
+        "forma": "infinitivo"
+      },
+      "aprendo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "aprende": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "aprendemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "aprendem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ensinar",
+    "classe": "verbo",
+    "definicoes": [
+      "Transmitir conhecimento a alguém."
+    ],
+    "formas": {
+      "ensinar": {
+        "forma": "infinitivo"
+      },
+      "ensino": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "ensina": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "ensinamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "ensinam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "escrever",
+    "classe": "verbo",
+    "definicoes": [
+      "Representar palavras através de sinais gráficos."
+    ],
+    "formas": {
+      "escrever": {
+        "forma": "infinitivo"
+      },
+      "escrevo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "escreve": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "escrevemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "escrevem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ler",
+    "classe": "verbo",
+    "definicoes": [
+      "Interpretar um texto escrito."
+    ],
+    "formas": {
+      "ler": {
+        "forma": "infinitivo"
+      },
+      "leio": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "lê": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "lemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "leem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "falar",
+    "classe": "verbo",
+    "definicoes": [
+      "Exprimir-se através da voz."
+    ],
+    "formas": {
+      "falar": {
+        "forma": "infinitivo"
+      },
+      "falo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "fala": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "falamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "falam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ouvir",
+    "classe": "verbo",
+    "definicoes": [
+      "Perceber sons pela audição."
+    ],
+    "formas": {
+      "ouvir": {
+        "forma": "infinitivo"
+      },
+      "ouço": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "ouve": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "ouvimos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "ouvem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ajudar",
+    "classe": "verbo",
+    "definicoes": [
+      "Prestar auxílio a alguém."
+    ],
+    "formas": {
+      "ajudar": {
+        "forma": "infinitivo"
+      },
+      "ajudo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "ajuda": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "ajudamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "ajudam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "perguntar",
+    "classe": "verbo",
+    "definicoes": [
+      "Formular uma questão."
+    ],
+    "formas": {
+      "perguntar": {
+        "forma": "infinitivo"
+      },
+      "pergunto": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "pergunta": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "perguntamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "perguntam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "responder",
+    "classe": "verbo",
+    "definicoes": [
+      "Dar resposta a uma pergunta."
+    ],
+    "formas": {
+      "responder": {
+        "forma": "infinitivo"
+      },
+      "respondo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "responde": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "respondemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "respondem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "entender",
+    "classe": "verbo",
+    "definicoes": [
+      "Compreender o sentido de algo."
+    ],
+    "formas": {
+      "entender": {
+        "forma": "infinitivo"
+      },
+      "entendo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "entende": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "entendemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "entendem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "explicar",
+    "classe": "verbo",
+    "definicoes": [
+      "Tornar claro ou compreensível algo."
+    ],
+    "formas": {
+      "explicar": {
+        "forma": "infinitivo"
+      },
+      "explico": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "explica": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "explicamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "explicam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "resolver",
+    "classe": "verbo",
+    "definicoes": [
+      "Encontrar a solução de um problema ou exercício."
+    ],
+    "formas": {
+      "resolver": {
+        "forma": "infinitivo"
+      },
+      "resolvo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "resolve": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "resolvemos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "resolvem": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "calcular",
+    "classe": "verbo",
+    "definicoes": [
+      "Determinar um valor através de operações matemáticas."
+    ],
+    "formas": {
+      "calcular": {
+        "forma": "infinitivo"
+      },
+      "calculo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "calcula": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "calculamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "calculam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "contar",
+    "classe": "verbo",
+    "definicoes": [
+      "Enumerar unidades para determinar uma quantidade."
+    ],
+    "formas": {
+      "contar": {
+        "forma": "infinitivo"
+      },
+      "conto": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "conta": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "contamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "contam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "somar",
+    "classe": "verbo",
+    "definicoes": [
+      "Juntar quantidades para obter um total."
+    ],
+    "formas": {
+      "somar": {
+        "forma": "infinitivo"
+      },
+      "somo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "soma": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "somamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "somam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "comparar",
+    "classe": "verbo",
+    "definicoes": [
+      "Observar semelhanças ou diferenças entre duas coisas."
+    ],
+    "formas": {
+      "comparar": {
+        "forma": "infinitivo"
+      },
+      "comparo": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "singular"
+      },
+      "compara": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "singular"
+      },
+      "comparamos": {
+        "tempo": "presente",
+        "pessoa": 1,
+        "numero": "plural"
+      },
+      "comparam": {
+        "tempo": "presente",
+        "pessoa": 3,
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "escola",
+    "classe": "substantivo",
+    "definicoes": [
+      "Instituição onde se ensina e se aprende."
+    ],
+    "formas": {
+      "escola": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "escolas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "professor",
+    "classe": "substantivo",
+    "definicoes": [
+      "Pessoa que ensina."
+    ],
+    "formas": {
+      "professor": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "professora": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "professores": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "professoras": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "aluno",
+    "classe": "substantivo",
+    "definicoes": [
+      "Pessoa que aprende com um professor ou motor de ensino."
+    ],
+    "formas": {
+      "aluno": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "aluna": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "alunos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "alunas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "número",
+    "classe": "substantivo",
+    "definicoes": [
+      "Entidade matemática que exprime uma quantidade ou posição."
+    ],
+    "formas": {
+      "número": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "números": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "exercício",
+    "classe": "substantivo",
+    "definicoes": [
+      "Atividade proposta para praticar um conhecimento."
+    ],
+    "formas": {
+      "exercício": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "exercícios": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "resposta",
+    "classe": "substantivo",
+    "definicoes": [
+      "Aquilo que se diz ou escreve para responder a uma pergunta."
+    ],
+    "formas": {
+      "resposta": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "respostas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "pergunta",
+    "classe": "substantivo",
+    "definicoes": [
+      "Enunciado que pede uma resposta ou informação."
+    ],
+    "formas": {
+      "pergunta": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "perguntas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "aula",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sessão de ensino sobre um assunto."
+    ],
+    "formas": {
+      "aula": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "aulas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "tempo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Duração ou sucessão dos acontecimentos."
+    ],
+    "formas": {
+      "tempo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "tempos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "dia",
+    "classe": "substantivo",
+    "definicoes": [
+      "Período de 24 horas, ou a parte clara desse período."
+    ],
+    "formas": {
+      "dia": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "dias": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ano",
+    "classe": "substantivo",
+    "definicoes": [
+      "Período de doze meses."
+    ],
+    "formas": {
+      "ano": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "anos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "amigo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Pessoa com quem se tem uma relação de afeto e confiança."
+    ],
+    "formas": {
+      "amigo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "amiga": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "amigos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "amigas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "família",
+    "classe": "substantivo",
+    "definicoes": [
+      "Grupo de pessoas unidas por laços de parentesco."
+    ],
+    "formas": {
+      "família": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "famílias": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "mãe",
+    "classe": "substantivo",
+    "definicoes": [
+      "Progenitora feminina."
+    ],
+    "formas": {
+      "mãe": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "mães": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "pai",
+    "classe": "substantivo",
+    "definicoes": [
+      "Progenitor masculino."
+    ],
+    "formas": {
+      "pai": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "pais": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "mundo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Conjunto de tudo o que existe; a Terra e quem nela vive."
+    ],
+    "formas": {
+      "mundo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "mundos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "vida",
+    "classe": "substantivo",
+    "definicoes": [
+      "Estado de quem existe e se desenvolve; conjunto de experiências de alguém."
+    ],
+    "formas": {
+      "vida": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "vidas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "trabalho",
+    "classe": "substantivo",
+    "definicoes": [
+      "Atividade realizada para produzir algo ou obter sustento."
+    ],
+    "formas": {
+      "trabalho": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "trabalhos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "jogo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Atividade com regras, feita por diversão ou competição."
+    ],
+    "formas": {
+      "jogo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "jogos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "computador",
+    "classe": "substantivo",
+    "definicoes": [
+      "Máquina que processa informação segundo instruções."
+    ],
+    "formas": {
+      "computador": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "computadores": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "ideia",
+    "classe": "substantivo",
+    "definicoes": [
+      "Representação mental de algo; pensamento."
+    ],
+    "formas": {
+      "ideia": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "ideias": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "problema",
+    "classe": "substantivo",
+    "definicoes": [
+      "Questão que exige solução; dificuldade a resolver."
+    ],
+    "formas": {
+      "problema": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "problemas": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "solução",
+    "classe": "substantivo",
+    "definicoes": [
+      "Resposta ou caminho que resolve um problema."
+    ],
+    "formas": {
+      "solução": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "soluções": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "conhecimento",
+    "classe": "substantivo",
+    "definicoes": [
+      "Aquilo que se sabe através do estudo ou da experiência."
+    ],
+    "formas": {
+      "conhecimento": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "conhecimentos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "sujeito",
+    "classe": "substantivo",
+    "definicoes": [
+      "Termo da oração sobre o qual se declara algo, geralmente ligado ao verbo."
+    ],
+    "formas": {
+      "sujeito": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "sujeitos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "predicado",
+    "classe": "substantivo",
+    "definicoes": [
+      "Tudo o que se diz do sujeito numa oração, organizado em torno do verbo."
+    ],
+    "formas": {
+      "predicado": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "predicados": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "substantivo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Classe de palavras que nomeia seres, objetos, ideias ou sentimentos."
+    ],
+    "formas": {
+      "substantivo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "substantivos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "verbo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Classe de palavras que exprime ação, estado ou processo."
+    ],
+    "formas": {
+      "verbo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "verbos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "adjetivo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Classe de palavras que atribui qualidade a um substantivo."
+    ],
+    "formas": {
+      "adjetivo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "adjetivos": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "advérbio",
+    "classe": "substantivo",
+    "definicoes": [
+      "Classe de palavras que modifica um verbo, adjetivo ou outro advérbio."
+    ],
+    "formas": {
+      "advérbio": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "advérbios": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "pronome",
+    "classe": "substantivo",
+    "definicoes": [
+      "Classe de palavras que substitui ou acompanha um substantivo."
+    ],
+    "formas": {
+      "pronome": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "pronomes": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "sílaba",
+    "classe": "substantivo",
+    "definicoes": [
+      "Unidade sonora pronunciada numa só emissão de voz."
+    ],
+    "formas": {
+      "sílaba": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "sílabas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "vogal",
+    "classe": "substantivo",
+    "definicoes": [
+      "Som produzido sem obstrução do ar, ou a letra que o representa (a, e, i, o, u)."
+    ],
+    "formas": {
+      "vogal": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "vogais": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "consoante",
+    "classe": "substantivo",
+    "definicoes": [
+      "Som produzido com obstrução do ar, ou a letra que o representa."
+    ],
+    "formas": {
+      "consoante": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "consoantes": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "conta",
+    "classe": "substantivo",
+    "definicoes": [
+      "Operação aritmética a resolver."
+    ],
+    "formas": {
+      "conta": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "contas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "soma",
+    "classe": "substantivo",
+    "definicoes": [
+      "Resultado de somar; adição."
+    ],
+    "formas": {
+      "soma": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "somas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "subtração",
+    "classe": "substantivo",
+    "definicoes": [
+      "Operação de retirar uma quantidade de outra."
+    ],
+    "formas": {
+      "subtração": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "subtrações": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "multiplicação",
+    "classe": "substantivo",
+    "definicoes": [
+      "Operação de somar um número consigo mesmo várias vezes."
+    ],
+    "formas": {
+      "multiplicação": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "multiplicações": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "divisão",
+    "classe": "substantivo",
+    "definicoes": [
+      "Operação de repartir uma quantidade em partes iguais."
+    ],
+    "formas": {
+      "divisão": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "divisões": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "total",
+    "classe": "substantivo",
+    "definicoes": [
+      "Resultado final de uma soma ou contagem."
+    ],
+    "formas": {
+      "total": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "totais": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "resultado",
+    "classe": "substantivo",
+    "definicoes": [
+      "Valor ou consequência final de uma operação ou processo."
+    ],
+    "formas": {
+      "resultado": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "resultados": {
+        "genero": "masculino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "fração",
+    "classe": "substantivo",
+    "definicoes": [
+      "Número que representa uma parte de um todo dividido em partes iguais."
+    ],
+    "formas": {
+      "fração": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "frações": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "metade",
+    "classe": "substantivo",
+    "definicoes": [
+      "Uma das duas partes iguais de um todo."
+    ],
+    "formas": {
+      "metade": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "metades": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "fácil",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que se faz ou entende sem grande esforço."
+    ],
+    "formas": {
+      "fácil": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "fáceis": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "difícil",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que exige esforço para se fazer ou entender."
+    ],
+    "formas": {
+      "difícil": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "difíceis": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "novo",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que existe ou apareceu há pouco tempo."
+    ],
+    "formas": {
+      "novo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "nova": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "novos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "novas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "velho",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que existe há muito tempo; de idade avançada."
+    ],
+    "formas": {
+      "velho": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "velha": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "velhos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "velhas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "pequeno",
+    "classe": "adjetivo",
+    "definicoes": [
+      "De tamanho reduzido."
+    ],
+    "formas": {
+      "pequeno": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "pequena": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "pequenos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "pequenas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "rápido",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que se move ou acontece em pouco tempo."
+    ],
+    "formas": {
+      "rápido": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "rápida": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "rápidos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "rápidas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "lento",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que se move ou acontece devagar."
+    ],
+    "formas": {
+      "lento": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "lenta": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "lentos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "lentas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "correto",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que está de acordo com a regra ou a verdade."
+    ],
+    "formas": {
+      "correto": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "correta": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "corretos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "corretas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "errado",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que não está de acordo com a regra ou a verdade."
+    ],
+    "formas": {
+      "errado": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "errada": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "errados": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "erradas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "importante",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que tem grande valor ou relevância."
+    ],
+    "formas": {
+      "importante": {
+        "genero": "comum",
+        "numero": "singular"
+      },
+      "importantes": {
+        "genero": "comum",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "simples",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que não é complicado; que tem poucas partes."
+    ],
+    "formas": {
+      "simples": {
+        "genero": "comum",
+        "numero": "singular"
+      }
+    }
+  },
+  {
+    "lema": "completo",
+    "classe": "adjetivo",
+    "definicoes": [
+      "A que não falta nenhuma parte."
+    ],
+    "formas": {
+      "completo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "completa": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "completos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "completas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "certo",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que corresponde à verdade ou ao esperado."
+    ],
+    "formas": {
+      "certo": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "certa": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "certos": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "certas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "muito",
+    "classe": "adverbio",
+    "definicoes": [
+      "Em grande quantidade ou intensidade."
+    ],
+    "formas": {
+      "muito": {}
+    }
+  },
+  {
+    "lema": "pouco",
+    "classe": "adverbio",
+    "definicoes": [
+      "Em pequena quantidade ou intensidade."
+    ],
+    "formas": {
+      "pouco": {}
+    }
+  },
+  {
+    "lema": "sempre",
+    "classe": "adverbio",
+    "definicoes": [
+      "Em todos os momentos; sem exceção."
+    ],
+    "formas": {
+      "sempre": {}
+    }
+  },
+  {
+    "lema": "nunca",
+    "classe": "adverbio",
+    "definicoes": [
+      "Em nenhum momento."
+    ],
+    "formas": {
+      "nunca": {}
+    }
+  },
+  {
+    "lema": "também",
+    "classe": "adverbio",
+    "definicoes": [
+      "Do mesmo modo; além disso."
+    ],
+    "formas": {
+      "também": {}
+    }
+  },
+  {
+    "lema": "já",
+    "classe": "adverbio",
+    "definicoes": [
+      "Neste momento, ou anteriormente ao que se esperava."
+    ],
+    "formas": {
+      "já": {}
+    }
+  },
+  {
+    "lema": "ainda",
+    "classe": "adverbio",
+    "definicoes": [
+      "Até o momento presente; continuamente."
+    ],
+    "formas": {
+      "ainda": {}
+    }
+  },
+  {
+    "lema": "agora",
+    "classe": "adverbio",
+    "definicoes": [
+      "No momento presente."
+    ],
+    "formas": {
+      "agora": {}
+    }
+  },
+  {
+    "lema": "bem",
+    "classe": "adverbio",
+    "definicoes": [
+      "De modo correto, satisfatório ou favorável."
+    ],
+    "formas": {
+      "bem": {}
+    }
+  },
+  {
+    "lema": "mal",
+    "classe": "adverbio",
+    "definicoes": [
+      "De modo incorreto ou insatisfatório."
+    ],
+    "formas": {
+      "mal": {}
+    }
+  },
+  {
+    "lema": "aqui",
+    "classe": "adverbio",
+    "definicoes": [
+      "Neste lugar."
+    ],
+    "formas": {
+      "aqui": {}
+    }
+  },
+  {
+    "lema": "ali",
+    "classe": "adverbio",
+    "definicoes": [
+      "Naquele lugar, mais distante do que \"aqui\"."
+    ],
+    "formas": {
+      "ali": {}
+    }
+  },
+  {
+    "lema": "tu",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome pessoal da segunda pessoa do singular."
+    ],
+    "formas": {
+      "tu": {
+        "numero": "singular",
+        "pessoa": 2
+      }
+    }
+  },
+  {
+    "lema": "você",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome de tratamento usado como segunda pessoa."
+    ],
+    "formas": {
+      "você": {
+        "numero": "singular",
+        "pessoa": 2
+      },
+      "vocês": {
+        "numero": "plural",
+        "pessoa": 2
+      }
+    }
+  },
+  {
+    "lema": "isto",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome demonstrativo para algo próximo de quem fala."
+    ],
+    "formas": {
+      "isto": {}
+    }
+  },
+  {
+    "lema": "isso",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome demonstrativo para algo próximo de quem ouve."
+    ],
+    "formas": {
+      "isso": {}
+    }
+  },
+  {
+    "lema": "aquilo",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome demonstrativo para algo distante de quem fala e de quem ouve."
+    ],
+    "formas": {
+      "aquilo": {}
+    }
+  },
+  {
+    "lema": "meu",
+    "classe": "pronome",
+    "definicoes": [
+      "Pronome possessivo da primeira pessoa do singular."
+    ],
+    "formas": {
+      "meu": {
+        "genero": "masculino",
+        "numero": "singular"
+      },
+      "minha": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "meus": {
+        "genero": "masculino",
+        "numero": "plural"
+      },
+      "minhas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "matemática",
+    "classe": "substantivo",
+    "definicoes": [
+      "Ciência que estuda números, quantidades, espaço e estruturas através de raciocínio lógico e demonstração."
+    ],
+    "formas": {
+      "matemática": {
+        "genero": "feminino",
+        "numero": "singular"
+      },
+      "matemáticas": {
+        "genero": "feminino",
+        "numero": "plural"
+      }
+    }
+  },
+  {
+    "lema": "adição",
+    "classe": "substantivo",
+    "definicoes": [
+      "Operação construída como reunião de grupos."
+    ],
+    "formas": {
+      "adição": {}
+    }
+  },
+  {
+    "lema": "dobro",
+    "classe": "substantivo",
+    "definicoes": [
+      "Quantidade construída juntando uma quantidade consigo mesma."
+    ],
+    "formas": {
+      "dobro": {}
+    }
+  },
+  {
+    "lema": "divisibilidade",
+    "classe": "substantivo",
+    "definicoes": [
+      "Relação em que um número constrói outro por multiplicação por algum natural."
+    ],
+    "formas": {
+      "divisibilidade": {}
+    }
+  },
+  {
+    "lema": "divisor",
+    "classe": "substantivo",
+    "definicoes": [
+      "Número que constrói outro por multiplicação por algum natural."
+    ],
+    "formas": {
+      "divisor": {}
+    }
+  },
+  {
+    "lema": "múltiplo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Número construído por repetição multiplicativa de outro."
+    ],
+    "formas": {
+      "múltiplo": {}
+    }
+  },
+  {
+    "lema": "quociente",
+    "classe": "substantivo",
+    "definicoes": [
+      "Quantidade de vezes que uma parte cabe num todo em divisão euclidiana."
+    ],
+    "formas": {
+      "quociente": {}
+    }
+  },
+  {
+    "lema": "resto",
+    "classe": "substantivo",
+    "definicoes": [
+      "Sobra final depois de retirar a maior quantidade possível de partes iguais."
+    ],
+    "formas": {
+      "resto": {}
+    }
+  },
+  {
+    "lema": "primalidade",
+    "classe": "substantivo",
+    "definicoes": [
+      "Propriedade de um número natural maior que um ter apenas divisores positivos um e ele mesmo."
+    ],
+    "formas": {
+      "primalidade": {}
+    }
+  },
+  {
+    "lema": "fatoração",
+    "classe": "substantivo",
+    "definicoes": [
+      "Decomposição de um número em fatores, especialmente fatores primos."
+    ],
+    "formas": {
+      "fatoração": {}
+    }
+  },
+  {
+    "lema": "congruência",
+    "classe": "substantivo",
+    "definicoes": [
+      "Relação entre números que deixam o mesmo resto perante um módulo."
+    ],
+    "formas": {
+      "congruência": {}
+    }
+  },
+  {
+    "lema": "combinatória",
+    "classe": "substantivo",
+    "definicoes": [
+      "Área que estuda contagem de possibilidades por construção finita."
+    ],
+    "formas": {
+      "combinatória": {}
+    }
+  },
+  {
+    "lema": "relação",
+    "classe": "substantivo",
+    "definicoes": [
+      "Ligação entre objetos, geralmente representada por pares."
+    ],
+    "formas": {
+      "relação": {}
+    }
+  },
+  {
+    "lema": "função",
+    "classe": "substantivo",
+    "definicoes": [
+      "Relação especial que associa cada entrada a uma única saída."
+    ],
+    "formas": {
+      "função": {}
+    }
+  },
+  {
+    "lema": "álgebra",
+    "classe": "substantivo",
+    "definicoes": [
+      "Estudo de operações e estruturas que preservam regras."
+    ],
+    "formas": {
+      "álgebra": {}
+    }
+  },
+  {
+    "lema": "grafo",
+    "classe": "substantivo",
+    "definicoes": [
+      "Estrutura formada por vértices e ligações."
+    ],
+    "formas": {
+      "grafo": {}
+    }
+  },
+  {
+    "lema": "autômato",
+    "classe": "substantivo",
+    "definicoes": [
+      "Máquina abstrata com estados e transições."
+    ],
+    "formas": {
+      "autômato": {}
+    }
+  },
+  {
+    "lema": "probabilidade",
+    "classe": "substantivo",
+    "definicoes": [
+      "Medida de possibilidade dentro de um espaço de eventos."
+    ],
+    "formas": {
+      "probabilidade": {}
+    }
+  },
+  {
+    "lema": "estatística",
+    "classe": "substantivo",
+    "definicoes": [
+      "Estudo de dados, variação e inferência a partir de amostras."
+    ],
+    "formas": {
+      "estatística": {}
+    }
+  },
+  {
+    "lema": "otimização",
+    "classe": "substantivo",
+    "definicoes": [
+      "Procura de melhor valor segundo uma função objetivo."
+    ],
+    "formas": {
+      "otimização": {}
+    }
+  },
+  {
+    "lema": "infinito",
+    "classe": "substantivo",
+    "definicoes": [
+      "Abertura sem último elemento; no PSF, uma regra que pode continuar."
+    ],
+    "formas": {
+      "infinito": {}
+    }
+  },
+  {
+    "lema": "fronteira",
+    "classe": "substantivo",
+    "definicoes": [
+      "Limite atual entre o que já foi construído e o que ainda precisa ser construído."
+    ],
+    "formas": {
+      "fronteira": {}
+    }
+  },
+  {
+    "lema": "conceito",
+    "classe": "substantivo",
+    "definicoes": [
+      "Unidade estável de conhecimento construída por definição, teste e relação."
+    ],
+    "formas": {
+      "conceito": {}
+    }
+  },
+  {
+    "lema": "dependência",
+    "classe": "substantivo",
+    "definicoes": [
+      "Conceito anterior necessário para construir outro sem fingimento."
+    ],
+    "formas": {
+      "dependência": {}
+    }
+  },
+  {
+    "lema": "validação",
+    "classe": "substantivo",
+    "definicoes": [
+      "Comparação externa ou teste usado para verificar uma construção."
+    ],
+    "formas": {
+      "validação": {}
+    }
+  },
+  {
+    "lema": "fórmula",
+    "classe": "substantivo",
+    "definicoes": [
+      "Forma compacta de uma relação matemática; no PSF não pode substituir a construção."
+    ],
+    "formas": {
+      "fórmula": {}
+    }
+  },
+  {
+    "lema": "pacote",
+    "classe": "substantivo",
+    "definicoes": [
+      "Grupo organizado de aulas ou conhecimentos relacionados."
+    ],
+    "formas": {
+      "pacote": {}
+    }
+  },
+  {
+    "lema": "construir",
+    "classe": "verbo",
+    "definicoes": [
+      "Formar um conceito a partir de conceitos anteriores."
+    ],
+    "formas": {
+      "construir": {}
+    }
+  },
+  {
+    "lema": "validar",
+    "classe": "verbo",
+    "definicoes": [
+      "Testar se uma construção se mantém diante de exemplos ou referência externa."
+    ],
+    "formas": {
+      "validar": {}
+    }
+  },
+  {
+    "lema": "subtrair",
+    "classe": "verbo",
+    "definicoes": [
+      "Retirar uma quantidade de outra quando isso é controlado."
+    ],
+    "formas": {
+      "subtrair": {}
+    }
+  },
+  {
+    "lema": "multiplicar",
+    "classe": "verbo",
+    "definicoes": [
+      "Repetir uma adição de grupos iguais."
+    ],
+    "formas": {
+      "multiplicar": {}
+    }
+  },
+  {
+    "lema": "dividir",
+    "classe": "verbo",
+    "definicoes": [
+      "Repartir ou procurar quantas vezes uma parte cabe no todo."
+    ],
+    "formas": {
+      "dividir": {}
+    }
+  },
+  {
+    "lema": "recriar",
+    "classe": "verbo",
+    "definicoes": [
+      "Construir novamente por fundamentos próprios, sem copiar como dogma."
+    ],
+    "formas": {
+      "recriar": {}
+    }
+  },
+  {
+    "lema": "generalizar",
+    "classe": "verbo",
+    "definicoes": [
+      "Estender uma construção para mais casos mantendo a regra."
+    ],
+    "formas": {
+      "generalizar": {}
+    }
+  },
+  {
+    "lema": "testar",
+    "classe": "verbo",
+    "definicoes": [
+      "Aplicar casos para verificar se uma ideia funciona."
+    ],
+    "formas": {
+      "testar": {}
+    }
+  },
+  {
+    "lema": "fluido",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que passa de uma ideia para outra com ligação clara."
+    ],
+    "formas": {
+      "fluido": {}
+    }
+  },
+  {
+    "lema": "coerente",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que não contradiz os conceitos já aceites."
+    ],
+    "formas": {
+      "coerente": {}
+    }
+  },
+  {
+    "lema": "restrito",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que exige permissão ou reconhecimento antes de ser revelado."
+    ],
+    "formas": {
+      "restrito": {}
+    }
+  },
+  {
+    "lema": "público",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que pode ser usado sem restrição especial."
+    ],
+    "formas": {
+      "público": {}
+    }
+  },
+  {
+    "lema": "futuro",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que ainda não está construído no estado atual."
+    ],
+    "formas": {
+      "futuro": {}
+    }
+  },
+  {
+    "lema": "técnico",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Relativo a construção formal ou operacional."
+    ],
+    "formas": {
+      "técnico": {}
+    }
+  },
+  {
+    "lema": "humano",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Expresso em linguagem acessível ao estudante."
+    ],
+    "formas": {
+      "humano": {}
+    }
+  },
+  {
+    "lema": "promissor",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Que gerou ferramenta, método ou avanço aplicável."
+    ],
+    "formas": {
+      "promissor": {}
+    }
+  },
+  {
+    "lema": "finito",
+    "classe": "adjetivo",
+    "definicoes": [
+      "Limitado por tamanho, passos ou catálogo."
+    ],
+    "formas": {
+      "finito": {}
+    }
+  },
+  {
+    "lema": "porque",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Conjunção usada para apresentar causa ou explicação."
+    ],
+    "formas": {
+      "porque": {}
+    }
+  },
+  {
+    "lema": "portanto",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Conjunção usada para introduzir conclusão."
+    ],
+    "formas": {
+      "portanto": {}
+    }
+  },
+  {
+    "lema": "então",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Palavra que indica consequência, continuidade ou conclusão."
+    ],
+    "formas": {
+      "então": {}
+    }
+  },
+  {
+    "lema": "se",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Conjunção que introduz condição."
+    ],
+    "formas": {
+      "se": {}
+    }
+  },
+  {
+    "lema": "quando",
+    "classe": "conjuncao",
+    "definicoes": [
+      "Palavra que liga uma ação a uma condição temporal ou lógica."
+    ],
+    "formas": {
+      "quando": {}
+    }
+  },
+  {
+    "lema": "sobre",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que introduz tema ou assunto."
+    ],
+    "formas": {
+      "sobre": {}
+    }
+  },
+  {
+    "lema": "desde",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que indica ponto inicial."
+    ],
+    "formas": {
+      "desde": {}
+    }
+  },
+  {
+    "lema": "até",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que indica limite ou destino."
+    ],
+    "formas": {
+      "até": {}
+    }
+  },
+  {
+    "lema": "sem",
+    "classe": "preposicao",
+    "definicoes": [
+      "Preposição que indica ausência."
+    ],
+    "formas": {
+      "sem": {}
+    }
+  }
+]

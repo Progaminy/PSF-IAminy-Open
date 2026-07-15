@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa do conhecimento — PSF-IAminy</title>
+<link rel="stylesheet" href="/estatico/estilo.css">
+<style>
+  :root {
+    --acento-mat: #1f8f83;
+    --acento-ponte: #b8620a;
+    --acento-cao: #6a4fa0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --acento-mat: #5ec9c0;
+      --acento-ponte: #e8a33d;
+      --acento-cao: #b18fe0;
+    }
+  }
+
+  html, body { overflow: hidden; }
+  #tela { position: fixed; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; background: var(--bg); }
+  #tela.arrastando { cursor: grabbing; }
+
+  .painel {
+    position: fixed;
+    background: var(--bg-secundario);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    box-shadow: 0 8px 30px var(--sombra);
+    padding: 12px 14px 14px;
+  }
+  .painel.flutuante {
+    resize: both;
+    overflow: auto;
+    min-width: 230px;
+    min-height: 120px;
+    max-width: 94vw;
+    max-height: 90vh;
+  }
+  .alca {
+    display: flex; align-items: center; gap: 7px; height: 20px;
+    padding: 0 8px; margin: -4px -6px 8px -6px; cursor: grab; user-select: none;
+    border-radius: 8px 8px 0 0; color: var(--texto-suave);
+  }
+  .alca:active { cursor: grabbing; }
+  .alca:hover { background: var(--bg-terciario); }
+  .alca .grip { letter-spacing: 2px; font-size: 0.7rem; opacity: 0.65; }
+  .alca .titulo { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.09em; }
+
+  #cabecalho { top: 18px; left: 18px; width: 380px; }
+  #cabecalho h1 { font-size: 1.02rem; font-weight: 700; margin: 0 0 8px; }
+  #cabecalho a.voltar { font-size: 0.7rem; color: var(--texto-suave); text-decoration: none; }
+  #cabecalho a.voltar:hover { color: var(--acento); }
+
+  #modos { display: flex; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
+  .modo-btn {
+    font-size: 0.72rem; padding: 6px 10px; border-radius: 20px;
+    border: 1px solid var(--borda); background: transparent; color: var(--texto-suave); cursor: pointer;
+  }
+  .modo-btn:hover { color: var(--texto); border-color: var(--texto-suave); }
+  .modo-btn.ativo[data-modo="pt"] { background: var(--acento); color: var(--acento-texto); border-color: var(--acento); }
+  .modo-btn.ativo[data-modo="mat"] { background: var(--acento-mat); color: var(--acento-texto); border-color: var(--acento-mat); }
+  .modo-btn.ativo[data-modo="pontes"] { background: var(--acento-ponte); color: var(--acento-texto); border-color: var(--acento-ponte); }
+  .modo-btn.ativo[data-modo="cao"] { background: var(--acento-cao); color: var(--acento-texto); border-color: var(--acento-cao); }
+
+  #busca {
+    width: 100%; font-size: 0.82rem; background: var(--bg-terciario); color: var(--texto);
+    border: 1px solid var(--borda); border-radius: 7px; padding: 8px 10px; outline: none; margin-bottom: 8px;
+  }
+  #busca:focus { border-color: var(--acento); }
+
+  #stats { font-size: 0.68rem; color: var(--texto-suave); display: flex; gap: 12px; font-variant-numeric: tabular-nums; }
+  #stats b { color: var(--texto); }
+  #subtitulo { font-size: 0.68rem; color: var(--texto-suave); margin: 6px 0 0; line-height: 1.4; }
+
+  #btn-lista-view { font-size: 0.72rem; padding: 6px 10px; border-radius: 20px; border: 1px solid var(--borda); background: transparent; color: var(--texto-suave); cursor: pointer; margin-top: 4px; }
+  #btn-lista-view:hover { color: var(--texto); border-color: var(--texto-suave); }
+  #btn-lista-view[aria-pressed="true"] { background: var(--acento); color: var(--acento-texto); border-color: var(--acento); }
+
+  #lista-view { top: 18px; left: 410px; width: 260px; height: min(60vh, 420px); }
+  #lista-nos { list-style: none; margin: 0; padding: 0; overflow-y: auto; max-height: calc(100% - 6px); }
+  #lista-nos li { padding: 6px 8px; border-radius: 6px; cursor: pointer; font-size: 0.76rem; color: var(--texto-suave); }
+  #lista-nos li:hover, #lista-nos li:focus { background: var(--bg-terciario); color: var(--texto); }
+  #lista-nos li[aria-selected="true"] { background: var(--acento); color: var(--acento-texto); }
+
+  #legenda { top: 18px; right: 18px; width: 230px; height: min(50vh, 460px); }
+  #legenda-lista { overflow-y: auto; max-height: calc(100% - 30px); padding-right: 2px; }
+  .legenda-item { display: flex; align-items: center; gap: 8px; padding: 5px 4px; border-radius: 6px; cursor: pointer; font-size: 0.72rem; color: var(--texto-suave); }
+  .legenda-item:hover { background: var(--bg-terciario); color: var(--texto); }
+  .legenda-item.esmaecido { opacity: 0.35; }
+  .legenda-cor { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .legenda-contagem { margin-left: auto; font-variant-numeric: tabular-nums; font-size: 0.62rem; color: var(--texto-suave); }
+  #legenda-reset { font-size: 0.65rem; color: var(--texto-suave); cursor: pointer; text-decoration: underline; margin-top: 6px; display: inline-block; }
+
+  #destaques { bottom: 18px; left: 18px; width: 340px; height: min(30vh, 230px); }
+  #destaques-lista { display: flex; flex-wrap: wrap; gap: 6px; overflow-y: auto; max-height: calc(100% - 28px); }
+  .chip { font-size: 0.68rem; padding: 5px 9px; border-radius: 20px; border: 1px solid var(--borda); background: var(--bg-terciario); color: var(--texto-suave); cursor: pointer; white-space: nowrap; }
+  .chip:hover { color: var(--texto); border-color: var(--acento); }
+  #destaques p { font-size: 0.65rem; color: var(--texto-suave); margin: 6px 0 0; line-height: 1.4; }
+
+  #navegar { top: 18px; width: 260px; }
+  #navegar input { width: 100%; box-sizing: border-box; font-size: 0.76rem; background: var(--bg-terciario); color: var(--texto); border: 1px solid var(--borda); border-radius: 7px; padding: 7px 9px; outline: none; }
+  #navegar input:focus { border-color: var(--acento); }
+  #nav-modo { display: flex; gap: 6px; margin: 8px 0; }
+  .nav-modo-btn { flex: 1; font-size: 0.68rem; padding: 5px; border-radius: 14px; border: 1px solid var(--borda); background: transparent; color: var(--texto-suave); cursor: pointer; }
+  .nav-modo-btn.ativo { background: var(--acento); color: var(--acento-texto); border-color: var(--acento); }
+  #nav-ir { width: 100%; font-size: 0.76rem; padding: 7px; border-radius: 7px; border: none; background: var(--acento-ponte); color: var(--acento-texto); cursor: pointer; }
+  #nav-resultado { margin-top: 10px; font-size: 0.72rem; color: var(--texto-suave); max-height: 220px; overflow-y: auto; }
+  #nav-resultado .passo { padding: 3px 0; cursor: pointer; }
+  #nav-resultado .passo:hover { color: var(--texto); }
+  #nav-resultado .passo::before { content: "→ "; color: var(--acento-ponte); }
+  #nav-resultado .passo:first-child::before { content: "● "; }
+
+  #detalhe { bottom: 18px; right: 18px; width: 340px; height: min(56vh, 480px); display: none; }
+  #detalhe.visivel { display: block; }
+  #detalhe-fechar { position: absolute; top: 10px; right: 10px; cursor: pointer; color: var(--texto-suave); font-size: 0.9rem; background: none; border: none; padding: 0; font-family: inherit; }
+  #detalhe-fechar:hover { color: var(--texto); }
+  #detalhe-corpo { overflow-y: auto; max-height: calc(100% - 26px); padding-right: 4px; }
+  #detalhe-nome { font-size: 1.02rem; margin: 0 0 3px; }
+  #detalhe-tema { font-size: 0.66rem; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .secao { margin-bottom: 11px; }
+  .rotulo { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--texto-suave); margin-bottom: 5px; }
+  .texto { font-size: 0.78rem; line-height: 1.5; color: var(--texto); white-space: pre-wrap; }
+  .fileira-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip-dep { font-size: 0.65rem; padding: 3px 8px; border-radius: 5px; background: var(--bg-terciario); color: var(--texto-suave); cursor: pointer; border: 1px solid var(--borda); }
+  .chip-dep:hover { color: var(--texto); border-color: var(--acento); }
+  .chip-dep.ponte { border-color: var(--acento-ponte); color: var(--acento-ponte); }
+  .nota-vazia { font-size: 0.72rem; color: var(--texto-suave); font-style: italic; }
+
+  #dica { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 0.66rem; color: var(--texto-suave); pointer-events: none; }
+  #carregando { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: var(--texto-suave); }
+</style>
+</head>
+<body>
+<canvas id="tela" aria-hidden="true"></canvas>
+<div id="carregando">A carregar o conhecimento ao vivo…</div>
+
+<div id="cabecalho" class="painel flutuante" style="display:none;">
+  <div class="alca" data-arrastar="cabecalho"><span class="grip">⠿⠿</span><span class="titulo">arrastar</span></div>
+  <h1>Mapa do conhecimento</h1>
+  <a class="voltar" href="/">← voltar ao chat</a>
+  <div id="modos" role="group" aria-label="Modo do mapa">
+    <button class="modo-btn ativo" data-modo="pt" aria-pressed="true">Português</button>
+    <button class="modo-btn" data-modo="mat" aria-pressed="false">Matemática</button>
+    <button class="modo-btn" data-modo="pontes" aria-pressed="false">Pontes entre as duas</button>
+    <button class="modo-btn" data-modo="cao" aria-pressed="false">Cão de caça</button>
+  </div>
+  <input id="busca" type="text" placeholder="Buscar um conceito… (ex: alfabeto, poema, redação)" aria-label="Buscar um conceito" autocomplete="off">
+  <div id="stats"></div>
+  <p id="subtitulo"></p>
+  <button id="btn-lista-view" type="button" aria-pressed="false">Ver como lista (teclado)</button>
+</div>
+
+<div id="lista-view" class="painel flutuante" style="display:none;">
+  <div class="alca" data-arrastar="lista-view"><span class="grip">⠿⠿</span><span class="titulo">lista de conceitos</span></div>
+  <ul id="lista-nos" role="listbox" aria-label="Conceitos do mapa, navegável por teclado"></ul>
+</div>
+
+<div id="legenda" class="painel flutuante" style="display:none;">
+  <div class="alca" data-arrastar="legenda"><span class="grip">⠿⠿</span><span class="titulo">temas</span></div>
+  <div id="legenda-lista" role="group" aria-label="Filtrar por tema"></div>
+  <span id="legenda-reset" role="button" tabindex="0">mostrar todos</span>
+</div>
+
+<div id="destaques" class="painel flutuante" style="display:none;">
+  <div class="alca" data-arrastar="destaques"><span class="grip">⠿⠿</span><span class="titulo">conceitos em destaque</span></div>
+  <div id="destaques-lista" role="group" aria-label="Conceitos em destaque"></div>
+  <p>Alfabeto, poesia e redação existem no conhecimento sob outros nomes — clique acima para ver.</p>
+</div>
+
+<div id="navegar" class="painel flutuante" style="display:none;">
+  <div class="alca" data-arrastar="navegar"><span class="grip">⠿⠿</span><span class="titulo">GPS · caminho real</span></div>
+  <input id="nav-origem" type="text" placeholder="De onde? (ex: diferença)" aria-label="De onde" autocomplete="off">
+  <input id="nav-destino" type="text" placeholder="Para onde? (ex: artigo definido)" aria-label="Para onde" autocomplete="off" style="margin-top:6px;">
+  <div id="nav-modo" role="group" aria-label="Modo de rota">
+    <button class="nav-modo-btn ativo" data-modo="curto" aria-pressed="true">Mais curto</button>
+    <button class="nav-modo-btn" data-modo="longo" aria-pressed="false">Mais longo</button>
+  </div>
+  <button id="nav-ir">Traçar rota</button>
+  <div id="nav-resultado" aria-live="polite"></div>
+</div>
+
+<div id="detalhe" class="painel flutuante">
+  <div class="alca" data-arrastar="detalhe"><span class="grip">⠿⠿</span><span class="titulo">conceito</span></div>
+  <button id="detalhe-fechar" type="button" aria-label="Fechar detalhes do conceito">✕</button>
+  <div id="detalhe-corpo">
+    <h2 id="detalhe-nome"></h2>
+    <div id="detalhe-tema"></div>
+    <div class="secao"><div class="rotulo">Construção</div><div class="texto" id="detalhe-construcao"></div></div>
+    <div class="secao" id="detalhe-funcao-envolt"><div class="rotulo">Função</div><div class="texto" id="detalhe-funcao"></div></div>
+    <div class="secao"><div class="rotulo">Depende de</div><div class="fileira-chips" id="detalhe-deps"></div></div>
+    <div class="secao"><div class="rotulo">Ligado por (quem depende disto)</div><div class="fileira-chips" id="detalhe-dependentes"></div></div>
+    <div class="secao" id="detalhe-ponte-envolt" style="display:none;"><div class="rotulo">Ponte real Português ↔ Matemática</div><div class="fileira-chips" id="detalhe-ponte"></div></div>
+  </div>
+</div>
+
+<div id="dica" style="display:none;">arraste o fundo para girar · roda do mouse para zoom · clique num nó para ver detalhes</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var tela = document.getElementById("tela");
+  var ctx = tela.getContext("2d");
+  var dpr = Math.max(1, window.devicePixelRatio || 1);
+
+  function redimensionar() {
+    tela.width = Math.floor(window.innerWidth * dpr);
+    tela.height = Math.floor(window.innerHeight * dpr);
+    tela.style.width = window.innerWidth + "px";
+    tela.style.height = window.innerHeight + "px";
+  }
+  window.addEventListener("resize", redimensionar);
+  redimensionar();
+
+  var movimentoReduzido = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var PALETA = [
+    "#5b57e0", "#1f8f83", "#b8620a", "#c23b6e", "#2b7fb0",
+    "#8a7a1f", "#a03a8f", "#3f8f4a", "#7a4fc2", "#c25a2a",
+    "#2a6fa3", "#a37a1f", "#1f8f7a", "#8f2aa0", "#5f8f2a",
+    "#c2492a", "#3a5fc2", "#8f6a1f", "#1fa38f", "#c2295f"
+  ];
+  function corDoIndice(i) { return PALETA[i % PALETA.length]; }
+
+  // Torna um elemento clicável (div/span sem foco nativo) operável por teclado
+  // -- mesma ação do clique, disparada por Enter ou Espaço, sem duplicar lógica.
+  function tornarAcionavelPorTeclado(el, acao) {
+    el.setAttribute("role", "button");
+    el.tabIndex = 0;
+    el.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); acao(); }
+    });
+  }
+
+  // hash determinístico só para dar a cada nó uma fase/frequência de flutuação
+  // própria e estável (mesmo nó, mesma "respiração" sempre) -- não é aleatório
+  // a cada carregamento, é uma função pura do nome.
+  function hashTexto(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; }
+    return Math.abs(h);
+  }
+
+  function construirGrafo(dados) {
+    var temas = dados.temas.slice();
+    var corPorTema = {};
+    temas.forEach(function (t, i) { corPorTema[t] = corDoIndice(i); });
+    var nodes = dados.nodes.map(function (n, i) {
+      var h = hashTexto(n.nome);
+      return {
+        idx: i, nome: n.nome, tema: n.tema, tipo: n.tipo || "conceito",
+        construcao: n.construcao || "", funcao: n.funcao || "",
+        deps: n.deps || [], grau: n.grau || 0,
+        cor: corPorTema[n.tema] || "#888",
+        faseX: (h % 1000) / 1000 * Math.PI * 2,
+        faseY: ((h >> 3) % 1000) / 1000 * Math.PI * 2,
+        freq: 0.12 + ((h >> 6) % 100) / 100 * 0.10,
+        x: 0, y: 0
+      };
+    });
+    var byName = {};
+    nodes.forEach(function (n) { byName[n.nome] = n; });
+    var edges = dados.edges.map(function (e) { return { a: e[0], b: e[1] }; });
+    return { nodes: nodes, edges: edges, temas: temas, corPorTema: corPorTema, byName: byName };
+  }
+
+  var GRAFOS = null;
+  var PONTES_VALIDAS = [];
+
+  var state = {
+    mode: "pt",
+    view: { scale: 1, rotation: 0 },
+    hover: null,
+    selected: null,
+    temaFiltro: null,
+    query: "",
+    dragging: false,
+    lastPointer: null,
+    idleRotation: true,
+    rotaModo: "curto",
+    rotaSequencia: []
+  };
+
+  function tamanhoMundo() { return Math.min(window.innerWidth, window.innerHeight) * 0.34; }
+
+  function layoutBase(grafo) {
+    var n = grafo.nodes.length;
+    grafo.nodes.forEach(function (node, i) { node.baseAngle = (i / n) * Math.PI * 2; });
+  }
+
+  function calcularPosicoes() {
+    var t = performance.now() * 0.001;
+    var rot = state.view.rotation;
+    if (state.mode === "pontes") {
+      var R = tamanhoMundo() * 0.72;
+      var offset = R * 1.35;
+      posicionar(GRAFOS.pt.nodes, -offset, 0, R, rot, t);
+      posicionar(GRAFOS.mat.nodes, offset, 0, R, rot, t);
+    } else {
+      posicionar(GRAFOS[state.mode].nodes, 0, 0, tamanhoMundo(), rot, t);
+    }
+  }
+
+  function posicionar(nodes, cx, cy, raio, rot, t) {
+    nodes.forEach(function (node) {
+      var ang = node.baseAngle + rot;
+      var bx = cx + Math.cos(ang) * raio;
+      var by = cy + Math.sin(ang) * raio;
+      // flutuação própria: cada bola boia em torno da sua posição base, nunca
+      // sobre um raio/edge inventado -- só desloca onde a bola é desenhada.
+      var amp = 3.5 + Math.min(6, Math.sqrt(node.grau));
+      node.x = bx + Math.cos(t * node.freq + node.faseX) * amp;
+      node.y = by + Math.sin(t * node.freq * 1.3 + node.faseY) * amp;
+    });
+  }
+
+  function worldToScreen(x, y) {
+    var s = state.view.scale;
+    return { x: window.innerWidth / 2 + x * s, y: window.innerHeight / 2 + y * s };
+  }
+
+  function raioNo(grau) { return 2.2 + Math.sqrt(Math.max(0, grau)) * 1.15; }
+
+  var corTextoAtual = "#000000";
+  var corPonteAtual = "#b8620a";
+
+  function atualizarCoresDoTema() {
+    var raiz = getComputedStyle(document.documentElement);
+    corTextoAtual = raiz.getPropertyValue("--texto").trim() || corTextoAtual;
+    corPonteAtual = raiz.getPropertyValue("--acento-ponte").trim() || corPonteAtual;
+  }
+
+  function limpar() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var corFundo = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+    ctx.fillStyle = corFundo || "#ffffff";
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+  }
+
+  function nosAtivos() {
+    if (state.mode === "pontes") return GRAFOS.pt.nodes.concat(GRAFOS.mat.nodes);
+    return GRAFOS[state.mode].nodes;
+  }
+
+  function passaFiltro(node) {
+    if (state.temaFiltro && node.tema !== state.temaFiltro) return false;
+    if (state.query) return node.nome.toLowerCase().indexOf(state.query) !== -1;
+    return true;
+  }
+
+  function desenharArestas(nodes, edges, alphaBase) {
+    ctx.lineWidth = 1;
+    for (var i = 0; i < edges.length; i++) {
+      var e = edges[i];
+      var a = nodes[e.a], b = nodes[e.b];
+      if (!a || !b) continue;
+      var destacado = state.hover && (a === state.hover || b === state.hover);
+      var pa = worldToScreen(a.x, a.y), pb = worldToScreen(b.x, b.y);
+      ctx.strokeStyle = destacado ? corTextoAtual : "rgba(128,128,128,0.18)";
+      ctx.globalAlpha = destacado ? 0.9 : alphaBase;
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.lineTo(pb.x, pb.y);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function desenharPontes() {
+    var t = performance.now() * 0.001;
+    var pulso = 0.5 + 0.25 * Math.sin(t * 1.4);
+    ctx.lineWidth = 1.6;
+    ctx.strokeStyle = hexParaRgba(corPonteAtual, pulso);
+    PONTES_VALIDAS.forEach(function (p) {
+      var a = GRAFOS.pt.nodes[p.pt_idx], b = GRAFOS.mat.nodes[p.mat_idx];
+      if (!a || !b) return;
+      var pa = worldToScreen(a.x, a.y), pb = worldToScreen(b.x, b.y);
+      var midx = (pa.x + pb.x) / 2, midy = (pa.y + pb.y) / 2 - 40;
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.quadraticCurveTo(midx, midy, pb.x, pb.y);
+      ctx.stroke();
+    });
+  }
+
+  function hexParaRgba(hex, alpha) {
+    hex = hex.replace("#", "");
+    var r = parseInt(hex.substring(0, 2), 16), g = parseInt(hex.substring(2, 4), 16), b = parseInt(hex.substring(4, 6), 16);
+    return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+  }
+
+  function desenharNo(node) {
+    var p = worldToScreen(node.x, node.y);
+    var naRota = state.rotaSequencia.indexOf(node.nome) !== -1;
+    var r = raioNo(node.grau) * Math.min(1.4, Math.max(0.6, state.view.scale)) * (naRota ? 1.3 : 1);
+    var ativo = passaFiltro(node);
+    var isHover = state.hover === node;
+    var isSel = state.selected === node;
+    ctx.globalAlpha = ativo ? 1 : 0.18;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = node.tipo === "raiz" ? "#8a8a92" : node.cor;
+    ctx.fill();
+    if (isHover || isSel || naRota) {
+      ctx.lineWidth = naRota ? 2.5 : 2;
+      ctx.strokeStyle = naRota ? corPonteAtual : corTextoAtual;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    if (isHover || isSel || naRota) {
+      ctx.font = "12px -apple-system, sans-serif";
+      ctx.fillStyle = naRota ? corPonteAtual : corTextoAtual;
+      ctx.textBaseline = "middle";
+      var lado = p.x > window.innerWidth / 2 ? -1 : 1;
+      ctx.textAlign = lado === 1 ? "left" : "right";
+      ctx.fillText(node.nome, p.x + lado * (r + 8), p.y);
+    }
+  }
+
+  function desenharRota(nodesPorNome) {
+    if (state.rotaSequencia.length < 2) return;
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = corPonteAtual;
+    ctx.globalAlpha = 0.85;
+    for (var i = 0; i < state.rotaSequencia.length - 1; i++) {
+      var a = nodesPorNome[state.rotaSequencia[i]];
+      var b = nodesPorNome[state.rotaSequencia[i + 1]];
+      if (!a || !b) continue;
+      var pa = worldToScreen(a.x, a.y), pb = worldToScreen(b.x, b.y);
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.lineTo(pb.x, pb.y);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function desenhar() {
+    if (!GRAFOS) return;
+    atualizarCoresDoTema();
+    limpar();
+    calcularPosicoes();
+    if (state.mode === "pontes") {
+      desenharArestas(GRAFOS.pt.nodes, GRAFOS.pt.edges, 0.14);
+      desenharArestas(GRAFOS.mat.nodes, GRAFOS.mat.edges, 0.14);
+      desenharPontes();
+      GRAFOS.pt.nodes.forEach(desenharNo);
+      GRAFOS.mat.nodes.forEach(desenharNo);
+    } else {
+      var g = GRAFOS[state.mode];
+      desenharArestas(g.nodes, g.edges, 0.16);
+      g.nodes.forEach(desenharNo);
+      if (state.mode === "pt" || state.mode === "mat") desenharRota(g.byName);
+    }
+  }
+
+  tela.addEventListener("pointerdown", function (ev) {
+    state.dragging = true;
+    state.idleRotation = false;
+    state.lastPointer = { x: ev.clientX, y: ev.clientY };
+    tela.classList.add("arrastando");
+    tela.setPointerCapture(ev.pointerId);
+  });
+  tela.addEventListener("pointermove", function (ev) {
+    var p = { x: ev.clientX, y: ev.clientY };
+    if (state.dragging && state.lastPointer) {
+      var dx = (p.x - state.lastPointer.x) / state.view.scale;
+      state.view.rotation += dx * 0.003;
+      state.lastPointer = p;
+      return;
+    }
+    var melhor = null, melhorD = 18 / state.view.scale;
+    nosAtivos().forEach(function (n) {
+      var d = Math.hypot(n.x - (p.x - window.innerWidth / 2) / state.view.scale, n.y - (p.y - window.innerHeight / 2) / state.view.scale);
+      if (d < melhorD) { melhorD = d; melhor = n; }
+    });
+    state.hover = melhor;
+    tela.style.cursor = melhor ? "pointer" : "grab";
+  });
+  tela.addEventListener("pointerup", function (ev) {
+    state.dragging = false;
+    tela.classList.remove("arrastando");
+    try { tela.releasePointerCapture(ev.pointerId); } catch (e) {}
+  });
+  tela.addEventListener("click", function () { if (state.hover) selecionar(state.hover); });
+  tela.addEventListener("wheel", function (ev) {
+    ev.preventDefault();
+    state.view.scale = Math.min(6, Math.max(0.25, state.view.scale * Math.exp(-ev.deltaY * 0.0012)));
+  }, { passive: false });
+
+  var detalheEl = document.getElementById("detalhe");
+  var detalheNome = document.getElementById("detalhe-nome");
+  var detalheTema = document.getElementById("detalhe-tema");
+  var detalheConstrucao = document.getElementById("detalhe-construcao");
+  var detalheFuncaoEnvolt = document.getElementById("detalhe-funcao-envolt");
+  var detalheFuncao = document.getElementById("detalhe-funcao");
+  var detalheDeps = document.getElementById("detalhe-deps");
+  var detalheDependentes = document.getElementById("detalhe-dependentes");
+  var detalhePonteEnvolt = document.getElementById("detalhe-ponte-envolt");
+  var detalhePonte = document.getElementById("detalhe-ponte");
+
+  function grafoDoNo(node) { return GRAFOS.pt.nodes.indexOf(node) !== -1 ? GRAFOS.pt : GRAFOS.mat; }
+  function dependentesDe(node, grafo) {
+    var out = [];
+    grafo.nodes.forEach(function (n) { if (n.deps.indexOf(node.nome) !== -1) out.push(n); });
+    return out;
+  }
+  function pontesDoNo(node) {
+    return PONTES_VALIDAS.filter(function (p) { return p.pt === node.nome || p.mat === node.nome; });
+  }
+
+  function selecionar(node) {
+    state.selected = node;
+    var grafo = grafoDoNo(node);
+    detalheNome.textContent = node.nome;
+    detalheTema.textContent = node.tema + (node.tipo === "raiz" ? " · primitiva fundacional" : "");
+    detalheConstrucao.textContent = node.construcao || "(sem texto de construção registrado)";
+    if (node.funcao) { detalheFuncaoEnvolt.style.display = ""; detalheFuncao.textContent = node.funcao; }
+    else { detalheFuncaoEnvolt.style.display = "none"; }
+
+    detalheDeps.innerHTML = "";
+    if (node.deps.length === 0) {
+      detalheDeps.innerHTML = '<span class="nota-vazia">nenhuma — é raiz ou primitiva</span>';
+    } else {
+      node.deps.forEach(function (d) {
+        var alvo = grafo.byName[d];
+        var chip = document.createElement("span");
+        chip.className = "chip-dep";
+        chip.textContent = d;
+        if (alvo) {
+          chip.addEventListener("click", function () { selecionar(alvo); });
+          tornarAcionavelPorTeclado(chip, function () { selecionar(alvo); });
+        }
+        detalheDeps.appendChild(chip);
+      });
+    }
+
+    var dependentes = dependentesDe(node, grafo);
+    detalheDependentes.innerHTML = "";
+    if (dependentes.length === 0) {
+      detalheDependentes.innerHTML = '<span class="nota-vazia">nada ainda depende deste conceito</span>';
+    } else {
+      dependentes.slice(0, 40).forEach(function (n) {
+        var chip = document.createElement("span");
+        chip.className = "chip-dep";
+        chip.textContent = n.nome;
+        chip.addEventListener("click", function () { selecionar(n); });
+        tornarAcionavelPorTeclado(chip, function () { selecionar(n); });
+        detalheDependentes.appendChild(chip);
+      });
+    }
+
+    var pontesNo = pontesDoNo(node);
+    if (pontesNo.length > 0) {
+      detalhePonteEnvolt.style.display = "";
+      detalhePonte.innerHTML = "";
+      pontesNo.forEach(function (p) {
+        var outroNome = p.pt === node.nome ? p.mat : p.pt;
+        var outroGrafo = p.pt === node.nome ? GRAFOS.mat : GRAFOS.pt;
+        var chip = document.createElement("span");
+        chip.className = "chip-dep ponte";
+        chip.textContent = outroNome;
+        var irParaPonte = function () {
+          if (state.mode !== "pontes") mudarModo("pontes");
+          selecionar(outroGrafo.byName[outroNome]);
+        };
+        chip.addEventListener("click", irParaPonte);
+        tornarAcionavelPorTeclado(chip, irParaPonte);
+        detalhePonte.appendChild(chip);
+      });
+    } else {
+      detalhePonteEnvolt.style.display = "none";
+    }
+    detalheEl.classList.add("visivel");
+    atualizarSelecaoNaLista();
+  }
+
+  document.getElementById("detalhe-fechar").addEventListener("click", function () {
+    state.selected = null;
+    detalheEl.classList.remove("visivel");
+  });
+
+  // Alternativa por teclado ao grafo em canvas: mesmos nós ativos (mesmo
+  // filtro de tema/busca do canvas), navegáveis por Tab/Enter, chamando a
+  // mesma `selecionar(node)` que o clique no canvas já chama -- nenhuma
+  // lógica de seleção/painel de detalhe duplicada.
+  var listaViewEl = document.getElementById("lista-view");
+  var listaNosEl = document.getElementById("lista-nos");
+  var btnListaView = document.getElementById("btn-lista-view");
+
+  function listaViewVisivel() { return listaViewEl.style.display !== "none"; }
+
+  function renderizarListaNos() {
+    if (!GRAFOS || !listaViewVisivel()) return;
+    var nos = nosAtivos().filter(passaFiltro);
+    listaNosEl.innerHTML = "";
+    nos.slice(0, 1500).forEach(function (node) {
+      var li = document.createElement("li");
+      li.textContent = node.nome;
+      li.setAttribute("role", "option");
+      li.tabIndex = 0;
+      li.setAttribute("aria-selected", state.selected === node ? "true" : "false");
+      var ir = function () { selecionar(node); };
+      li.addEventListener("click", ir);
+      li.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); ir(); }
+      });
+      listaNosEl.appendChild(li);
+    });
+  }
+
+  function atualizarSelecaoNaLista() {
+    if (!listaViewVisivel()) return;
+    var nomeSel = state.selected ? state.selected.nome : null;
+    listaNosEl.querySelectorAll("li").forEach(function (li) {
+      li.setAttribute("aria-selected", li.textContent === nomeSel ? "true" : "false");
+    });
+  }
+
+  btnListaView.addEventListener("click", function () {
+    var visivel = listaViewVisivel();
+    listaViewEl.style.display = visivel ? "none" : "";
+    btnListaView.setAttribute("aria-pressed", visivel ? "false" : "true");
+    if (!visivel) renderizarListaNos();
+  });
+
+  var buscaEl = document.getElementById("busca");
+  function mudarModo(modo) {
+    state.mode = modo;
+    state.selected = null;
+    state.temaFiltro = null;
+    state.query = "";
+    state.rotaSequencia = [];
+    buscaEl.value = "";
+    detalheEl.classList.remove("visivel");
+    document.getElementById("nav-resultado").innerHTML = "";
+    document.querySelectorAll(".modo-btn").forEach(function (b) {
+      var ativo = b.dataset.modo === modo;
+      b.classList.toggle("ativo", ativo);
+      b.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+    document.getElementById("navegar").style.display = (modo === "pt" || modo === "mat") ? "" : "none";
+    montarLegenda();
+    atualizarStats();
+    renderizarListaNos();
+  }
+  document.querySelectorAll(".modo-btn").forEach(function (b) { b.addEventListener("click", function () { mudarModo(b.dataset.modo); }); });
+
+  buscaEl.addEventListener("input", function () {
+    state.query = buscaEl.value.trim().toLowerCase();
+    renderizarListaNos();
+    if (!state.query) return;
+    var pool = state.mode === "pontes" ? GRAFOS.pt.nodes.concat(GRAFOS.mat.nodes) : GRAFOS[state.mode].nodes;
+    var match = pool.find(function (n) { return n.nome.toLowerCase().indexOf(state.query) !== -1; });
+    if (match) selecionar(match);
+  });
+
+  var legendaListaEl = document.getElementById("legenda-lista");
+  function montarLegenda() {
+    legendaListaEl.innerHTML = "";
+    var contagem = {};
+    var pool = state.mode === "pontes" ? GRAFOS.pt.nodes.concat(GRAFOS.mat.nodes) : GRAFOS[state.mode].nodes;
+    pool.forEach(function (n) { contagem[n.tema] = (contagem[n.tema] || 0) + 1; });
+    var temas = state.mode === "pontes" ? GRAFOS.pt.temas.concat(GRAFOS.mat.temas) : GRAFOS[state.mode].temas;
+    var corPorTema = state.mode === "mat" ? GRAFOS.mat.corPorTema
+      : state.mode === "cao" ? GRAFOS.cao.corPorTema
+      : state.mode === "pontes" ? Object.assign({}, GRAFOS.pt.corPorTema, GRAFOS.mat.corPorTema)
+      : GRAFOS.pt.corPorTema;
+    temas.forEach(function (tema) {
+      var item = document.createElement("div");
+      item.className = "legenda-item";
+      item.innerHTML = '<span class="legenda-cor" style="background:' + (corPorTema[tema] || "#888") + '"></span><span>' + tema + '</span><span class="legenda-contagem">' + (contagem[tema] || 0) + "</span>";
+      var alternarFiltro = function () {
+        state.temaFiltro = state.temaFiltro === tema ? null : tema;
+        atualizarEsmaecimento();
+        renderizarListaNos();
+      };
+      item.addEventListener("click", alternarFiltro);
+      tornarAcionavelPorTeclado(item, alternarFiltro);
+      legendaListaEl.appendChild(item);
+    });
+    atualizarEsmaecimento();
+  }
+  function atualizarEsmaecimento() {
+    legendaListaEl.querySelectorAll(".legenda-item").forEach(function (item) {
+      var nomeTema = item.querySelector("span:nth-child(2)").textContent;
+      item.classList.toggle("esmaecido", state.temaFiltro && state.temaFiltro !== nomeTema);
+    });
+  }
+  var resetarFiltroLegenda = function () {
+    state.temaFiltro = null;
+    atualizarEsmaecimento();
+    renderizarListaNos();
+  };
+  var legendaResetEl = document.getElementById("legenda-reset");
+  legendaResetEl.addEventListener("click", resetarFiltroLegenda);
+  legendaResetEl.addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); resetarFiltroLegenda(); }
+  });
+
+  document.querySelectorAll(".nav-modo-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.rotaModo = b.dataset.modo;
+      document.querySelectorAll(".nav-modo-btn").forEach(function (x) {
+        x.classList.toggle("ativo", x === b);
+        x.setAttribute("aria-pressed", x === b ? "true" : "false");
+      });
+    });
+  });
+
+  document.getElementById("nav-ir").addEventListener("click", function () {
+    if (state.mode !== "pt" && state.mode !== "mat") return;
+    var origem = document.getElementById("nav-origem").value.trim();
+    var destino = document.getElementById("nav-destino").value.trim();
+    var resultadoEl = document.getElementById("nav-resultado");
+    if (!origem || !destino) {
+      resultadoEl.textContent = "Preencha de onde e para onde.";
+      return;
+    }
+    resultadoEl.textContent = "A traçar…";
+    fetch("/api/navegar/caminho/" + state.mode + "?origem=" + encodeURIComponent(origem) +
+      "&destino=" + encodeURIComponent(destino) + "&modo=" + state.rotaModo)
+      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r.existe) {
+          state.rotaSequencia = [];
+          resultadoEl.textContent = "Não existe caminho real de \"" + origem + "\" até \"" + destino + "\" (nenhuma rota inventada).";
+          return;
+        }
+        state.rotaSequencia = r.conceitos;
+        resultadoEl.innerHTML = "<div style='margin-bottom:6px;color:var(--texto);'>" + r.comprimento + " passo(s):</div>";
+        r.conceitos.forEach(function (nome) {
+          var div = document.createElement("div");
+          div.className = "passo";
+          div.textContent = nome;
+          var irParaPasso = function () {
+            var grafo = GRAFOS[state.mode];
+            var alvo = grafo.byName[nome];
+            if (alvo) selecionar(alvo);
+          };
+          div.addEventListener("click", irParaPasso);
+          tornarAcionavelPorTeclado(div, irParaPasso);
+          resultadoEl.appendChild(div);
+        });
+      })
+      .catch(function () { resultadoEl.textContent = "Não consegui traçar a rota."; });
+  });
+
+  var DESTAQUES_PT = [
+    "alfabeto", "poema", "verso", "estrofe", "rima rica", "métrica",
+    "literatura", "gênero lírico", "estrutura narrativa",
+    "parágrafo introdutório", "parágrafo de desenvolvimento", "parágrafo conclusivo"
+  ];
+  var DESTAQUES_MAT = [
+    "contagem finita", "contas armadas", "ordem total", "porcentagem",
+    "ponte racionais reais", "medidas e grandezas", "principio multiplicativo"
+  ];
+  function montarDestaques() {
+    var lista = document.getElementById("destaques-lista");
+    lista.innerHTML = "";
+    if (state.mode === "cao") return;
+    var nomes = state.mode === "mat" ? DESTAQUES_MAT : DESTAQUES_PT;
+    var grafo = state.mode === "mat" ? GRAFOS.mat : GRAFOS.pt;
+    nomes.forEach(function (nome) {
+      var alvo = grafo.byName[nome];
+      if (!alvo) return;
+      var chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = nome;
+      chip.addEventListener("click", function () { selecionar(alvo); });
+      tornarAcionavelPorTeclado(chip, function () { selecionar(alvo); });
+      lista.appendChild(chip);
+    });
+  }
+
+  function atualizarStats() {
+    var statsEl = document.getElementById("stats");
+    var subEl = document.getElementById("subtitulo");
+    if (state.mode === "pt") {
+      statsEl.innerHTML = "<span><b>" + GRAFOS.pt.nodes.length + "</b> conceitos</span><span><b>" + GRAFOS.pt.edges.length + "</b> ligações</span><span><b>" + GRAFOS.pt.temas.length + "</b> temas</span>";
+      subEl.textContent = "Toda ligação vem de depende_de real, ao vivo do motor — nada desenhado por completude visual.";
+    } else if (state.mode === "mat") {
+      statsEl.innerHTML = "<span><b>" + GRAFOS.mat.nodes.length + "</b> conceitos</span><span><b>" + GRAFOS.mat.edges.length + "</b> ligações</span><span><b>" + GRAFOS.mat.temas.length + "</b> blocos</span>";
+      subEl.textContent = "Inclui primitivas fundacionais (nós cinza 'raiz:') e dependências de módulo inteiro. Hoje nenhum conceito fica isolado — mas se algum dia ficar, aparece sem nenhuma linha, nunca com uma inventada.";
+    } else if (state.mode === "cao") {
+      if (!CAO_DISPONIVEL) {
+        statsEl.innerHTML = "<span>indisponível</span>";
+        subEl.textContent = "Cão de caça não pôde ser carregado nesta instância (" + (CAO_MOTIVO || "motivo desconhecido") + ").";
+      } else {
+        statsEl.innerHTML = "<span><b>" + GRAFOS.cao.nodes.length + "</b> motores</span><span><b>" + GRAFOS.cao.temas.length + "</b> assuntos</span>";
+        subEl.textContent = "Ferramenta de cálculo com dependência externa (NumPy, SciPy, SymPy...) — não é conhecimento PSF. Sem nenhuma ligação interna nem ponte para Português/Matemática, por decisão explícita.";
+      }
+    } else {
+      statsEl.innerHTML = "<span><b>" + PONTES_VALIDAS.length + "</b> pontes reais</span><span><b>" + (GRAFOS.pt.nodes.length + GRAFOS.mat.nodes.length) + "</b> conceitos nas duas teias</span>";
+      subEl.textContent = "Só pares onde os dois lados existem de facto. Candidatos sem par real ficaram de fora.";
+    }
+    montarDestaques();
+  }
+
+  function configurarPaineisFlutuantes() {
+    var legendaPainel = document.getElementById("legenda");
+    legendaPainel.style.top = Math.max(18, window.innerHeight - legendaPainel.offsetHeight - 18) + "px";
+
+    var navegarPainel = document.getElementById("navegar");
+    navegarPainel.style.left = Math.max(18, (window.innerWidth - navegarPainel.offsetWidth) / 2) + "px";
+
+    document.querySelectorAll(".alca").forEach(function (alca) {
+      var painel = document.getElementById(alca.dataset.arrastar);
+      var drag = { ativo: false, startX: 0, startY: 0, startLeft: 0, startTop: 0 };
+      alca.addEventListener("pointerdown", function (ev) {
+        drag.ativo = true;
+        drag.startX = ev.clientX;
+        drag.startY = ev.clientY;
+        var rect = painel.getBoundingClientRect();
+        drag.startLeft = rect.left;
+        drag.startTop = rect.top;
+        painel.style.right = "auto";
+        painel.style.bottom = "auto";
+        alca.setPointerCapture(ev.pointerId);
+        ev.preventDefault();
+      });
+      alca.addEventListener("pointermove", function (ev) {
+        if (!drag.ativo) return;
+        var novoLeft = Math.min(Math.max(0, drag.startLeft + (ev.clientX - drag.startX)), window.innerWidth - 60);
+        var novoTop = Math.min(Math.max(0, drag.startTop + (ev.clientY - drag.startY)), window.innerHeight - 40);
+        painel.style.left = novoLeft + "px";
+        painel.style.top = novoTop + "px";
+      });
+      alca.addEventListener("pointerup", function (ev) {
+        drag.ativo = false;
+        try { alca.releasePointerCapture(ev.pointerId); } catch (e) {}
+      });
+    });
+  }
+
+  function loop() {
+    if (state.idleRotation && !movimentoReduzido && !state.dragging) state.view.rotation += 0.00035;
+    desenhar();
+    requestAnimationFrame(loop);
+  }
+
+  var CAO_DISPONIVEL = false;
+  var CAO_MOTIVO = null;
+
+  function construirGrafoCaoDeCaca(dados) {
+    var nodes = (dados.nodes || []).map(function (n) {
+      return { nome: n.nome, tema: n.tema, tipo: "conceito", construcao: n.classe || "", funcao: n.descricao || "", deps: [], grau: 0 };
+    });
+    return construirGrafo({ nodes: nodes, edges: [], temas: dados.temas || [] });
+  }
+
+  fetch("/api/mapa")
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (dados) {
+      GRAFOS = { pt: construirGrafo(dados.pt), mat: construirGrafo(dados.mat), cao: construirGrafoCaoDeCaca(dados.cao_de_caca) };
+      layoutBase(GRAFOS.pt);
+      layoutBase(GRAFOS.mat);
+      layoutBase(GRAFOS.cao);
+      PONTES_VALIDAS = dados.pontes;
+      CAO_DISPONIVEL = !!dados.cao_de_caca.disponivel;
+      CAO_MOTIVO = dados.cao_de_caca.motivo;
+      document.getElementById("carregando").style.display = "none";
+      ["cabecalho", "legenda", "destaques", "navegar"].forEach(function (id) { document.getElementById(id).style.display = ""; });
+      document.getElementById("dica").style.display = "";
+      montarLegenda();
+      atualizarStats();
+      configurarPaineisFlutuantes();
+      requestAnimationFrame(loop);
+    })
+    .catch(function (erro) {
+      document.getElementById("carregando").textContent = "Não consegui carregar o conhecimento ao vivo (" + erro.message + "). Confirme que o servidor está a correr.";
+    });
+})();
+</script>
+</body>
+</html>

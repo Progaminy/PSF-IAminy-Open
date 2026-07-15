@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PSF-IAminy</title>
+<link rel="stylesheet" href="/estatico/estilo.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topo">
+    <button class="icone-botao" id="btn-lateral" title="Mostrar/esconder barra lateral" aria-label="Mostrar/esconder barra lateral">
+      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 5h18M3 12h18M3 19h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+    <div class="marca">PSF-IAminy</div>
+    <a class="icone-botao" href="/estatico/mapa.html" target="_blank" rel="noopener" title="Mapa do conhecimento (Português, Matemática e as pontes entre os dois)" aria-label="Abrir mapa do conhecimento">
+      <svg viewBox="0 0 24 24" width="19" height="19"><circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="5" cy="16" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="19" cy="16" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="19" r="1.6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 7l-5.5 7.5M12 7l5.5 7.5M6.7 17.2l3.6 1.3M17.3 17.2l-3.6 1.3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    </a>
+    <a class="icone-botao" href="/estatico/aulas.html" target="_blank" rel="noopener" title="Aulas por pacote real (uma aula por conceito, exercícios, corrigir, treinar)" aria-label="Abrir aulas">
+      <svg viewBox="0 0 24 24" width="19" height="19"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M4 5.5v15" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M8 8h9M8 11.5h9" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+    </a>
+    <button class="icone-botao" id="btn-copiar-conversa" title="Copiar a conversa inteira" aria-label="Copiar a conversa inteira">
+      <svg viewBox="0 0 24 24" width="18" height="18"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 16V5a1 1 0 0 1 1-1h11" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+
+  <div class="corpo">
+    <aside class="lateral" id="lateral">
+      <button class="botao-nova-conversa" id="btn-nova-conversa">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Nova conversa
+      </button>
+
+      <nav class="lista-conversas" id="lista-conversas" aria-label="Conversas"></nav>
+    </aside>
+
+    <main class="principal">
+      <div class="mensagens" id="mensagens">
+        <div class="boas-vindas" id="boas-vindas">
+          <h1>PSF-IAminy</h1>
+          <p>Motor próprio de matemática, português e ensino por pacotes — sem depender de nenhum modelo de linguagem externo.</p>
+          <p class="dica">Fala comigo normalmente: "quem é você?", "ensina adição", "explica Bhaskara", "o que são padrões de Turing?", "isso está errado". Aulas por código continuam disponíveis, mas são secundárias.</p>
+        </div>
+      </div>
+
+      <div class="atalhos-chat" id="atalhos-chat" aria-label="Ações rápidas">
+        <button type="button" data-text="mais simples" title="Mais simples">Mais simples</button>
+        <button type="button" data-text="passo a passo" title="Passo a passo">Passos</button>
+        <button type="button" data-text="dá exemplo" title="Dar exemplo">Exemplo</button>
+        <button type="button" data-text="exercícios" title="Gerar exercícios">Exercícios</button>
+        <button type="button" data-text="modo cientista" title="Modo cientista">Cientista</button>
+        <button type="button" data-text="corrigir resposta" title="Corrigir resposta">Corrigir</button>
+      </div>
+
+      <form class="entrada" id="form-entrada">
+        <input type="file" id="input-arquivo" accept=".txt,.docx,.zip" hidden>
+        <button type="button" class="icone-botao" id="btn-anexar" title="Anexar ficheiro (.txt, .docx, .zip)" aria-label="Anexar ficheiro">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M21 12.5V7a3 3 0 0 0-3-3H9L4 9v8a3 3 0 0 0 3 3h5" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M14 21v-4a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        </button>
+        <textarea id="campo-texto" placeholder="Escreve uma mensagem para o PSF-IAminy…" aria-label="Escreve uma mensagem para o PSF-IAminy" rows="1"></textarea>
+        <button type="submit" class="botao-enviar" id="btn-enviar" title="Enviar" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <footer class="rodape">Do zero ao infinito</footer>
+</div>
+
+<script src="/estatico/app.js"></script>
+</body>
+</html>

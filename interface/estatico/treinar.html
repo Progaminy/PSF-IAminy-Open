@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treinar — PSF-IAminy</title>
+<link rel="stylesheet" href="/estatico/estilo.css">
+<style>
+  html, body { height: 100%; margin: 0; }
+  #app { max-width: 640px; margin: 0 auto; padding: 40px 24px; display: flex; flex-direction: column; min-height: 100vh; box-sizing: border-box; }
+  #cabecalho { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  #cabecalho h1 { font-size: 1.1rem; margin: 0; }
+  #progresso { font-family: ui-monospace, monospace; font-size: 0.75rem; color: var(--texto-suave); }
+  #barra { height: 4px; background: var(--bg-terciario); border-radius: 2px; overflow: hidden; margin-bottom: 28px; }
+  #barra-preenchida { height: 100%; background: var(--acento); width: 0%; transition: width 0.2s; }
+
+  #cartao { background: var(--bg-secundario); border: 1px solid var(--borda); border-radius: var(--raio); padding: 24px; flex: 1; }
+  #conceito-atual { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--texto-suave); margin-bottom: 6px; }
+  #pergunta-atual { font-size: 1.05rem; line-height: 1.5; margin-bottom: 20px; }
+  #resposta { width: 100%; box-sizing: border-box; font-size: 0.9rem; padding: 10px 12px; border-radius: var(--raio); border: 1px solid var(--borda); background: var(--bg-terciario); color: var(--texto); }
+  #acoes { display: flex; gap: 10px; margin-top: 14px; }
+  #acoes button { font-size: 0.85rem; padding: 9px 18px; border-radius: 20px; border: none; background: var(--acento); color: var(--acento-texto); cursor: pointer; }
+  #acoes button:disabled { opacity: 0.5; cursor: default; }
+  #acoes button.secundario { background: transparent; border: 1px solid var(--borda); color: var(--texto-suave); }
+
+  #resultado { margin-top: 16px; padding: 12px 14px; border-radius: var(--raio); font-size: 0.85rem; display: none; }
+  #resultado.certo { background: rgba(60, 160, 90, 0.12); border: 1px solid rgba(60, 160, 90, 0.4); }
+  #resultado.errado { background: rgba(200, 90, 70, 0.1); border: 1px solid rgba(200, 90, 70, 0.35); }
+  #resultado .metodo { font-size: 0.68rem; color: var(--texto-suave); margin-top: 6px; }
+
+  #fim { text-align: center; padding: 40px 0; display: none; }
+  #fim h2 { margin-bottom: 8px; }
+  #fim a { color: var(--acento); }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="cabecalho">
+    <h1>Treinar</h1>
+    <span id="progresso" aria-live="polite"></span>
+  </div>
+  <div id="barra" role="progressbar" aria-label="Progresso do treino" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="barra-preenchida"></div></div>
+
+  <div id="cartao">
+    <div id="conceito-atual"></div>
+    <div id="pergunta-atual" aria-live="polite">A carregar exercícios…</div>
+    <input id="resposta" type="text" placeholder="A sua resposta…" aria-label="A sua resposta" autocomplete="off">
+    <div id="acoes">
+      <button id="btn-confirmar">Confirmar</button>
+      <button id="btn-pular" class="secundario">Pular</button>
+    </div>
+    <div id="resultado" aria-live="polite"></div>
+  </div>
+
+  <div id="fim">
+    <h2 id="fim-titulo"></h2>
+    <p id="fim-resumo"></p>
+    <a href="/estatico/aulas.html">← voltar às aulas</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var parametros = new URLSearchParams(window.location.search);
+  var area = parametros.get("area") || "portugues";
+  var codigoPacote = parametros.get("pacote") || "";
+
+  var fila = [];
+  var indice = 0;
+  var acertos = 0;
+  var respondidos = 0;
+
+  var elProgresso = document.getElementById("progresso");
+  var elBarra = document.getElementById("barra-preenchida");
+  var elBarraContainer = document.getElementById("barra");
+  var elConceito = document.getElementById("conceito-atual");
+  var elPergunta = document.getElementById("pergunta-atual");
+  var elResposta = document.getElementById("resposta");
+  var elResultado = document.getElementById("resultado");
+  var elCartao = document.getElementById("cartao");
+  var elFim = document.getElementById("fim");
+  var btnConfirmar = document.getElementById("btn-confirmar");
+  var btnPular = document.getElementById("btn-pular");
+
+  fetch("/api/aulas/" + area + "/" + encodeURIComponent(codigoPacote))
+    .then(function (r) { return r.json(); })
+    .then(function (dados) {
+      (dados.aulas || []).forEach(function (aula) {
+        aula.exercicios.forEach(function (ex) {
+          fila.push({ conceito: aula.conceito, tipo: ex.tipo, pergunta: ex.pergunta });
+        });
+      });
+      if (!fila.length) {
+        elPergunta.textContent = "Este pacote não tem exercício possível (conceito sem dependência, dependente, função ou exemplo suficiente).";
+        btnConfirmar.disabled = true;
+        btnPular.disabled = true;
+        return;
+      }
+      mostrarAtual();
+    })
+    .catch(function () {
+      elPergunta.textContent = "Não consegui carregar os exercícios deste pacote.";
+    });
+
+  function mostrarAtual() {
+    elResultado.style.display = "none";
+    elResposta.value = "";
+    elResposta.disabled = false;
+    btnConfirmar.disabled = false;
+    var item = fila[indice];
+    elConceito.textContent = item.conceito;
+    elPergunta.textContent = item.pergunta;
+    elProgresso.textContent = (indice + 1) + " / " + fila.length;
+    var percentagem = Math.round((indice / fila.length) * 100);
+    elBarra.style.width = percentagem + "%";
+    elBarraContainer.setAttribute("aria-valuenow", String(percentagem));
+    elResposta.focus();
+  }
+
+  function confirmar() {
+    var item = fila[indice];
+    var resposta = elResposta.value.trim();
+    if (!resposta) return;
+    elResposta.disabled = true;
+    btnConfirmar.disabled = true;
+    fetch("/api/aulas/verificar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ area: area, conceito: item.conceito, tipo: item.tipo, resposta: resposta }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        respondidos++;
+        if (r.correto) acertos++;
+        elResultado.style.display = "block";
+        elResultado.className = r.correto ? "certo" : "errado";
+        elResultado.innerHTML =
+          "<strong>" + (r.correto ? "Certo." : "Não confere.") + "</strong> Resposta de referência: " + r.resposta_modelo +
+          (r.semelhanca !== 1 && r.semelhanca !== 0 ? " (semelhança: " + Math.round(r.semelhanca * 100) + "%)" : "") +
+          '<div class="metodo">' + r.metodo + "</div>";
+        setTimeout(proximo, 1600);
+      });
+  }
+
+  function proximo() {
+    indice++;
+    if (indice >= fila.length) {
+      terminar();
+      return;
+    }
+    mostrarAtual();
+  }
+
+  function terminar() {
+    elCartao.style.display = "none";
+    elFim.style.display = "block";
+    elBarra.style.width = "100%";
+    elBarraContainer.setAttribute("aria-valuenow", "100");
+    document.getElementById("fim-titulo").textContent = "Pacote treinado.";
+    document.getElementById("fim-resumo").textContent =
+      acertos + " de " + respondidos + " respondidos batem com a resposta de referência" +
+      (respondidos < fila.length ? " (" + (fila.length - respondidos) + " pulados)." : ".");
+  }
+
+  btnConfirmar.addEventListener("click", confirmar);
+  btnPular.addEventListener("click", proximo);
+  elResposta.addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter") confirmar();
+  });
+})();
+</script>
+</body>
+</html>
