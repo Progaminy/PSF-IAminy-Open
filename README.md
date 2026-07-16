@@ -25,9 +25,9 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 git clone https://github.com/Progaminy/PSF-IAminy-Open.git
 cd PSF-IAminy-Open
 python3 -m pytest -q                 # 1066 passed
-python3 psf_chat.py "quem é você?"   # chat mínimo pelo motor PSF
+python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitação -- em segundos
 ```
-Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
+Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
 
 **Por que a abordagem é diferente.** A maioria dos sistemas de IA usa bibliotecas e modelos prontos como fundamento de verdade. O PSF-IAminy proíbe isso por regra sagrada (`REGRA_INTEGRIDADE.md`): dependências externas só podem comparar, validar ou otimizar — nunca ser fonte do conhecimento. Cada conceito matemático ou linguístico precisa de uma ponte explícita até conhecimento anterior; sem ponte, não é conhecimento PSF.
 

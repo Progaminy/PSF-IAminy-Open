@@ -26,6 +26,14 @@ Resultado atual esperado:
 1066 passed
 ```
 
+## Ver uma demonstração rápida
+
+```bash
+python3 exemplo_publico.py
+```
+
+Exemplos mais profundos por domínio: `exemplos/matematica.py`, `exemplos/portugues.py`, `exemplos/rastreabilidade.py`.
+
 ## Verificar conhecimento puro de Português
 
 ```bash
