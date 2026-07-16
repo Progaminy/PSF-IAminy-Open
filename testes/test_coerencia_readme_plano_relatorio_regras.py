@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import verificar_integridade
 from motor.coerencia import (
     arquivos_que_violam_regra_versao_unica,
+    divergencia_contagem_testes_entre_documentos,
     divergencias_lexico_no_readme,
     divergencias_readme_vs_auditoria_portugues,
     itens_do_plano_fora_de_ordem,
@@ -39,6 +40,10 @@ def test_numeros_do_lexico_no_readme_batem_com_o_dicionario_vivo():
 
 def test_nenhum_arquivo_viola_a_regra_de_versao_unica():
     assert arquivos_que_violam_regra_versao_unica() == ()
+
+
+def test_readme_e_como_rodar_declaram_a_mesma_contagem_de_testes():
+    assert divergencia_contagem_testes_entre_documentos() == ()
 
 
 def test_perfis_de_teste_nao_declaram_ficheiro_fantasma():

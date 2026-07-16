@@ -23,7 +23,7 @@ python3 -m pytest -q
 Resultado atual esperado:
 
 ```text
-660 passed
+1066 passed
 ```
 
 ## Verificar conhecimento puro de Português
