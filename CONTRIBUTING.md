@@ -20,7 +20,7 @@ Princípios obrigatórios
 * Dependências externas podem ser usadas para comparação, validação ou otimização quando isso estiver claramente identificado.
 * Não remover testes ou verificações apenas para ocultar uma falha.
 * Manter separadas as responsabilidades dos motores de Matemática, Português e do núcleo comum.
-* Não adicionar conteúdo privado à pasta `privado/`.
+* Não adicionar conteúdo privado, conversas locais ou ficheiros da edição privada ao repositório público.
 
 Preparar o ambiente
 

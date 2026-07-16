@@ -35,7 +35,7 @@ Ver `docs/ARQUITETURA.md` para o diagrama e a descrição de cada componente (mo
 
 ## Resultados atuais (verificáveis)
 
-- 1066 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1084 testes automatizados passam localmente (`python3 -m pytest -q`).
 - 203 documentos conceituais de Matemática auditados, todos com ponte de dependências fechada.
 - 1141 conceitos puros de Português numa única linha canónica, 2545 relações de dependência, 0 lacunas internas conhecidas (124 fronteiras abertas e 179 limites operacionais declarados à parte — ver `README.md`).
 - Divisão reconstruída como fração exata + expansão decimal explícita (quociente, resto, transporte por 10), incluindo divisão por zero tratada como não definida por construção, não como problema aberto nem exceção silenciosa.
@@ -45,7 +45,7 @@ Ver `docs/ARQUITETURA.md` para o diagrama e a descrição de cada componente (mo
 - O domínio matemático coberto é finito e racional; não há afirmação de completude sobre os números reais (a "lei geradora de aproximação real", ETAPA 1035, é o esforço mais avançado nessa direção e continua com equivalência/ordem entre leis pendente).
 - A hipótese de primalidade por divisão em níveis não foi integrada nem falsificada — está preservada, não validada.
 - Não houve, até o momento, comparação sistemática publicada com bibliotecas de referência (SymPy, correctores ortográficos consolidados) nem avaliação por terceiros independentes do autor.
-- A cobertura de testes não foi medida (percentual de linhas/branches exercitadas); "1066 testes passam" descreve quantidade e resultado, não profundidade de cobertura.
+- A cobertura de linhas foi medida localmente em 63% (`docs/COBERTURA.md`); o número de testes e a cobertura ainda não demonstram, por si só, profundidade científica nem cobertura completa dos casos extremos.
 - O projeto tem um único mantenedor até o momento; não houve revisão por pares externos.
 
 ## Possibilidades de falsificação

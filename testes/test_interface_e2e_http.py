@@ -41,7 +41,11 @@ def porta_servidor(tmp_path, monkeypatch):
 
 
 def _get(porta, caminho):
-    conexao = http.client.HTTPConnection("127.0.0.1", porta, timeout=5)
+    # A primeira resposta do chat materializa índices sob demanda. Em cópia
+    # limpa ela mediu 3,65 s sem HTTP e ultrapassou ocasionalmente 5 s sob a
+    # carga da suíte completa. O timeout testa travamento, não desempenho
+    # (medido separadamente em benchmarks/), por isso mantém margem realista.
+    conexao = http.client.HTTPConnection("127.0.0.1", porta, timeout=15)
     conexao.request("GET", caminho)
     resposta = conexao.getresponse()
     corpo = resposta.read()
@@ -50,7 +54,7 @@ def _get(porta, caminho):
 
 
 def _post(porta, caminho, dados):
-    conexao = http.client.HTTPConnection("127.0.0.1", porta, timeout=5)
+    conexao = http.client.HTTPConnection("127.0.0.1", porta, timeout=15)
     corpo = json.dumps(dados).encode("utf-8")
     conexao.request("POST", caminho, body=corpo, headers={"Content-Type": "application/json"})
     resposta = conexao.getresponse()
@@ -60,7 +64,7 @@ def _post(porta, caminho, dados):
 
 
 def _delete(porta, caminho):
-    conexao = http.client.HTTPConnection("127.0.0.1", porta, timeout=5)
+    conexao = http.client.HTTPConnection("127.0.0.1", porta, timeout=15)
     conexao.request("DELETE", caminho)
     resposta = conexao.getresponse()
     resposta.read()

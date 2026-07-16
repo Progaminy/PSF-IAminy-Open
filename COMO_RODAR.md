@@ -33,7 +33,7 @@ python3 -m pytest -q
 Resultado atual esperado:
 
 ```text
-1066 passed
+1084 passed
 ```
 
 ## Ver uma demonstração rápida
@@ -142,4 +142,3 @@ for h in MotorMatematica().hipoteses_pendentes():
     print(h.titulo, h.estado, h.autor)
 PY
 ```
-

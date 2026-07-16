@@ -21,7 +21,7 @@ def demo_matematica() -> None:
     entrada = "12:5"
     print(f"[Matemática] entrada: {entrada!r}")
     resolucao = motor.calcular(entrada, casas_decimais=3)
-    print(f"  motor acionado: MotorMatematica.calcular")
+    print("  motor acionado: MotorMatematica.calcular")
     print(f"  estado: {resolucao.estado}")
     print(f"  resultado: {resolucao.resultado}  (forma exata: {resolucao.resultado_exato})")
     print("  reconstrução passo a passo:")

@@ -1,5 +1,7 @@
 # PSF-IAminy
 
+Português · [English](README.en.md)
+
 [![CI](https://github.com/Progaminy/PSF-IAminy-Open/actions/workflows/ci.yml/badge.svg)](https://github.com/Progaminy/PSF-IAminy-Open/actions/workflows/ci.yml)
 
 Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investigação, organização e validação.
@@ -13,7 +15,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 **O que já funciona, com teste automatizado.**
 - Matemática: resolve expressões racionais com precedência, reconstrói divisão por quociente/resto/fração/decimal, executa prova formal no fragmento lógico finito e distingue teste de prova universal — 203 documentos conceituais auditados, todos com dependências ligadas.
 - Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1702 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
-- 1066 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1084 testes automatizados passam localmente (`python3 -m pytest -q`).
 
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
@@ -24,7 +26,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 ```bash
 git clone https://github.com/Progaminy/PSF-IAminy-Open.git
 cd PSF-IAminy-Open
-python3 -m pytest -q                 # 1066 passed
+python3 -m pytest -q                 # 1084 passed
 python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitação -- em segundos
 ```
 Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
@@ -146,8 +148,10 @@ O projeto separa o que afirma em cinco categorias, para que nenhuma seja confund
 Limitações que o projeto reconhece abertamente:
 
 - O motor de Matemática cobre um domínio racional finito; não afirma completude sobre os reais (ver ETAPA_1035, ainda pendente de equivalência/ordem entre leis geradoras).
+- O domínio funcional não implica escala: na avaliação local, `20*20` terminou em 0,215 s, mas `99*99` excedeu 10 s devido às construções por retirada/predecessor (`docs/LIMITES_OPERACIONAIS.md`).
 - Português declara **124 fronteiras abertas** (dependem de variedade, contexto, comunidade ou evidência real) e **179 limites operacionais** (o conceito existe, mas a automação ainda pode ser parcial) — nenhum dos dois é tratado como lacuna a esconder.
-- Cobertura de testes medida localmente em 63% (ver `docs/COBERTURA.md` para o detalhe por módulo); ainda não há comparação sistemática com bibliotecas de referência (SymPy, corretores ortográficos conhecidos) — ver `PLANO_PSF_IAMINY.md`.
+- A avaliação linguística pública inicial encontrou sugestões indevidas para 4 de 8 palavras válidas numa amostra pequena (50% nessa amostra, não estimativa geral); o corretor permanece consultivo e parcial. Ver `docs/AVALIACAO_QUALIDADE.md`.
+- Cobertura de testes medida localmente em 63% (ver `docs/COBERTURA.md` para o detalhe por módulo). A primeira comparação externa matemática obteve 7/7 concordâncias com SymPy 1.14.0 numa amostra pequena; validação sistemática ampla e comparação linguística continuam pendentes (`docs/VALIDACAO_EXTERNA.md`).
 - `dados/base_canonica.jsonl` foi esvaziado deliberadamente (ver `COMO_RODAR.md`); o chat responde de forma mais limitada até a base pura ser reconstruída por materialização PSF.
 
 ## Regra sagrada principal
@@ -205,15 +209,34 @@ Tudo entra no mesmo corpo do PSF-IAminy.
 
 ```text
 README.md                 visão atual e coerência geral
+README.en.md              apresentação pública essencial em inglês
 COMO_RODAR.md             instruções mínimas de execução
 REGRA_INTEGRIDADE.md      regras sagradas
 REGRA_VERSAO_UNICA.md     continuidade única
 PLANO_PSF_IAMINY.md       plano único crescente
 RELATORIO_UNICO.md        relatório único do estado atual
 CHANGELOG.md              mudanças da edição pública, por versão
+ROADMAP.md                prioridades públicas: agora, próximo, depois e investigação
+CODE_OF_CONDUCT.md        regras de convivência e aplicação nos espaços do projeto
+GOVERNANCE.md             critérios públicos de decisão, aceitação e release
+AUTHORS.md                autoria, licença, conteúdo excluído e forma de citação
+CITATION.cff              metadados legíveis por plataformas de citação
+REFERENCIAS.md            fontes internas e protocolo para referências externas
 docs/ARQUITETURA.md       diagrama e descrição de cada componente
 docs/NOTA_CIENTIFICA.md   problema, hipótese, metodologia e limitações
 docs/COBERTURA.md         cobertura de testes medida, por módulo
+docs/AUDITORIA_SEGURANCA.md   o que foi auditado, corrigido e o que continua como risco não testado
+docs/POLITICA_DADOS.md    o que é guardado localmente, onde, por quanto tempo e como apagar
+docs/RELEASE.md           notas e checklist da primeira release candidata
+docs/COMPATIBILIDADE.md   versões, sistemas e estabilidade das interfaces
+docs/DEPENDENCIAS.md      finalidade, separação e riscos das dependências
+docs/TESTES.md            classificação reproduzível, concentração e limites da suíte
+docs/DESEMPENHO.md        linha de base de tempo, inicialização e memória rastreada
+docs/AVALIACAO_QUALIDADE.md   casos matemáticos/linguísticos, resultados e erros observados
+docs/VALIDACAO_EXTERNA.md     comparadores, versões, concordâncias, divergências e limites
+docs/REPRODUCAO.md         instalação, CLI, demonstração e suíte numa cópia limpa
+docs/ANALISE_ESTATICA.md   resultados Ruff/Bandit, correções e dívida triada
+docs/LIMITES_OPERACIONAIS.md   números, expressões, texto, HTTP e limites não avaliados
 ```
 
 ## Estado preservado
@@ -405,7 +428,7 @@ python3 motor_iaminy.py --rapido
 Resultado atual esperado:
 
 ```text
-1066 passed na verificação local mais recente
+1084 passed na verificação local mais recente
 ```
 
 ```text
