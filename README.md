@@ -152,8 +152,8 @@ núcleo
 motor
 motor de busca como mecanismo
 validação externa como comparação
-pasta privado/
-privado/avalmath.docx
+pasta privado/ preservada apenas como marcador estrutural
+ficheiros privados não incluídos na edição pública
 ```
 
 Foi removido da camada atual:
@@ -330,7 +330,7 @@ python3 motor_iaminy.py --rapido
 Resultado atual esperado:
 
 ```text
-660 passed
+1066 passed na verificação local mais recente
 ```
 
 ```text
