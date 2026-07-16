@@ -18,7 +18,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
 - Português declara 124 fronteiras abertas e 179 limites operacionais: o conceito existe, mas a operação automática ainda pode ser parcial.
-- CI (`.github/workflows/ci.yml`) já existe no repositório, mas ainda não rodou publicamente — só passa a valer depois do primeiro push. Ainda não há pacote instalável via `pip` nem release publicada (ver [O que falta](#o-que-falta) e `PLANO_PSF_IAMINY.md`).
+- CI (`.github/workflows/ci.yml`) já existe no repositório, mas ainda não rodou publicamente — só passa a valer depois do primeiro push. Instalação via `pip install -e .` já existe (comando `psf-iaminy`), mas ainda não há release publicada (ver [O que falta](#o-que-falta) e `PLANO_PSF_IAMINY.md`).
 
 **Como rodar uma demonstração.**
 ```bash
@@ -147,7 +147,7 @@ Limitações que o projeto reconhece abertamente:
 
 - O motor de Matemática cobre um domínio racional finito; não afirma completude sobre os reais (ver ETAPA_1035, ainda pendente de equivalência/ordem entre leis geradoras).
 - Português declara **124 fronteiras abertas** (dependem de variedade, contexto, comunidade ou evidência real) e **179 limites operacionais** (o conceito existe, mas a automação ainda pode ser parcial) — nenhum dos dois é tratado como lacuna a esconder.
-- Cobertura de testes medida localmente em 63% (ver `docs/COBERTURA.md` para o detalhe por módulo); ainda não há pacote instalável via `pip` nem comparação sistemática com bibliotecas de referência (SymPy, corretores ortográficos conhecidos) — ver `PLANO_PSF_IAMINY.md`.
+- Cobertura de testes medida localmente em 63% (ver `docs/COBERTURA.md` para o detalhe por módulo); ainda não há comparação sistemática com bibliotecas de referência (SymPy, corretores ortográficos conhecidos) — ver `PLANO_PSF_IAMINY.md`.
 - `dados/base_canonica.jsonl` foi esvaziado deliberadamente (ver `COMO_RODAR.md`); o chat responde de forma mais limitada até a base pura ser reconstruída por materialização PSF.
 
 ## Regra sagrada principal

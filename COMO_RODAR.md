@@ -8,6 +8,16 @@ Projeto oficial: `PSF-IAminy/`.
 cd PSF-IAminy
 ```
 
+## Instalação reproduzível (opcional)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+Isto instala o comando único `psf-iaminy` (equivalente a `python -m psf_iaminy`), que delega para a mesma entrada de `main.py` já documentada abaixo. `main.py`, `psf.py`, `psf_chat.py` e `motor_iaminy.py` continuam funcionando exatamente como antes, com ou sem esta instalação -- ela não é obrigatória para rodar os testes ou os exemplos.
+
 ## Verificar integridade básica
 
 ```bash
