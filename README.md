@@ -237,6 +237,7 @@ docs/VALIDACAO_EXTERNA.md     comparadores, versões, concordâncias, divergênc
 docs/REPRODUCAO.md         instalação, CLI, demonstração e suíte numa cópia limpa
 docs/ANALISE_ESTATICA.md   resultados Ruff/Bandit, correções e dívida triada
 docs/LIMITES_OPERACIONAIS.md   números, expressões, texto, HTTP e limites não avaliados
+docs/ISSUES_PLANEJADAS.md   backlog pronto; ainda não publicado por falta de permissão de escrita
 ```
 
 ## Estado preservado

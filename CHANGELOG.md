@@ -40,6 +40,7 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 - `ferramentas/auditar_testes.py`: 763 funções auditadas; nenhuma sem asserção explícita, duplicação AST exata ou erro de sintaxe.
 - Servidor HTTP agora devolve 400 para JSON truncado, UTF-8 inválido e JSON que não seja objeto; três regressões elevam a suíte a 1084 casos.
 - `avaliacoes/avaliar_limites.py` e `docs/LIMITES_OPERACIONAIS.md`: limites com timeout; `99*99` excedeu 10 s, enquanto 100 termos, 500 palavras e 100 GETs concluíram.
+- `docs/ISSUES_PLANEJADAS.md`: seis issues reais preparadas após criação remota falhar com 403; nenhuma é apresentada como publicada.
 - Este `CHANGELOG.md`.
 
 ### Removido
