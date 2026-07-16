@@ -38,6 +38,7 @@ confidencial.md
 interface/dados/conversas/
 dados/auditoria_chat_vivo.jsonl
 dados/falhas_chat_vivo.jsonl
+graficos_psf/
 *.log
 *.tmp
 *.temp

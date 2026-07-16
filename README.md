@@ -1,5 +1,7 @@
 # PSF-IAminy
 
+[![CI](https://github.com/Progaminy/PSF-IAminy-Open/actions/workflows/ci.yml/badge.svg)](https://github.com/Progaminy/PSF-IAminy-Open/actions/workflows/ci.yml)
+
 Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investigação, organização e validação.
 
 ## Em poucos minutos
@@ -16,7 +18,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
 - Português declara 124 fronteiras abertas e 179 limites operacionais: o conceito existe, mas a operação automática ainda pode ser parcial.
-- Ainda não há CI público, pacote instalável via `pip` nem release publicada (ver [O que falta](#o-que-falta) e `PLANO_PSF_IAMINY.md`).
+- CI (`.github/workflows/ci.yml`) já existe no repositório, mas ainda não rodou publicamente — só passa a valer depois do primeiro push. Ainda não há pacote instalável via `pip` nem release publicada (ver [O que falta](#o-que-falta) e `PLANO_PSF_IAMINY.md`).
 
 **Como rodar uma demonstração.**
 ```bash
@@ -145,7 +147,7 @@ Limitações que o projeto reconhece abertamente:
 
 - O motor de Matemática cobre um domínio racional finito; não afirma completude sobre os reais (ver ETAPA_1035, ainda pendente de equivalência/ordem entre leis geradoras).
 - Português declara **124 fronteiras abertas** (dependem de variedade, contexto, comunidade ou evidência real) e **179 limites operacionais** (o conceito existe, mas a automação ainda pode ser parcial) — nenhum dos dois é tratado como lacuna a esconder.
-- Não existe ainda CI público, cobertura de testes medida, pacote instalável via `pip`, nem comparação sistemática com bibliotecas de referência (SymPy, corretores ortográficos conhecidos) — ver `PLANO_PSF_IAMINY.md`.
+- Cobertura de testes medida localmente em 63% (ver `docs/COBERTURA.md` para o detalhe por módulo); ainda não há pacote instalável via `pip` nem comparação sistemática com bibliotecas de referência (SymPy, corretores ortográficos conhecidos) — ver `PLANO_PSF_IAMINY.md`.
 - `dados/base_canonica.jsonl` foi esvaziado deliberadamente (ver `COMO_RODAR.md`); o chat responde de forma mais limitada até a base pura ser reconstruída por materialização PSF.
 
 ## Regra sagrada principal
@@ -211,6 +213,7 @@ RELATORIO_UNICO.md        relatório único do estado atual
 CHANGELOG.md              mudanças da edição pública, por versão
 docs/ARQUITETURA.md       diagrama e descrição de cada componente
 docs/NOTA_CIENTIFICA.md   problema, hipótese, metodologia e limitações
+docs/COBERTURA.md         cobertura de testes medida, por módulo
 ```
 
 ## Estado preservado
@@ -224,7 +227,6 @@ núcleo
 motor
 motor de busca como mecanismo
 validação externa como comparação
-pasta privado/ preservada apenas como marcador estrutural
 ficheiros privados não incluídos na edição pública
 ```
 
@@ -244,6 +246,7 @@ módulos matemáticos antigos baseados em monografia/pergunta/resposta/aula pron
 log dados/auditoria_chat_vivo.jsonl
 READMEs extras
 conteúdo antigo de dados/base_canonica.jsonl
+pasta privado/ (só continha um marcador estrutural, sem conteúdo pessoal real; removida por decisão do autor)
 ```
 
 ## Crescimento atual de Português

@@ -60,11 +60,9 @@ http://127.0.0.1:8765/
 
 ## Regra deste pacote
 
-Este pacote preserva o conhecimento puro, o núcleo, Matemática, Português, motor interno, motor de busca e área privada.
+Este pacote preserva o conhecimento puro, o núcleo, Matemática, Português, motor interno e motor de busca.
 
-Foram removidas conversas salvas, aulas prontas antigas, perguntas prontas antigas, respostas prontas antigas, baterias didáticas órfãs, auditorias/dossiês, índices antigos, monografias, resultados temporários e logs que não eram conhecimento puro.
-
-A pasta `privado/` é sagrada e pessoal. O arquivo `privado/avalmath.docx` foi preservado.
+Foram removidas conversas salvas, aulas prontas antigas, perguntas prontas antigas, respostas prontas antigas, baterias didáticas órfãs, auditorias/dossiês, índices antigos, monografias, resultados temporários e logs que não eram conhecimento puro. A pasta `privado/` (antes preservada só como marcador estrutural, sem conteúdo pessoal real nesta edição pública) foi removida por decisão explícita do autor.
 
 ## Verificar o aproveitamento da Matemática no Português
 

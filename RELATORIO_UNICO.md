@@ -4,13 +4,13 @@ Este é o relatório único do projeto. Ele é ajustado no mesmo lugar; não exi
 
 ## Estado atual
 
-O PSF-IAminy preserva Matemática, Português, núcleo, motor, busca, comparação externa e área privada. Português cresceu dentro da mesma linha canónica, sem criar versão, etapa paralela ou base sobreposta.
+O PSF-IAminy preserva Matemática, Português, núcleo, motor, busca e comparação externa. Português cresceu dentro da mesma linha canónica, sem criar versão, etapa paralela ou base sobreposta.
 
 ## Feito acumulado
 
 - A pasta oficial continua sendo `PSF-IAminy/`.
 - Os documentos oficiais continuam únicos.
-- A área `privado/` e `privado/avalmath.docx` permanecem preservadas.
+- A pasta `privado/` (que já só continha um marcador estrutural nesta edição pública, sem conteúdo pessoal real) foi removida por decisão do autor.
 - Monografia continua sendo consolidação e reconstrução PSF, nunca fonte cega.
 - Matemática permanece preservada em `conhecimento/ETAPA_*.md` e módulos vivos/auditáveis.
 - Dependências externas continuam permitidas somente para comparação, validação, medição e otimização.
