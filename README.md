@@ -2,7 +2,34 @@
 
 Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investigação, organização e validação.
 
-**Para rodar o projeto (testes, chat, interface local): veja [`COMO_RODAR.md`](COMO_RODAR.md).**
+## Em poucos minutos
+
+**O que é.** Um sistema que constrói conhecimento de Matemática e Português a partir do mínimo possível, por construção própria (PSF = "Pensador Sem Fronteiras"), em vez de citar bibliotecas, fórmulas prontas ou respostas de terceiros como fundamento.
+
+**Problema que tenta resolver.** Sistemas que devolvem resultado pronto sem mostrar a construção nem admitir o que ainda não sabem escondem tanto erros quanto limites reais. O PSF-IAminy tenta o oposto: todo resultado carrega o caminho até ele (a "ponte" de dependências que o gerou), e o que ainda não foi construído fica marcado como lacuna, hipótese ou limite operacional — nunca escondido ou fingido (ver [Regra sagrada principal](#regra-sagrada-principal)).
+
+**O que já funciona, com teste automatizado.**
+- Matemática: resolve expressões racionais com precedência, reconstrói divisão por quociente/resto/fração/decimal, executa prova formal no fragmento lógico finito e distingue teste de prova universal — 203 documentos conceituais auditados, todos com dependências ligadas.
+- Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1702 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
+- 1066 testes automatizados passam localmente (`python3 -m pytest -q`).
+
+**O que ainda é experimental.**
+- A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
+- Português declara 124 fronteiras abertas e 179 limites operacionais: o conceito existe, mas a operação automática ainda pode ser parcial.
+- Ainda não há CI público, pacote instalável via `pip` nem release publicada (ver [O que falta](#o-que-falta) e `PLANO_PSF_IAMINY.md`).
+
+**Como rodar uma demonstração.**
+```bash
+git clone https://github.com/Progaminy/PSF-IAminy-Open.git
+cd PSF-IAminy-Open
+python3 -m pytest -q                 # 1066 passed
+python3 psf_chat.py "quem é você?"   # chat mínimo pelo motor PSF
+```
+Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
+
+**Por que a abordagem é diferente.** A maioria dos sistemas de IA usa bibliotecas e modelos prontos como fundamento de verdade. O PSF-IAminy proíbe isso por regra sagrada (`REGRA_INTEGRIDADE.md`): dependências externas só podem comparar, validar ou otimizar — nunca ser fonte do conhecimento. Cada conceito matemático ou linguístico precisa de uma ponte explícita até conhecimento anterior; sem ponte, não é conhecimento PSF.
+
+A filosofia completa, a arquitetura dos motores e o estado detalhado de cada área continuam abaixo.
 
 ## Foco atual
 
@@ -68,6 +95,18 @@ MotorAuxiliarValidacao → compara, mede, cacheia e procura divergências
 
 O auxiliar pode usar recursos eficientes da biblioteca padrão, mas nunca cria conhecimento puro, prova matemática ou verdade linguística.
 
+## PSF-Calculadora (`cao_de_caca/`)
+
+`cao_de_caca/PSF-Calculadora/` é um **subprojeto separado**, não conhecimento PSF: uma calculadora de terminal em português (própria `pyproject.toml`, próprio comando `psf-calculadora`, própria suíte de testes) que abusa de propósito de dependências científicas — NumPy, SciPy, SymPy, Pandas, Matplotlib, NetworkX, mpmath, scikit-learn — para cobrir 353 motores de cálculo em 33 assuntos (aritmética, álgebra, geometria, cálculo, estatística, otimização, sinais e outros).
+
+O nome vem da regra que o define: é o "cão de caça" do projeto — vai buscar valor exato, otimizado ou comparação no mundo livre de bibliotecas prontas, e traz de volta, mas nunca entra como fundamento do conhecimento PSF. Por isso:
+
+- fica **fora da coleta padrão de testes** (`pytest.ini` define `testpaths = testes`; o subprojeto roda sua própria suíte de dentro da sua pasta);
+- o motor principal decide sozinho, por 4 perguntas explícitas (`motor/decisao_auxiliar.py`: preciso comparar? preciso de valor exato/otimizado? preciso de dependência externa? o assunto é reconhecido?), quando vale a pena consultá-lo;
+- o mapa de conhecimento (`interface/mapa_cao_de_caca.py`) o cataloga com **zero arestas e zero pontes** para Matemática ou Português — decisão explícita do autor: é ferramenta de cálculo, não conhecimento PSF.
+
+Ver `cao_de_caca/PSF-Calculadora/README.md` para instalação e uso próprios.
+
 ## Hipótese própria pendente
 
 A técnica de Pensador Sem Fronteiras que usa divisões por níveis, restos, transporte decimal e limite relacionado à raiz quadrada foi preservada em:
@@ -78,6 +117,36 @@ conhecimento/HIPOTESE_DIVISAO_PRIMALIDADE_PSF.md
 ```
 
 Ela está apenas guardada, sem investigação ativa. Hipóteses, teses, teorias, problemas pendentes e possível construção de axiomas serão retomados quando o motor estiver maduro. A ideia não substitui a primalidade PSF existente nem responde automaticamente a novos casos. Nos exemplos dados pelo autor, a mesma técnica é usada como teste: encontra divisores próprios em 9 e 12, concluindo que não são primos, e não encontra divisor próprio para 7 no percurso necessário, concluindo que 7 é primo.
+
+## Capacidades reais e limitações
+
+Tabela de capacidades centrais, cada uma com teste automatizado que a sustenta. Não é a lista completa de conhecimento construído (isso está em `conhecimento/LISTA_CONHECIMENTO_MATEMATICA.md` e `conhecimento/LISTA_CONHECIMENTO_PORTUGUES.md`); é uma amostra verificável para quem chega agora ao projeto.
+
+| Capacidade | Estado | Teste | Limitação |
+| --- | --- | --- | --- |
+| Resolução de expressões racionais com precedência | Implementada | `testes/test_motores_dominio_comum.py::test_motor_matematica_resolve_precedencia_sem_cortar_expressao` | Domínio racional não negativo |
+| Divisão reconstruída (quociente, resto, fração, decimal) | Implementada | `testes/test_motores_dominio_comum.py::test_divisao_racional_e_decimal_sao_reconstruidas_sem_magia` e `test_divisao_periodica_preserva_fracao_e_controla_precisao` | Divisão por zero fica não definida por construção — não é erro nem problema aberto |
+| Prova formal no fragmento lógico finito | Implementada | `testes/test_motores_dominio_comum.py::test_motor_matematica_prova_finita_certificada` | Restrita ao fragmento lógico finito já construído |
+| Adição | Implementada | `testes/test_adicao.py` (5 testes) | Naturais/inteiros conforme o motor |
+| Segmentação morfológica (prefixo+radical+sufixo) | Parcial | `testes/test_morfemas_afixais.py` (9 testes), `testes/test_morfologia_derivacional.py` (37 testes) | Só reconhece radical já existente como entrada própria no léxico; vocabulário limitado aos 1702 lemas internos |
+| Correção ortográfica | Implementada | `testes/test_corretor.py`, `testes/test_corretor_integracao.py` | Léxico e candidatos internos; nenhum dicionário externo como fundamento |
+| Motor auxiliar de validação e otimização | Implementado | `testes/test_motores_dominio_comum.py::test_motor_auxiliar_*` (5 testes) | Nunca decide conhecimento; só compara, mede e cacheia |
+| Hipótese de primalidade por divisão em níveis | Experimental, não integrada | `testes/test_motores_dominio_comum.py::test_hipotese_do_autor_fica_pendente_e_nao_vira_primalidade_pronta` (confirma que fica pendente, não que a hipótese está provada) | Guardada sem investigação ativa; não substitui a primalidade PSF existente nem responde a novos casos automaticamente |
+
+O projeto separa o que afirma em cinco categorias, para que nenhuma seja confundida com as outras:
+
+- **Conhecimento implementado**: tem código, teste e ponte de dependências fechada — exemplos na tabela acima e em `conhecimento/ETAPA_*.md`.
+- **Experimentos**: construções recentes ainda em ajuste, já testadas mas não necessariamente estáveis (ver entradas mais recentes de `PLANO_PSF_IAMINY.md`).
+- **Hipóteses**: ideias autorais preservadas com autoria, exemplos e contraexemplos, sem entrar como conhecimento puro até prova ou falsificação — caso único hoje: `matematica/hipoteses.py` e `conhecimento/HIPOTESE_DIVISAO_PRIMALIDADE_PSF.md`, acima.
+- **Problemas pendentes**: questões declaradas em aberto, sem prova fingida — `nucleo/problemas_abertos.py` fixa enunciado, dependências e plano de investigação, nunca uma solução.
+- **Validação externa**: `validacao_externa/` (o `MotorAuxiliarValidacao` desta seção) compara, mede e cacheia contra outras implementações, mas nunca decide conhecimento puro nem serve de fundamento.
+
+Limitações que o projeto reconhece abertamente:
+
+- O motor de Matemática cobre um domínio racional finito; não afirma completude sobre os reais (ver ETAPA_1035, ainda pendente de equivalência/ordem entre leis geradoras).
+- Português declara **124 fronteiras abertas** (dependem de variedade, contexto, comunidade ou evidência real) e **179 limites operacionais** (o conceito existe, mas a automação ainda pode ser parcial) — nenhum dos dois é tratado como lacuna a esconder.
+- Não existe ainda CI público, cobertura de testes medida, pacote instalável via `pip`, nem comparação sistemática com bibliotecas de referência (SymPy, corretores ortográficos conhecidos) — ver `PLANO_PSF_IAMINY.md`.
+- `dados/base_canonica.jsonl` foi esvaziado deliberadamente (ver `COMO_RODAR.md`); o chat responde de forma mais limitada até a base pura ser reconstruída por materialização PSF.
 
 ## Regra sagrada principal
 
@@ -139,6 +208,9 @@ REGRA_INTEGRIDADE.md      regras sagradas
 REGRA_VERSAO_UNICA.md     continuidade única
 PLANO_PSF_IAMINY.md       plano único crescente
 RELATORIO_UNICO.md        relatório único do estado atual
+CHANGELOG.md              mudanças da edição pública, por versão
+docs/ARQUITETURA.md       diagrama e descrição de cada componente
+docs/NOTA_CIENTIFICA.md   problema, hipótese, metodologia e limitações
 ```
 
 ## Estado preservado
