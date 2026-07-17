@@ -47,4 +47,4 @@ Nenhum destes é conhecimento matemático ou linguístico puro (todos são camad
 
 ## O que este número não diz
 
-63% de linhas executadas não equivale a 63% de comportamento correto verificado — cobertura mede o que rodou, não o que foi verificado com asserção significativa. Ver item 18 do plano de melhorias públicas (`PLANO_PSF_IAMINY.md`) sobre classificar testes por profundidade, ainda não feito.
+63% de linhas executadas não equivale a 63% de comportamento correto verificado — cobertura mede o que rodou, não o que foi verificado com asserção significativa. `docs/TESTES.md` já classifica a suíte e audita uma profundidade sintática mínima; força dos oráculos e duplicação semântica continuam pendentes.

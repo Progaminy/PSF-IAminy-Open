@@ -39,16 +39,35 @@ método por operação pronta.
 - texto conhecido com 500 palavras passou, mas vocabulário desconhecido pode
   custar muito mais por busca de candidatos.
 
+## Anexos compactados
+
+ZIP e DOCX possuem agora limites antes e durante a leitura:
+
+- 32 MiB no arquivo compactado;
+- 512 entradas;
+- 16 MiB descomprimidos por entrada;
+- 64 MiB de total descomprimido declarado;
+- razão máxima 200:1 para entradas a partir de 1 MiB;
+- rejeição de caminho absoluto, travessia, barra invertida e nome duplicado.
+
+Dezoito testes usam limites reduzidos por `monkeypatch` para exercitar cada
+ramo sem alocar arquivos gigantes. Eles incluem ZIP bomb por alta razão e
+DOCX hostil dentro de ZIP. Isso prova a aplicação das barreiras, não um limite
+universal de memória para toda combinação de compactador e sistema operativo.
+
 ## Não avaliado
 
 - requisições realmente concorrentes e prolongadas;
 - milhares de conversas e crescimento do armazenamento;
 - limite de memória imposto pelo sistema operativo;
-- ZIP bomb, arquivos DOCX enormes e profundidade de ZIP;
 - expressões profundamente aninhadas por parênteses;
 - carga de vários utilizadores.
+
+ZIP dentro de ZIP não é formato suportado e não é descomprimido recursivamente;
+o único aninhamento processado é DOCX dentro de ZIP, coberto pelos mesmos
+limites. Arquivos corrompidos ainda podem produzir erros da biblioteca padrão,
+e o tratamento de apresentação desses erros merece auditoria própria.
 
 Esses itens continuam pendentes. O script não deve aumentar tamanhos sem
 timeouts por processo, pois uma operação pura válida pode ter crescimento
 intencionalmente elevado.
-

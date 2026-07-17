@@ -34,11 +34,14 @@ the hidden foundation of pure PSF knowledge. The governing rule is simple:
   remain partial or vocabulary-bound.
 - **Common engine:** memory, dependency search, auditing, purity checks and
   traceability shared without merging mathematical and linguistic authority.
-- **Evidence:** 1084 automated tests passed locally; the documented line
+- **Evidence:** 1103 automated tests passed locally; the documented line
   coverage snapshot is 63%.
 
-The CI workflow targets Python 3.10–3.13. Do not treat those versions as
-publicly confirmed until the GitHub Actions workflow has a green public run.
+The CI workflow targets Python 3.10–3.13. Its first public
+[run](https://github.com/Progaminy/PSF-IAminy-Open/actions/runs/29505936596)
+failed because of an HTTP-test timeout on all four versions and a Python 3.10
+`ast.TryStar` incompatibility. Local candidate fixes exist, but those versions
+remain publicly unconfirmed until a new run is green.
 
 ## Quick start
 
@@ -82,7 +85,7 @@ Common PSF services
 Justified result or explicit limitation
 ```
 
-See [Architecture](docs/ARQUITETURA.md) for the current component-level
+See [Architecture](docs/en/ARCHITECTURE.md) for the current component-level
 description.
 
 ## Verifiable capability sample
@@ -131,7 +134,7 @@ The repository keeps five statuses separate:
 
 The main package has no required third-party runtime dependency and makes no
 outbound network request in the audited state. The local interface stores
-conversation data on the user's machine. Read [Security](SECURITY.md), the
+conversation data on the user's machine. Read [Security](docs/en/SECURITY.md), the
 [security audit](docs/AUDITORIA_SEGURANCA.md) and the
 [data policy](docs/POLITICA_DADOS.md) before exposing the server beyond its
 documented local use.
@@ -139,7 +142,8 @@ documented local use.
 ## Research and project documents
 
 - [Scientific note](docs/NOTA_CIENTIFICA.md)
-- [Architecture](docs/ARQUITETURA.md)
+- [Architecture in English](docs/en/ARCHITECTURE.md)
+- [Live demonstration guide in English](docs/en/DEMO.md)
 - [Test coverage](docs/COBERTURA.md)
 - [Test classification](docs/TESTES.md)
 - [Performance baseline](docs/DESEMPENHO.md)
@@ -150,10 +154,11 @@ documented local use.
 - [Operational limits](docs/LIMITES_OPERACIONAIS.md)
 - [Compatibility](docs/COMPATIBILIDADE.md)
 - [Dependencies](docs/DEPENDENCIAS.md)
-- [Public roadmap](ROADMAP.md)
-- [Release candidate notes](docs/RELEASE.md)
+- [Public roadmap in English](docs/en/ROADMAP.md)
+- [Release candidate notes in English](docs/en/RELEASE.md)
+- [Real screenshots and their provenance](docs/IMAGENS.md)
 - [Governance](GOVERNANCE.md)
-- [Contributing](CONTRIBUTING.md)
+- [Contributing in English](CONTRIBUTING.en.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Citation metadata](CITATION.cff)
 

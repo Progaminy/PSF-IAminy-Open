@@ -3,6 +3,7 @@
 
 A unidade de classificação é o ficheiro. Isso torna a contagem reproduzível,
 mas não prova profundidade nem impede que um ficheiro misture finalidades.
+Ficheiros `test_seguranca_*.py` entram automaticamente em Segurança.
 """
 from __future__ import annotations
 
@@ -13,7 +14,6 @@ import sys
 
 RAIZ = Path(__file__).resolve().parents[1]
 
-SEGURANCA = {"test_seguranca_conversas.py", "test_seguranca_servidor.py"}
 AUDITORIA = {
     "test_coerencia_readme_plano_relatorio_regras.py",
     "test_protecao_contra_fingimento.py",
@@ -50,7 +50,9 @@ TERMOS_PORTUGUES = (
 
 
 def categoria(nome: str) -> str:
-    if nome in SEGURANCA:
+    # Novas regressões de segurança devem entrar na categoria sem exigir que
+    # esta lista documental seja atualizada a cada ficheiro acrescentado.
+    if nome.startswith("test_seguranca_"):
         return "Segurança"
     if nome.startswith("test_interface_"):
         return "Interface"
@@ -103,4 +105,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

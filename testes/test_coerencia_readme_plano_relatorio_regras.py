@@ -5,6 +5,8 @@ agora eram scripts que alguém precisava lembrar de rodar manualmente.
 """
 from __future__ import annotations
 
+import ast
+import importlib
 import os
 import sys
 
@@ -60,6 +62,31 @@ def test_verificar_integridade_aprova():
 
 def test_imports_python_do_nucleo_resolvem_sem_executar_modulos():
     assert imports_python_quebrados() == []
+
+
+def test_percurso_de_imports_funciona_sem_ast_trystar(monkeypatch):
+    """Python 3.10 não expõe ``ast.TryStar`` (criado no Python 3.11)."""
+    import motor.rastreabilidade as rastreabilidade
+
+    monkeypatch.delattr(ast, "TryStar", raising=False)
+    modulo_sem_try_star = importlib.reload(rastreabilidade)
+    try:
+        arvore = ast.parse(
+            "try:\n"
+            "    import modulo_dentro_do_try\n"
+            "except Exception:\n"
+            "    import modulo_dentro_do_except\n"
+        )
+        nomes = {
+            apelido.name
+            for no in modulo_sem_try_star._imports_fora_de_type_checking(arvore.body)
+            for apelido in no.names
+        }
+        assert nomes == {"modulo_dentro_do_try", "modulo_dentro_do_except"}
+        assert modulo_sem_try_star._TIPOS_TRY == (ast.Try,)
+    finally:
+        monkeypatch.undo()
+        importlib.reload(rastreabilidade)
 
 
 def test_detector_de_imports_aponta_modulo_atributo_e_sintaxe(tmp_path):

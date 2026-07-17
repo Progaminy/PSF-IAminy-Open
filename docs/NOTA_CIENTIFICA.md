@@ -35,7 +35,7 @@ Ver `docs/ARQUITETURA.md` para o diagrama e a descrição de cada componente (mo
 
 ## Resultados atuais (verificáveis)
 
-- 1084 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1103 testes automatizados passam localmente (`python3 -m pytest -q`).
 - 203 documentos conceituais de Matemática auditados, todos com ponte de dependências fechada.
 - 1141 conceitos puros de Português numa única linha canónica, 2545 relações de dependência, 0 lacunas internas conhecidas (124 fronteiras abertas e 179 limites operacionais declarados à parte — ver `README.md`).
 - Divisão reconstruída como fração exata + expansão decimal explícita (quociente, resto, transporte por 10), incluindo divisão por zero tratada como não definida por construção, não como problema aberto nem exceção silenciosa.
@@ -44,7 +44,7 @@ Ver `docs/ARQUITETURA.md` para o diagrama e a descrição de cada componente (mo
 
 - O domínio matemático coberto é finito e racional; não há afirmação de completude sobre os números reais (a "lei geradora de aproximação real", ETAPA 1035, é o esforço mais avançado nessa direção e continua com equivalência/ordem entre leis pendente).
 - A hipótese de primalidade por divisão em níveis não foi integrada nem falsificada — está preservada, não validada.
-- Não houve, até o momento, comparação sistemática publicada com bibliotecas de referência (SymPy, correctores ortográficos consolidados) nem avaliação por terceiros independentes do autor.
+- Houve uma primeira comparação matemática de sete casos com SymPy 1.14.0, mas não comparação sistemática ampla, comparação linguística com correctores consolidados nem avaliação por terceiros independentes do autor.
 - A cobertura de linhas foi medida localmente em 63% (`docs/COBERTURA.md`); o número de testes e a cobertura ainda não demonstram, por si só, profundidade científica nem cobertura completa dos casos extremos.
 - O projeto tem um único mantenedor até o momento; não houve revisão por pares externos.
 
@@ -58,7 +58,7 @@ Por regra (`REGRA_INTEGRIDADE.md`, item 14), toda hipótese autoral permanece hi
 
 ## Trabalho futuro
 
-- Medir cobertura de testes (item 17 do plano de melhorias) e classificar tipos de teste (unitário, integração, regressão — item 18).
-- Comparação sistemática com bibliotecas de referência e relatório de divergências (itens 41-42).
-- CI público executando a suíte a cada mudança (item 3).
+- Aprofundar a cobertura já medida e a classificação já criada, revisando força de oráculos e duplicação semântica dos testes.
+- Ampliar a comparação inicial com SymPy e criar validação linguística externa, com relatório de divergências (itens 41-42).
+- Obter a primeira execução pública verde do CI; a execução `29505936596` falhou e as correções locais ainda precisam ser publicadas.
 - Extensão da lei geradora de aproximação real até completude dos racionais/reais, e revisão de geometria plana/espacial como bloco pleno (ver `RELATORIO_UNICO.md`).

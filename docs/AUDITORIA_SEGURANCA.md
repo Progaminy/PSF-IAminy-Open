@@ -35,9 +35,24 @@ Confirmado explorável de verdade antes da correção (não só teoricamente): r
 
 **Corrigido**: `TAMANHO_MAXIMO_CORPO = 1_000_000` (1 MB); acima disso, `413` sem tocar em `rfile.read`. Teste de regressão em `testes/test_seguranca_servidor.py`.
 
+### 3. Anexos ZIP/DOCX sem limites defensivos (severidade: moderada)
+
+`ensino/leitura_documentos.py` abria ZIP/DOCX e lia as entradas suportadas sem
+teto de tamanho compactado, quantidade de entradas, tamanho descomprimido ou
+razão de compactação. Mesmo sem extrair em disco, um arquivo hostil poderia
+consumir CPU/memória de forma desproporcional; nomes internos perigosos também
+eram devolvidos ao chamador sem validação.
+
+**Corrigido**: 32 MiB compactados, 512 entradas, 16 MiB por entrada, 64 MiB
+de total declarado e razão máxima 200:1 a partir de 1 MiB. Caminhos absolutos,
+travessia `..`, separador Windows ambíguo e nomes duplicados são rejeitados.
+A leitura de cada entrada também para em 16 MiB, mesmo depois da validação dos
+metadados, e um DOCX dentro de ZIP passa pela mesma política. Há 18 regressões
+em `testes/test_seguranca_leitura_documentos.py`.
+
 ## O que continua como risco não testado (honesto, não escondido)
 
 - A interface HTTP (`python3 -m interface.servidor`) não tem autenticação nem HTTPS — assume-se uso local (`127.0.0.1`), documentado em `COMO_RODAR.md`. Expor isto publicamente sem uma camada própria de autenticação/proxy reverso não é recomendado e não foi testado.
 - `cao_de_caca/PSF-Calculadora` (dependências científicas de terceiros abusadas de propósito) não foi auditado nesta rodada — é um subprojeto externo com ciclo de vida próprio.
 - Não houve execução de ferramenta automatizada de análise de dependências vulneráveis (`pip-audit`) nesta rodada — o pacote principal não tem dependências de terceiros em runtime (só `pytest`/`pytest-cov`/`ruff`/`bandit` como dev, declarados em `pyproject.toml`), o que reduz mas não elimina a necessidade dessa verificação no futuro.
-- Bandit roda no CI (`.github/workflows/ci.yml`, job `qualidade`) como sinal informativo, não bloqueante — não substitui esta auditoria manual nem revisão externa.
+- Bandit roda no CI (`.github/workflows/ci.yml`, job `qualidade`): severidade média/alta é bloqueante e o relatório completo de alertas baixos é informativo. Isso não substitui esta auditoria manual nem revisão externa.

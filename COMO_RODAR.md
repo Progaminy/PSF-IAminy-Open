@@ -1,11 +1,11 @@
 # Como rodar o PSF-IAminy
 
-Projeto oficial: `PSF-IAminy/`.
+Projeto oficial: `PSF-IAminy-Open/`.
 
 ## Entrar na pasta
 
 ```bash
-cd PSF-IAminy
+cd PSF-IAminy-Open
 ```
 
 ## Instalação reproduzível (opcional)
@@ -33,7 +33,7 @@ python3 -m pytest -q
 Resultado atual esperado:
 
 ```text
-1084 passed
+1103 passed
 ```
 
 ## Ver uma demonstração rápida
@@ -43,6 +43,9 @@ python3 exemplo_publico.py
 ```
 
 Exemplos mais profundos por domínio: `exemplos/matematica.py`, `exemplos/portugues.py`, `exemplos/rastreabilidade.py`.
+
+Capturas reais da interface, mapa, ensino e resposta rastreável, com protocolo
+de isolamento: `docs/IMAGENS.md`.
 
 ## Verificar conhecimento puro de Português
 

@@ -1,5 +1,7 @@
 # Arquitetura do PSF-IAminy
 
+[English](en/ARCHITECTURE.md)
+
 Este documento explica como as peças do projeto se encaixam, para que ninguém precise deduzir a arquitetura lendo o código inteiro. Ele descreve estrutura; não substitui as regras de `REGRA_INTEGRIDADE.md` nem o estado detalhado do `README.md`.
 
 ## Visão geral

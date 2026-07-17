@@ -8,10 +8,13 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 
 ### Corrigido
 - `COMO_RODAR.md` afirmava `660 passed`, desatualizado em relação aos 1066 testes reais já refletidos no `README.md`. `motor/coerencia.py` ganhou `divergencia_contagem_testes_entre_documentos()` para detectar esse tipo de divergência entre os dois documentos automaticamente.
+- CI pública auditada a partir dos logs reais do run `29505936596`: timeout HTTP de 5 s nos quatro ambientes e acesso a `ast.TryStar` no Python 3.10. O timeout candidato passou a 15 s, o percurso AST agora é compatível com 3.10 e ganhou regressão; as actions foram atualizadas para runtime Node 24 e permissões mínimas.
+- Job estático dividido entre regras críticas bloqueantes e dívida completa informativa; Bandit passa a executar mesmo quando o relatório completo do Ruff encontra dívida existente.
 
 ### Segurança
 - `interface/conversas.py`: `id_conversa` (vindo da URL) não era validado antes de virar caminho de ficheiro — permitia ler/apagar qualquer `.json` alcançável por travessia relativa (`../`) a partir da pasta de conversas. Confirmado explorável de verdade antes da correção. Corrigido exigindo o formato exato de `secrets.token_hex(6)`. Ver `docs/AUDITORIA_SEGURANCA.md`.
 - `interface/servidor.py`: corpo do pedido HTTP era lido conforme o `Content-Length` declarado pelo cliente, sem limite. Corrigido com um teto de 1 MB (`413` acima disso).
+- `ensino/leitura_documentos.py`: ZIP/DOCX agora têm limites compactados/descomprimidos, razão contra ZIP bomb, validação de nomes internos e leitura limitada; 18 regressões cobrem também DOCX hostil aninhado.
 
 ### Adicionado
 - Seção "Em poucos minutos" no início do `README.md`: o que é, problema, o que já funciona, o que é experimental, demonstração rápida e diferencial — antes da filosofia completa.
@@ -41,6 +44,11 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 - Servidor HTTP agora devolve 400 para JSON truncado, UTF-8 inválido e JSON que não seja objeto; três regressões elevam a suíte a 1084 casos.
 - `avaliacoes/avaliar_limites.py` e `docs/LIMITES_OPERACIONAIS.md`: limites com timeout; `99*99` excedeu 10 s, enquanto 100 termos, 500 palavras e 100 GETs concluíram.
 - `docs/ISSUES_PLANEJADAS.md`: seis issues reais preparadas após criação remota falhar com 403; nenhuma é apresentada como publicada.
+- `docs/en/` e `CONTRIBUTING.en.md`: traduções essenciais de arquitetura, segurança, roadmap, demonstração, release e contribuição, ligadas aos documentos canónicos.
+- `site/` e workflow de GitHub Pages com permissões separadas entre build/deploy; página para apresentação, arquitetura, evidência, limites e interesse científico. Ainda não é apresentada como publicada.
+- `docs/IMAGENS.md` e cinco capturas reais: interface inicial, pergunta/resposta com origem e limite, mapa, ensino e página estática, todas sem dados persistentes do utilizador.
+- `docs/CANDIDATURA.md` e `docs/DIVULGACAO.md`: pacote factual para atualização somente quando autorizada e texto técnico reutilizável sem alegar publicação externa.
+- Suíte ampliada para 1103 casos em 109 ficheiros; 35 casos classificados como segurança. A execução completa atual passou em 80,10 s.
 - Este `CHANGELOG.md`.
 
 ### Removido

@@ -1,4 +1,6 @@
-Como contribuir com o PSF-IAminy-Open
+# Como contribuir com o PSF-IAminy-Open
+
+[English](CONTRIBUTING.en.md)
 
 Obrigado pelo interesse em contribuir com o PSF-IAminy-Open.
 

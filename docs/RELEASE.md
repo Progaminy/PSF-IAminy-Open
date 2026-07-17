@@ -1,5 +1,7 @@
 # Release candidata: v0.1.0 — Public Research Preview
 
+[English](en/RELEASE.md)
+
 Estado: **candidata a release; ainda não publicada no GitHub**.
 
 Esta primeira versão pública apresenta o PSF-IAminy como projeto científico e
@@ -25,12 +27,14 @@ Em 17 de julho de 2026, no ambiente local de preparação:
 ```text
 python3 verificar_integridade.py → APROVADO
 python3 exemplo_publico.py        → executado com resultado real
-python3 -m pytest -q              → 1084 passed em 81,06 s
+python3 -m pytest -q              → 1103 passed em 80,10 s
 cobertura de linhas               → 63% na medição documentada
 ```
 
-O workflow de CI testa Python 3.10, 3.11, 3.12 e 3.13, mas esse resultado só
-deve ser chamado de público depois de uma execução verde no GitHub Actions.
+O workflow de CI testa Python 3.10, 3.11, 3.12 e 3.13. A primeira execução
+pública ([run 29505936596](https://github.com/Progaminy/PSF-IAminy-Open/actions/runs/29505936596))
+falhou por timeout HTTP e, em 3.10, incompatibilidade com `ast.TryStar`.
+Correções candidatas existem localmente, mas ainda não houve execução verde.
 
 ## Demonstração mínima
 

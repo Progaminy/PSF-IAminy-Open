@@ -36,7 +36,9 @@ declarado separadamente para não desaparecer dentro de uma média favorável.
 O pico observado por `tracemalloc` foi **22,228 MiB**. Isso mede alocações
 rastreadas pelo Python durante o script; não é o RSS total do processo.
 
-A suíte completa mais recente levou **81,06 s** para 1084 testes. Ela
+A suíte completa mais recente levou **80,10 s** para 1103 testes
+(**81,17 s** de parede; pico RSS reportado pelo processo: **300.740 KiB**).
+Ela
 mede muito mais do que as operações acima e não deve ser comparada diretamente
 com uma chamada isolada.
 

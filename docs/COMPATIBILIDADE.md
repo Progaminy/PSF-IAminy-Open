@@ -3,8 +3,16 @@
 ## Python
 
 O pacote declara `Python >= 3.10` em `pyproject.toml`. O workflow de CI está
-configurado para 3.10, 3.11, 3.12 e 3.13. Essas versões só serão chamadas de
-publicamente confirmadas depois de uma execução verde do workflow no GitHub.
+configurado para 3.10, 3.11, 3.12 e 3.13. A primeira execução pública
+([run 29505936596](https://github.com/Progaminy/PSF-IAminy-Open/actions/runs/29505936596))
+falhou: o teste HTTP tinha timeout de 5 segundos nos quatro ambientes, e
+`motor/rastreabilidade.py` acessava `ast.TryStar`, inexistente em 3.10.
+
+Na árvore local candidata, o timeout do cliente de teste é 15 segundos e o
+percurso AST forma os tipos `Try`/`TryStar` conforme o interpretador, com uma
+regressão que simula a ausência de `TryStar`. Isso corrige as causas conhecidas;
+não é ainda confirmação pública. As quatro versões só serão chamadas de
+publicamente confirmadas depois de uma nova execução verde no GitHub.
 
 A suíte completa passou localmente em Python 3.14.4 em 17 de julho de 2026,
 mas 3.14 ainda não integra a matriz pública declarada. Esse resultado isolado

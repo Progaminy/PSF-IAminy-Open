@@ -15,21 +15,23 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 **O que já funciona, com teste automatizado.**
 - Matemática: resolve expressões racionais com precedência, reconstrói divisão por quociente/resto/fração/decimal, executa prova formal no fragmento lógico finito e distingue teste de prova universal — 203 documentos conceituais auditados, todos com dependências ligadas.
 - Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1702 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
-- 1084 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1103 testes automatizados passam localmente (`python3 -m pytest -q`).
 
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
 - Português declara 124 fronteiras abertas e 179 limites operacionais: o conceito existe, mas a operação automática ainda pode ser parcial.
-- CI (`.github/workflows/ci.yml`) já existe no repositório, mas ainda não rodou publicamente — só passa a valer depois do primeiro push. Instalação via `pip install -e .` já existe (comando `psf-iaminy`), mas ainda não há release publicada (ver [O que falta](#o-que-falta) e `PLANO_PSF_IAMINY.md`).
+- A [primeira execução pública da CI](https://github.com/Progaminy/PSF-IAminy-Open/actions/runs/29505936596), no commit `e74740e`, falhou: timeout HTTP nos quatro Pythons e uso de `ast.TryStar` no Python 3.10. A árvore local já amplia a margem do teste e compatibiliza a AST, mas a matriz só será chamada de confirmada depois de um novo push verde. Instalação via `pip install -e .` já existe (comando `psf-iaminy`), mas ainda não há release publicada.
 
 **Como rodar uma demonstração.**
 ```bash
 git clone https://github.com/Progaminy/PSF-IAminy-Open.git
 cd PSF-IAminy-Open
-python3 -m pytest -q                 # 1084 passed
+python3 -m pytest -q                 # 1103 passed
 python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitação -- em segundos
 ```
 Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
+
+**Evidência visual real.** [`docs/IMAGENS.md`](docs/IMAGENS.md) reúne a interface inicial, uma entrada e resposta reais com origem/limite explícito, o mapa de conhecimento, a área de ensino e a prévia da página estática. As capturas usam armazenamento temporário isolado e não contêm conversas persistentes do utilizador.
 
 **Por que a abordagem é diferente.** A maioria dos sistemas de IA usa bibliotecas e modelos prontos como fundamento de verdade. O PSF-IAminy proíbe isso por regra sagrada (`REGRA_INTEGRIDADE.md`): dependências externas só podem comparar, validar ou otimizar — nunca ser fonte do conhecimento. Cada conceito matemático ou linguístico precisa de uma ponte explícita até conhecimento anterior; sem ponte, não é conhecimento PSF.
 
@@ -210,6 +212,7 @@ Tudo entra no mesmo corpo do PSF-IAminy.
 ```text
 README.md                 visão atual e coerência geral
 README.en.md              apresentação pública essencial em inglês
+CONTRIBUTING.en.md        guia de contribuição em inglês
 COMO_RODAR.md             instruções mínimas de execução
 REGRA_INTEGRIDADE.md      regras sagradas
 REGRA_VERSAO_UNICA.md     continuidade única
@@ -223,6 +226,7 @@ AUTHORS.md                autoria, licença, conteúdo excluído e forma de cita
 CITATION.cff              metadados legíveis por plataformas de citação
 REFERENCIAS.md            fontes internas e protocolo para referências externas
 docs/ARQUITETURA.md       diagrama e descrição de cada componente
+docs/en/                  arquitetura, segurança, roadmap, demonstração e release em inglês
 docs/NOTA_CIENTIFICA.md   problema, hipótese, metodologia e limitações
 docs/COBERTURA.md         cobertura de testes medida, por módulo
 docs/AUDITORIA_SEGURANCA.md   o que foi auditado, corrigido e o que continua como risco não testado
@@ -238,6 +242,10 @@ docs/REPRODUCAO.md         instalação, CLI, demonstração e suíte numa cópi
 docs/ANALISE_ESTATICA.md   resultados Ruff/Bandit, correções e dívida triada
 docs/LIMITES_OPERACIONAIS.md   números, expressões, texto, HTTP e limites não avaliados
 docs/ISSUES_PLANEJADAS.md   backlog pronto; ainda não publicado por falta de permissão de escrita
+docs/IMAGENS.md           capturas reais, proveniência e limites da evidência visual
+docs/CANDIDATURA.md       pacote factual para eventual atualização autorizada
+docs/DIVULGACAO.md        texto técnico honesto, ainda não publicado externamente
+site/                     fonte estática da página pública, ainda pendente de deploy
 ```
 
 ## Estado preservado
@@ -429,7 +437,7 @@ python3 motor_iaminy.py --rapido
 Resultado atual esperado:
 
 ```text
-1084 passed na verificação local mais recente
+1103 passed na verificação local mais recente
 ```
 
 ```text
