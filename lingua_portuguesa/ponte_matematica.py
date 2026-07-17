@@ -220,7 +220,6 @@ class PonteMatematicaPortugues:
             return ()
 
         conceitos = self.conhecimento.todos()
-        por_nome = {c.nome: c for c in conceitos}
         dependentes: dict[str, list[str]] = {c.nome: [] for c in conceitos}
         for conceito in conceitos:
             for dependencia in conceito.depende_de:

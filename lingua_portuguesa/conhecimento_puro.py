@@ -1235,7 +1235,6 @@ ALIASES_CONCEITOS_PORTUGUES: dict[str, str] = {
     "variação diacrônica": "variação histórica",
     "variacao diacronica": "variação histórica",
     "variação diacrónica": "variação histórica",
-    "variacao diacronica": "variação histórica",
 }
 
 class ConstrutorConhecimentoPortugues:

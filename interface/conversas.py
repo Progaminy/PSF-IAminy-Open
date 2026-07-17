@@ -10,11 +10,21 @@ mesmo heurístico serve qualquer assunto, sem regra por área.
 from __future__ import annotations
 
 import json
+import re
 import secrets
 from datetime import datetime, timezone
 from pathlib import Path
 
 CAMINHO_PADRAO = Path(__file__).resolve().parent / "dados" / "conversas"
+
+# secrets.token_hex(6) só produz exatamente isto -- qualquer id_conversa que
+# não bata neste formato é tratado como inexistente, nunca usado para montar
+# caminho de ficheiro. Sem isto, um id_conversa vindo da URL como
+# "../../../etc/algo" seria concatenado direto em `self.pasta / f"{id}.json"`
+# (achado real de auditoria de segurança, item 22/23 do plano de melhorias
+# públicas): carregar() exporia conteúdo de qualquer .json fora da pasta de
+# conversas, e remover() apagaria qualquer .json alcançável por travessia.
+_PADRAO_ID_CONVERSA = re.compile(r"^[0-9a-f]{12}$")
 
 TITULO_SEM_MENSAGENS = "Nova conversa"
 
@@ -40,7 +50,9 @@ class ArmazemConversas:
         self.pasta = Path(pasta) if pasta is not None else CAMINHO_PADRAO
         self.pasta.mkdir(parents=True, exist_ok=True)
 
-    def _caminho(self, id_conversa: str) -> Path:
+    def _caminho(self, id_conversa: str) -> "Path | None":
+        if not _PADRAO_ID_CONVERSA.fullmatch(id_conversa):
+            return None
         return self.pasta / f"{id_conversa}.json"
 
     def criar(self) -> dict:
@@ -56,12 +68,15 @@ class ArmazemConversas:
 
     def carregar(self, id_conversa: str) -> "dict | None":
         caminho = self._caminho(id_conversa)
-        if not caminho.exists():
+        if caminho is None or not caminho.exists():
             return None
         return json.loads(caminho.read_text(encoding="utf-8"))
 
     def _guardar(self, conversa: dict) -> None:
-        self._caminho(conversa["id"]).write_text(
+        caminho = self._caminho(conversa["id"])
+        if caminho is None:
+            raise ValueError(f"id de conversa inválido: {conversa['id']!r}")
+        caminho.write_text(
             json.dumps(conversa, indent=2, ensure_ascii=False), encoding="utf-8"
         )
 
@@ -101,7 +116,7 @@ class ArmazemConversas:
 
     def remover(self, id_conversa: str) -> bool:
         caminho = self._caminho(id_conversa)
-        if not caminho.exists():
+        if caminho is None or not caminho.exists():
             return False
         caminho.unlink()
         return True

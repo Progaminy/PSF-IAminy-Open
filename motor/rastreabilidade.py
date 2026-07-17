@@ -61,6 +61,16 @@ _MODULOS_ETAPAS_IMPLICITAS = {"nucleo/primitivas.py", "nucleo/logica.py", "nucle
 # pedidas explicitamente pelo argumento ``diretorios`` sem allowlists.
 _DIRETORIOS_IMPORTS = ("nucleo",)
 
+# ``TryStar`` representa ``try/except*`` e só foi acrescentado ao módulo
+# ``ast`` no Python 3.11. O projeto suporta Python 3.10, portanto o percurso
+# precisa formar esta coleção a partir dos nós realmente disponíveis no
+# interpretador, sem sequer resolver ``ast.TryStar`` quando ele não existe.
+_TIPOS_TRY = tuple(
+    tipo
+    for nome in ("Try", "TryStar")
+    if (tipo := getattr(ast, nome, None)) is not None
+)
+
 
 def _referencias_de_etapa(caminho_md: Path) -> set[str]:
     texto = caminho_md.read_text(encoding="utf-8")
@@ -221,7 +231,7 @@ def _imports_fora_de_type_checking(corpo: list[ast.stmt]):
             yield from _imports_fora_de_type_checking(no.orelse)
         elif isinstance(no, (ast.With, ast.AsyncWith)):
             yield from _imports_fora_de_type_checking(no.body)
-        elif isinstance(no, (ast.Try, ast.TryStar)):
+        elif isinstance(no, _TIPOS_TRY):
             yield from _imports_fora_de_type_checking(no.body)
             for tratador in no.handlers:
                 yield from _imports_fora_de_type_checking(tratador.body)

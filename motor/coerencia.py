@@ -115,6 +115,37 @@ def divergencias_lexico_no_readme(caminho: "Path | None" = None) -> tuple[str, .
 # teste de coerência, tornando a verificação pesada, recursiva e frágil.
 
 
+_PADRAO_RESULTADO_TESTES = re.compile(r"Resultado atual esperado:\s*```text\n(\d+) passed")
+
+
+def divergencia_contagem_testes_entre_documentos(
+    readme: "Path | None" = None, como_rodar: "Path | None" = None
+) -> tuple[str, ...]:
+    """README.md e COMO_RODAR.md declaram, cada um por conta própria, quantos
+    testes passam. Já divergiram de verdade: COMO_RODAR.md ficou em "660
+    passed" depois que o número real (e o README) já tinham subido para 1066,
+    e nada acusava a diferença. Isto não confirma o número contra uma
+    execução real do pytest (ver nota acima); só garante que os dois
+    documentos não se contradizem entre si.
+    """
+    readme = readme or (RAIZ / "README.md")
+    como_rodar = como_rodar or (RAIZ / "COMO_RODAR.md")
+    texto_readme = readme.read_text(encoding="utf-8")
+    texto_como_rodar = como_rodar.read_text(encoding="utf-8")
+    encontrado_readme = _PADRAO_RESULTADO_TESTES.search(texto_readme)
+    encontrado_como_rodar = _PADRAO_RESULTADO_TESTES.search(texto_como_rodar)
+    if encontrado_readme is None:
+        return ("contagem de testes não encontrada em README.md",)
+    if encontrado_como_rodar is None:
+        return ("contagem de testes não encontrada em COMO_RODAR.md",)
+    if encontrado_readme.group(1) != encontrado_como_rodar.group(1):
+        return (
+            f"README.md diz {encontrado_readme.group(1)} passed, "
+            f"COMO_RODAR.md diz {encontrado_como_rodar.group(1)} passed",
+        )
+    return ()
+
+
 _PADROES_VERSAO_PROIBIDOS = (
     re.compile(r"_v\d+(?:\.|$)"),
     re.compile(r"_final(?:\.|$)"),

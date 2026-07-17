@@ -56,7 +56,6 @@ Violar estas regras significa colapso do projeto.
 - Núcleo do motor.
 - Motor de busca como mecanismo, não como conhecimento principal.
 - Motor comparador como validação, não como fundamento.
-- Pasta `privado/`, tratada como área pessoal sagrada.
 
 ## O que nunca pode acontecer
 

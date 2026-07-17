@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Se usar este projeto em investigação, cite-o com os dados abaixo."
+title: "PSF-IAminy-Open"
+type: software
+version: 0.1.0
+authors:
+  - family-names: "Progaminy"
+    affiliation: "Pensador Sem Fronteiras"
+abstract: >-
+  Projeto científico experimental para construção rastreável de conhecimento
+  de Matemática e Português pelo método Pensador Sem Fronteiras.
+license: Apache-2.0
+repository-code: "https://github.com/Progaminy/PSF-IAminy-Open"
+url: "https://github.com/Progaminy/PSF-IAminy-Open"
+keywords:
+  - knowledge representation
+  - explainability
+  - mathematics
+  - Portuguese language
+  - scientific software
+

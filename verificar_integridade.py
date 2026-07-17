@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 OBRIGATORIOS = [
     'README.md', 'main.py', 'psf.py', 'caixa.py', 'motor_iaminy.py',
     'conhecimento', 'ensino', 'interface', 'lingua_portuguesa', 'modelos',
-    'motor', 'nucleo', 'privado', 'testes', 'validacao_externa'
+    'motor', 'nucleo', 'testes', 'validacao_externa'
 ]
 
 MODULOS = [
@@ -52,7 +52,7 @@ def main():
             print('-', f)
         return 1
     print('APROVADO')
-    print('Estrutura base restaurada, pasta privado presente, README presente, main.py executável, módulos recentes importáveis.')
+    print('Estrutura base restaurada, README presente, main.py executável, módulos recentes importáveis.')
     return 0
 
 if __name__ == '__main__':

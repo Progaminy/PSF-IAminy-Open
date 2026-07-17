@@ -1,0 +1,70 @@
+:root {
+  color-scheme: dark;
+  --fundo: #08120f;
+  --painel: #10201a;
+  --texto: #edf7f1;
+  --suave: #a9c5b6;
+  --linha: #29483a;
+  --verde: #62e6a7;
+  --verde-escuro: #123b2c;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: radial-gradient(circle at 80% 0%, #15392b 0, var(--fundo) 32rem); color: var(--texto); line-height: 1.65; }
+a { color: var(--verde); text-underline-offset: .2em; }
+.saltar { position: absolute; left: -9999px; top: 1rem; }
+.saltar:focus { left: 1rem; z-index: 3; background: var(--texto); color: var(--fundo); padding: .6rem; }
+header { position: sticky; top: 0; z-index: 2; backdrop-filter: blur(16px); background: rgb(8 18 15 / .82); border-bottom: 1px solid var(--linha); }
+nav { max-width: 72rem; margin: auto; padding: 1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+nav div { display: flex; flex-wrap: wrap; gap: 1.1rem; }
+nav a { color: var(--texto); text-decoration: none; }
+.marca { font-weight: 800; letter-spacing: -.03em; }
+main { max-width: 72rem; margin: auto; padding: 0 1.4rem; }
+section { padding: 5.5rem 0; border-bottom: 1px solid var(--linha); }
+.hero { min-height: 76vh; display: flex; flex-direction: column; justify-content: center; max-width: 58rem; }
+h1 { max-width: 13ch; margin: .3rem 0 1.25rem; font-size: clamp(3rem, 8vw, 6.8rem); line-height: .96; letter-spacing: -.065em; }
+h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1.05; letter-spacing: -.045em; }
+h3 { margin-top: 0; font-size: 1.35rem; }
+.resumo { max-width: 48rem; font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--suave); }
+.rotulo { margin: 0 0 .5rem; color: var(--verde); font-size: .82rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.regra { margin-top: 2rem; color: var(--suave); }
+.acoes { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
+.botao { display: inline-block; padding: .72rem 1rem; border: 1px solid var(--linha); border-radius: .55rem; color: var(--texto); text-decoration: none; background: rgb(16 32 26 / .7); }
+.botao:hover, .botao:focus-visible { border-color: var(--verde); outline: none; }
+.botao.primario { background: var(--verde); color: #06100c; border-color: var(--verde); font-weight: 750; }
+.titulo-secao { margin-bottom: 2rem; }
+.grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+article { padding: 1.4rem; border: 1px solid var(--linha); border-radius: .8rem; background: linear-gradient(145deg, rgb(16 32 26 / .9), rgb(8 18 15 / .65)); }
+article p, .nota { color: var(--suave); }
+.fluxo { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; }
+.fluxo li { min-height: 9rem; padding: 1rem; border-left: 2px solid var(--verde); background: var(--painel); display: flex; flex-direction: column; }
+.fluxo span { color: var(--verde); font-size: .8rem; }
+.fluxo strong { margin-top: auto; }
+.fluxo small { color: var(--suave); }
+.metricas { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; }
+.metricas div { padding: 1.2rem; border-top: 1px solid var(--verde); background: var(--painel); }
+.metricas dt { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -.05em; }
+.metricas dd { margin: 0; color: var(--suave); }
+.limites { padding-left: 1.25rem; max-width: 58rem; }
+.limites li { margin: .8rem 0; }
+code { padding: .08rem .3rem; border-radius: .25rem; background: var(--verde-escuro); color: var(--verde); }
+footer { max-width: 72rem; margin: auto; padding: 2rem 1.4rem 4rem; color: var(--suave); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+@media (max-width: 760px) {
+  nav { align-items: flex-start; }
+  nav div { justify-content: flex-end; font-size: .9rem; }
+  .grade, .metricas { grid-template-columns: 1fr 1fr; }
+  .fluxo { grid-template-columns: 1fr; }
+  .fluxo li { min-height: 6rem; }
+}
+
+@media (max-width: 480px) {
+  .grade, .metricas { grid-template-columns: 1fr; }
+  nav div a:not(:last-child) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "psf-iaminy"
+version = "0.1.0"
+description = "PSF-IAminy — conhecimento de Matemática e Português construído do zero, com rastreabilidade obrigatória (projeto Pensador Sem Fronteiras)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Progaminy" }]
+
+[project.urls]
+Homepage = "https://github.com/Progaminy/PSF-IAminy-Open"
+Changelog = "https://github.com/Progaminy/PSF-IAminy-Open/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff", "bandit"]
+
+[project.scripts]
+psf-iaminy = "psf_iaminy:main"
+
+[tool.setuptools]
+py-modules = ["main", "psf", "psf_chat", "motor_iaminy", "caixa", "estatistica", "verificar_integridade"]
+packages = [
+    "nucleo",
+    "matematica",
+    "lingua_portuguesa",
+    "lingua_portuguesa.dados",
+    "motor",
+    "modelos",
+    "ensino",
+    "interface",
+    "validacao_externa",
+    "psf_iaminy",
+]

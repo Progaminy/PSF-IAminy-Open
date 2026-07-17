@@ -697,7 +697,6 @@ def resposta_automatica(pergunta):
         faltas = listar_tudo_que_falta()
         return 'Há ' + str(len(faltas)) + ' pendências/lacunas conhecidas no índice mestre. Use listar_tudo_que_falta().'
     if 'problemas em aberto' in p or 'quantos em aberto' in p:
-        c = contar_problemas_abertos_conhecidos()
         return 'Até a Etapa 55: 81 entradas abertas/investigáveis conhecidas, 0 faltando entre as conhecidas. Novas entradas futuras devem ser adicionadas.'
     if 'confi' in p or 'confiável' in p or 'confiavel' in p:
         return 'Confiança no PSF não é cega: a resposta deve mostrar etapa, base, passos, teste, lacuna e contrato aplicado.'

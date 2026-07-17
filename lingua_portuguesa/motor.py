@@ -104,7 +104,8 @@ class MotorPortugues:
     def fluxo_natural(self, texto: str) -> FluxoLinguistico:
         """Devolve a escada som → letra → palavra → significado → texto."""
         fluxo = self.analisar(texto).fluxo
-        assert fluxo is not None
+        if fluxo is None:
+            raise RuntimeError("a análise de Português não construiu o fluxo linguístico esperado")
         return fluxo
 
     def explicar_fluxo(self, texto: str) -> tuple[str, ...]:

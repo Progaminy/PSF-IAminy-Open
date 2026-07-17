@@ -31,10 +31,14 @@ Thumbs.db
 .env
 .env.*
 
+# Ficheiros temporários/pessoais que nunca devem ser publicados
+confidencial.md
+
 # Conteúdo local, temporário ou pertencente a projeto separado
 interface/dados/conversas/
 dados/auditoria_chat_vivo.jsonl
 dados/falhas_chat_vivo.jsonl
+graficos_psf/
 *.log
 *.tmp
 *.temp

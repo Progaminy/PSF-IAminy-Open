@@ -19,16 +19,44 @@ from .roteador import Roteador
 
 _PREFIXO_CONVERSAS = "/api/conversas/"
 
+# Sem limite, um Content-Length forjado e enorme faria o servidor tentar ler
+# (e manter em memória) um corpo arbitrariamente grande antes de qualquer
+# validação -- item 22/23 do plano de melhorias públicas ("payload muito
+# grande"). 1 MB é generoso para texto de chat/JSON; anexos usam
+# conteúdo_base64, que já cresce ~33% sobre o ficheiro original.
+TAMANHO_MAXIMO_CORPO = 1_000_000
+
 roteador = Roteador()
+
+
+class CorpoMuitoGrande(Exception):
+    pass
+
+
+class CorpoInvalido(Exception):
+    pass
 
 
 class Manipulador(BaseHTTPRequestHandler):
     def _corpo_json(self) -> dict:
-        tamanho = int(self.headers.get("Content-Length", 0) or 0)
+        try:
+            tamanho = int(self.headers.get("Content-Length", 0) or 0)
+        except (TypeError, ValueError) as erro:
+            raise CorpoInvalido("Content-Length inválido") from erro
+        if tamanho < 0:
+            raise CorpoInvalido("Content-Length não pode ser negativo")
+        if tamanho > TAMANHO_MAXIMO_CORPO:
+            raise CorpoMuitoGrande(tamanho)
         bruto = self.rfile.read(tamanho) if tamanho else b""
         if not bruto:
             return {}
-        return json.loads(bruto.decode("utf-8"))
+        try:
+            corpo = json.loads(bruto.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as erro:
+            raise CorpoInvalido("corpo não é JSON UTF-8 válido") from erro
+        if not isinstance(corpo, dict):
+            raise CorpoInvalido("corpo JSON deve ser um objeto")
+        return corpo
 
     def _responder_json(self, estado: int, corpo: dict) -> None:
         dados = json.dumps(corpo, ensure_ascii=False).encode("utf-8")
@@ -84,7 +112,14 @@ class Manipulador(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         caminho = urlparse(self.path).path
-        corpo = self._corpo_json()
+        try:
+            corpo = self._corpo_json()
+        except CorpoMuitoGrande:
+            self._responder_bytes(413, "text/plain; charset=utf-8", b"corpo do pedido excede o limite permitido")
+            return
+        except CorpoInvalido as erro:
+            self._responder_json(400, {"erro": str(erro)})
+            return
         if caminho == "/api/conversas":
             self._responder_json(*roteador.criar_conversa())
         elif caminho == "/api/aulas/verificar":

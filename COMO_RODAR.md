@@ -1,12 +1,22 @@
 # Como rodar o PSF-IAminy
 
-Projeto oficial: `PSF-IAminy/`.
+Projeto oficial: `PSF-IAminy-Open/`.
 
 ## Entrar na pasta
 
 ```bash
-cd PSF-IAminy
+cd PSF-IAminy-Open
 ```
+
+## Instalação reproduzível (opcional)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+Isto instala o comando único `psf-iaminy` (equivalente a `python -m psf_iaminy`), que delega para a mesma entrada de `main.py` já documentada abaixo. `main.py`, `psf.py`, `psf_chat.py` e `motor_iaminy.py` continuam funcionando exatamente como antes, com ou sem esta instalação -- ela não é obrigatória para rodar os testes ou os exemplos.
 
 ## Verificar integridade básica
 
@@ -23,8 +33,19 @@ python3 -m pytest -q
 Resultado atual esperado:
 
 ```text
-660 passed
+1103 passed
 ```
+
+## Ver uma demonstração rápida
+
+```bash
+python3 exemplo_publico.py
+```
+
+Exemplos mais profundos por domínio: `exemplos/matematica.py`, `exemplos/portugues.py`, `exemplos/rastreabilidade.py`.
+
+Capturas reais da interface, mapa, ensino e resposta rastreável, com protocolo
+de isolamento: `docs/IMAGENS.md`.
 
 ## Verificar conhecimento puro de Português
 
@@ -60,11 +81,9 @@ http://127.0.0.1:8765/
 
 ## Regra deste pacote
 
-Este pacote preserva o conhecimento puro, o núcleo, Matemática, Português, motor interno, motor de busca e área privada.
+Este pacote preserva o conhecimento puro, o núcleo, Matemática, Português, motor interno e motor de busca.
 
-Foram removidas conversas salvas, aulas prontas antigas, perguntas prontas antigas, respostas prontas antigas, baterias didáticas órfãs, auditorias/dossiês, índices antigos, monografias, resultados temporários e logs que não eram conhecimento puro.
-
-A pasta `privado/` é sagrada e pessoal. O arquivo `privado/avalmath.docx` foi preservado.
+Foram removidas conversas salvas, aulas prontas antigas, perguntas prontas antigas, respostas prontas antigas, baterias didáticas órfãs, auditorias/dossiês, índices antigos, monografias, resultados temporários e logs que não eram conhecimento puro. A pasta `privado/` (antes preservada só como marcador estrutural, sem conteúdo pessoal real nesta edição pública) foi removida por decisão explícita do autor.
 
 ## Verificar o aproveitamento da Matemática no Português
 
@@ -126,4 +145,3 @@ for h in MotorMatematica().hipoteses_pendentes():
     print(h.titulo, h.estado, h.autor)
 PY
 ```
-

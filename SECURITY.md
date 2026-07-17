@@ -1,4 +1,6 @@
-Política de Segurança
+# Política de Segurança
+
+[English](docs/en/SECURITY.md)
 
 A segurança, a integridade científica e a proteção de dados fazem parte dos princípios do PSF-IAminy-Open.
 
