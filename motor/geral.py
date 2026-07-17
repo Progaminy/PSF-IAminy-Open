@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from psf_iaminy.recursos import caminho_documento
+
 from ensino import (
     AulaPacote,
     EstadoPacote,
@@ -46,16 +48,21 @@ class MotorGeralIAMiny:
         self.comum.registrar_portugues(self.portugues.conhecimento_puro())
         self.comum.registrar_matematica(self.matematica.conhecimento_puro())
         self.raiz = Path(raiz) if raiz is not None else Path(__file__).resolve().parent.parent
+        self._raiz_explicita = raiz is not None
         self.progresso = progresso or RegistroProgresso()
         self.revisao = revisao or RegistroRevisao()
         self.identidade_humana = identidade_humana or RegistroIdentidadeHumana()
 
     def plano_visivel(self) -> str:
         caminho = self.raiz / "PLANO_PSF_IAMINY.md"
+        if not caminho.is_file() and not self._raiz_explicita:
+            caminho = caminho_documento("PLANO_PSF_IAMINY.md")
         return caminho.read_text(encoding="utf-8")
 
     def regra_versao_unica(self) -> str:
         caminho = self.raiz / "REGRA_VERSAO_UNICA.md"
+        if not caminho.is_file() and not self._raiz_explicita:
+            caminho = caminho_documento("REGRA_VERSAO_UNICA.md")
         return caminho.read_text(encoding="utf-8")
 
     def identidade(self) -> dict[str, str]:

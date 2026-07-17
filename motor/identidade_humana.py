@@ -16,7 +16,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-CAMINHO_PADRAO = Path(__file__).resolve().parent / "identidade_humana.json"
+from psf_iaminy.recursos import caminho_dado_mutavel
+
+CAMINHO_PADRAO = caminho_dado_mutavel("motor", "identidade_humana.json")
 CODIGO_RECONHECIMENTO = "299792458"
 CHAVE_PADRAO = "pensador_sem_fronteiras_humano"
 
@@ -50,6 +52,7 @@ class RegistroIdentidadeHumana:
         return {}
 
     def _guardar(self) -> None:
+        self._caminho.parent.mkdir(parents=True, exist_ok=True)
         self._caminho.write_text(
             json.dumps(self._dados, indent=2, ensure_ascii=False), encoding="utf-8"
         )

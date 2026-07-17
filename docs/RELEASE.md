@@ -17,8 +17,9 @@ Português. Não afirma completude geral nem substitui validação independente.
 - motor comum de memória, dependências, auditoria e rastreabilidade;
 - demonstração pública e três exemplos separados;
 - interface local, sem chamadas de rede de saída pelo pacote principal;
-- instalação por `pip install -e .` e entradas `psf-iaminy` e
-  `python -m psf_iaminy`.
+- instalação editável ou por wheel e entradas `psf-iaminy` e
+  `python -m psf_iaminy`; recursos de conhecimento, léxico, interface e
+  documentos foram exercitados fora da árvore-fonte.
 
 ## Validação desta candidata
 
@@ -27,7 +28,8 @@ Em 17 de julho de 2026, no ambiente local de preparação:
 ```text
 python3 verificar_integridade.py → APROVADO
 python3 exemplo_publico.py        → executado com resultado real
-python3 -m pytest -q              → 1103 passed em 80,10 s
+python3 -m pytest -q              → 1106 passed em 182,28 s no Python 3.13.5 (suíte integral atual)
+wheel isolado                     → CLI, Português, docs, rastreabilidade e estáticos aprovados
 cobertura de linhas               → 63% na medição documentada
 ```
 
@@ -77,5 +79,5 @@ No Windows, a ativação equivalente é `.venv\Scripts\activate`.
 2. repetir integridade, demonstração e suíte completa nesse commit;
 3. mover as mudanças aplicáveis de `Não lançado` para `0.1.0` no changelog;
 4. criar a tag anotada `v0.1.0` e publicar estas notas sem alterar métricas;
-5. conferir instalação a partir da tag num ambiente limpo (a árvore candidata
-   já passou antes da tag; ver `docs/REPRODUCAO.md`).
+5. conferir instalação do wheel construído a partir da tag num ambiente limpo
+   (a árvore candidata já passou antes da tag; ver `docs/REPRODUCAO.md`).

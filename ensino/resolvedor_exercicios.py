@@ -24,6 +24,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
+from psf_iaminy.recursos import caminho_dado_mutavel
+
 from lingua_portuguesa.normalizacao import normalizar_texto
 from modelos.eficiente import (
     divisores_int,
@@ -36,7 +38,7 @@ from modelos.eficiente import (
 from nucleo.ordenacao_finita import ordenar_crescente, ordenar_decrescente
 from nucleo.sequencias_calculo_psf import adicionar, multiplicar, potencia, subtrair_controlado
 
-CAMINHO_NAO_RECONHECIDOS = Path(__file__).resolve().parent / "padroes_nao_reconhecidos.json"
+CAMINHO_NAO_RECONHECIDOS = caminho_dado_mutavel("ensino", "padroes_nao_reconhecidos.json")
 
 
 @dataclass(frozen=True, slots=True)

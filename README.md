@@ -15,7 +15,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 **O que já funciona, com teste automatizado.**
 - Matemática: resolve expressões racionais com precedência, reconstrói divisão por quociente/resto/fração/decimal, executa prova formal no fragmento lógico finito e distingue teste de prova universal — 203 documentos conceituais auditados, todos com dependências ligadas.
 - Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1702 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
-- 1103 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1106 testes automatizados passam localmente (`python3 -m pytest -q`).
 
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
@@ -26,10 +26,12 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 ```bash
 git clone https://github.com/Progaminy/PSF-IAminy-Open.git
 cd PSF-IAminy-Open
-python3 -m pytest -q                 # 1103 passed
+python3 -m pytest -q                 # 1106 passed
 python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitação -- em segundos
 ```
 Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
+
+**Auditoria da preparação pública.** [`docs/AUDITORIA_MELHORIAS_120.md`](docs/AUDITORIA_MELHORIAS_120.md) acompanha os 64 pontos sem confundir trabalho técnico com adoção externa. [`docs/QUALIDADE_CODIGO.md`](docs/QUALIDADE_CODIGO.md) mede tipagem, exceções e duplicação de produção; [`docs/ROTEIRO_VIDEO.md`](docs/ROTEIRO_VIDEO.md) deixa pronta uma gravação reproduzível.
 
 **Evidência visual real.** [`docs/IMAGENS.md`](docs/IMAGENS.md) reúne a interface inicial, uma entrada e resposta reais com origem/limite explícito, o mapa de conhecimento, a área de ensino e a prévia da página estática. As capturas usam armazenamento temporário isolado e não contêm conversas persistentes do utilizador.
 
@@ -437,7 +439,7 @@ python3 motor_iaminy.py --rapido
 Resultado atual esperado:
 
 ```text
-1103 passed na verificação local mais recente
+1106 passed na verificação local mais recente
 ```
 
 ```text

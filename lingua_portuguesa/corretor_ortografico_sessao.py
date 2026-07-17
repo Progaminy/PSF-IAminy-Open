@@ -16,8 +16,7 @@ local + comparação textual simples + pares de correção aprovados.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
-
+from psf_iaminy.recursos import caminho_dado_mutavel
 from lingua_portuguesa.normalizacao import sem_acentos
 
 
@@ -61,7 +60,7 @@ CORRECOES_BASE: tuple[tuple[str, str, str], ...] = (
 
 # Memória local opcional. Se o projeto estiver em modo de escrita, pares novos
 # podem ser acrescentados manualmente por ferramenta futura sem internet.
-CAMINHO_MEMORIA = Path(__file__).resolve().parent / "dados" / "memoria_ortografica.tsv"
+CAMINHO_MEMORIA = caminho_dado_mutavel("lingua_portuguesa", "dados", "memoria_ortografica.tsv")
 
 
 def _pares_memoria() -> tuple[tuple[str, str, str], ...]:

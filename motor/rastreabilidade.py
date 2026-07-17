@@ -29,11 +29,13 @@ import symtable
 from importlib.machinery import BuiltinImporter, FrozenImporter, ModuleSpec, PathFinder
 from pathlib import Path
 
+from psf_iaminy.recursos import caminho_documento
+
 RAIZ = Path(__file__).resolve().parents[1]
 CONHECIMENTO = RAIZ / "conhecimento"
 NUCLEO = RAIZ / "nucleo"
-ROADMAP = RAIZ / "ROADMAP.md"
-LEIAME = RAIZ / "README.md"
+ROADMAP = caminho_documento("ROADMAP.md")
+LEIAME = caminho_documento("README.md")
 
 _PADRAO_REFERENCIA = re.compile(r"`((?:nucleo|testes)/[a-zA-Z0-9_./]+\.py)`")
 # Etapas 3-19 (e algumas entre 20-60) citam o ficheiro implementado dentro

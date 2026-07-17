@@ -57,3 +57,11 @@ mudança explícita, documentada e testada da política de dados.
 Uma combinação de Python e sistema operativo só deve ser declarada suportada
 quando instalação, integridade, demonstração e suíte completa passarem num
 ambiente limpo reproduzível. “Deve funcionar” não equivale a “suportado”.
+
+## Instalação por wheel e dados locais
+
+O wheel candidato foi instalado fora da árvore-fonte. Léxico, documentos de
+conhecimento, testes de rastreabilidade, ficheiros estáticos e entradas CLI
+foram encontrados. Dados mutáveis usam `psf_iaminy.recursos` e uma pasta
+gravável do utilizador, com substituição opcional por `PSF_IAMINY_DATA_DIR`;
+assim, a instalação não precisa alterar `site-packages`.

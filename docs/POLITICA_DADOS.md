@@ -1,43 +1,74 @@
-# Política de dados
+# Política técnica de dados
 
-Item 24 do plano de melhorias públicas. Descreve o que o PSF-IAminy guarda localmente, onde, por quanto tempo, como apagar, e se algo sai da máquina do utilizador. Não é uma política legal (privacidade/LGPD/GDPR); é uma descrição técnica honesta do que o código faz, verificada lendo o código, não apenas descrita de memória.
+Item 24 do plano de melhorias públicas. Este documento descreve o comportamento
+real do código; não é uma política jurídica de privacidade.
 
-## Funciona totalmente offline
+## Rede e funcionamento offline
 
-O pacote principal (tudo exceto `cao_de_caca/PSF-Calculadora`, subprojeto externo e opcional) **não faz nenhuma chamada de rede de saída** — confirmado por busca no código, não só por design pretendido. Nenhum dado é enviado a serviços externos, nenhuma telemetria, nenhuma analytics.
+O pacote principal não faz chamadas de rede de saída, não envia telemetria e não
+possui analytics. A interface HTTP liga-se por padrão a `127.0.0.1`; isso não
+significa que deva ser exposta à internet.
 
-## O que é guardado, onde, e por quê
+## Onde dados mutáveis são gravados
 
-| Dado | Caminho | Guardado por quê | Conteúdo |
+Num checkout do código, os caminhos históricos dentro da árvore são preservados
+para compatibilidade. Numa instalação por wheel, dados gerados durante o uso não
+são escritos em `site-packages`; usam o diretório de dados do utilizador:
+
+- Linux: `${XDG_DATA_HOME:-~/.local/share}/psf-iaminy/`;
+- macOS: `~/Library/Application Support/PSF-IAminy/`;
+- Windows: `%LOCALAPPDATA%\PSF-IAminy\`;
+- qualquer sistema: `PSF_IAMINY_DATA_DIR` substitui explicitamente a raiz.
+
+A implementação canónica está em `psf_iaminy/recursos.py`.
+
+| Dado | Caminho relativo | Finalidade | Conteúdo sensível possível |
 | --- | --- | --- | --- |
-| Conversas do chat (interface web) | `interface/dados/conversas/<id>.json` | Persistência automática do histórico de chat local | Mensagens trocadas (utilizador e assistente), título, timestamps |
-| Log de auditoria do Chat Vivo | `dados/auditoria_chat_vivo.jsonl` | Diagnóstico interno (intenção detectada, confiança, lacunas) | **Inclui o texto literal de cada mensagem enviada** (`nucleo/chat_auditoria.py`), timestamp, métricas de resposta |
-| Log de falhas do Chat Vivo | `dados/falhas_chat_vivo.jsonl` | Subconjunto do log acima, só casos de fallback/melhoria necessária | Mesmo formato do log de auditoria |
-| Base canónica | `dados/base_canonica.jsonl` | Conhecimento puro reconstruído (não conversas prontas) | Esvaziada deliberadamente numa limpeza anterior (ver `COMO_RODAR.md`); reconstruída por materialização PSF |
+| Conversas locais | `interface/dados/conversas/<id>.json` | histórico da interface | texto integral das mensagens |
+| Auditoria do Chat Vivo | `dados/auditoria_chat_vivo.jsonl` | intenção, confiança, lacunas e tempo | texto integral da mensagem |
+| Falhas/fallbacks | `dados/falhas_chat_vivo.jsonl` | casos que precisam de melhoria | mesmo conteúdo da auditoria |
+| Identidade humana | `motor/identidade_humana.json` | factos fornecidos voluntariamente durante a entrevista local | dados pessoais declarados pelo utilizador |
+| Memória ortográfica aprovada | `lingua_portuguesa/dados/memoria_ortografica.tsv` | pares de correção acrescentados localmente | texto que o utilizador decidiu guardar |
+| Padrões não reconhecidos | `ensino/padroes_nao_reconhecidos.json` | perguntas ainda sem padrão seguro | pergunta original |
+| Histórico de desempenho | `motor/historico_desempenho.json` | tempos de testes para detectar regressões | nomes de testes e tempos; sem conversa |
+| Base canónica | `dados/base_canonica.jsonl` | conhecimento materializado, não histórico de chat | depende do conteúdo materializado |
 
-Todos os caminhos acima estão listados em `.gitignore` — nenhum dado de sessão real é commitado ou publicado neste repositório.
+Os ficheiros gerados por sessão e ambiente estão ignorados pelo Git. O ficheiro
+`ensino/padroes_nao_reconhecidos.json` e a linha de base de desempenho podem ter
+conteúdo inicial distribuído; numa instalação, alterações posteriores ficam na
+área do utilizador.
 
-## Por quanto tempo
+## Retenção e eliminação
 
-Indefinidamente. Nenhum destes ficheiros tem expiração ou rotação automática — crescem enquanto o chat é usado, até serem apagados manualmente.
-
-## Como apagar
+Não existe expiração automática. Os dados permanecem até serem apagados pelo
+utilizador. Para descobrir a raiz efetiva:
 
 ```bash
-# Uma conversa específica, pela interface (API já protegida contra
-# id malformado/travessia de caminho -- ver docs/AUDITORIA_SEGURANCA.md):
-curl -X DELETE http://127.0.0.1:8765/api/conversas/<id>
-
-# Todas as conversas locais:
-rm -rf interface/dados/conversas/*
-
-# Logs de auditoria/falha do Chat Vivo:
-rm -f dados/auditoria_chat_vivo.jsonl dados/falhas_chat_vivo.jsonl
+python - <<'PY'
+from psf_iaminy.recursos import raiz_dados_usuario
+print(raiz_dados_usuario())
+PY
 ```
 
-Nenhum destes comandos afeta o conhecimento puro do projeto (`conhecimento/`, `nucleo/`, `lingua_portuguesa/` etc.) — só dado de sessão/uso local.
+Para apagar todos os dados mutáveis de uma instalação, remova essa pasta. Num
+checkout, os principais resíduos de sessão podem ser removidos assim:
 
-## Componentes com dependências externas
+```bash
+rm -rf interface/dados/conversas/
+rm -f dados/auditoria_chat_vivo.jsonl dados/falhas_chat_vivo.jsonl
+rm -f motor/identidade_humana.json
+rm -f lingua_portuguesa/dados/memoria_ortografica.tsv
+```
 
-- Pacote principal: nenhuma dependência de terceiros em runtime (só `pytest`/`pytest-cov`/`ruff`/`bandit` como dev, ver `pyproject.toml`) — nada disso lê ou envia dado do utilizador.
-- `cao_de_caca/PSF-Calculadora`: subprojeto separado, usa NumPy/SciPy/SymPy/Pandas/Matplotlib/NetworkX/mpmath/scikit-learn de propósito (ver seção correspondente em `README.md`). Roda inteiramente local; nenhuma dessas bibliotecas científicas envia dado pela rede como parte do uso normal deste projeto.
+Apagar dados de sessão não apaga o conhecimento versionado em `conhecimento/`,
+`nucleo/`, `matematica/` ou `lingua_portuguesa/`. Antes de apagar
+`ensino/padroes_nao_reconhecidos.json` ou `motor/historico_desempenho.json` num
+checkout, confirme se pretende remover também a linha de base versionada.
+
+## Dependências externas
+
+O pacote principal não possui dependências de runtime de terceiros. Ferramentas
+de desenvolvimento e validação (`pytest`, Ruff, Bandit, SymPy opcional) operam
+localmente e não são fundamento do conhecimento PSF. O subprojeto
+`cao_de_caca/PSF-Calculadora` tem dependências científicas próprias e ciclo
+separado.

@@ -15,7 +15,9 @@ import secrets
 from datetime import datetime, timezone
 from pathlib import Path
 
-CAMINHO_PADRAO = Path(__file__).resolve().parent / "dados" / "conversas"
+from psf_iaminy.recursos import caminho_dado_mutavel
+
+CAMINHO_PADRAO = caminho_dado_mutavel("interface", "dados", "conversas")
 
 # secrets.token_hex(6) só produz exatamente isto -- qualquer id_conversa que
 # não bata neste formato é tratado como inexistente, nunca usado para montar

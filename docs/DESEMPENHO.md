@@ -36,11 +36,15 @@ declarado separadamente para não desaparecer dentro de uma média favorável.
 O pico observado por `tracemalloc` foi **22,228 MiB**. Isso mede alocações
 rastreadas pelo Python durante o script; não é o RSS total do processo.
 
-A suíte completa mais recente levou **80,10 s** para 1103 testes
-(**81,17 s** de parede; pico RSS reportado pelo processo: **300.740 KiB**).
-Ela
-mede muito mais do que as operações acima e não deve ser comparada diretamente
-com uma chamada isolada.
+Na fotografia original em Python 3.14.4, a suíte levou **80,10 s** para
+1103 testes (**81,17 s** de parede; pico RSS: **300.740 KiB**). A árvore atual,
+com três regressões adicionais de empacotamento, passou **1106/1106 em 182,28 s**
+no Python 3.13.5 deste ambiente. Essa diferença mistura interpretador, máquina,
+carga, cache e testes novos; não é classificada como regressão de código sem uma
+comparação controlada no mesmo ambiente.
+
+A suíte mede muito mais do que as operações acima e não deve ser comparada
+diretamente com uma chamada isolada.
 
 ## Interpretação
 

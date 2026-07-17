@@ -7,6 +7,10 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 ## [Não lançado]
 
 ### Corrigido
+- Empacotamento por wheel agora inclui documentos de conhecimento, léxico, interface estática, dados canónicos, testes e documentação compartilhada; a instalação isolada deixou de depender da árvore-fonte.
+- Metadados de licença migrados para expressão SPDX PEP 639 (`Apache-2.0`), build mínimo Setuptools 77 e pacote estático explícito; o wheel final foi construído sem avisos.
+- Conversas, auditorias, identidade, memória ortográfica, padrões não reconhecidos e histórico de desempenho usam uma raiz gravável do utilizador em instalações, com `PSF_IAMINY_DATA_DIR` como substituição explícita, em vez de tentar modificar `site-packages`.
+- Workflows passaram a usar versões existentes e fixas das actions oficiais; upload de artefactos usa a linha v4 compatível.
 - `COMO_RODAR.md` afirmava `660 passed`, desatualizado em relação aos 1066 testes reais já refletidos no `README.md`. `motor/coerencia.py` ganhou `divergencia_contagem_testes_entre_documentos()` para detectar esse tipo de divergência entre os dois documentos automaticamente.
 - CI pública auditada a partir dos logs reais do run `29505936596`: timeout HTTP de 5 s nos quatro ambientes e acesso a `ast.TryStar` no Python 3.10. O timeout candidato passou a 15 s, o percurso AST agora é compatível com 3.10 e ganhou regressão; as actions foram atualizadas para runtime Node 24 e permissões mínimas.
 - Job estático dividido entre regras críticas bloqueantes e dívida completa informativa; Bandit passa a executar mesmo quando o relatório completo do Ruff encontra dívida existente.
@@ -17,6 +21,10 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 - `ensino/leitura_documentos.py`: ZIP/DOCX agora têm limites compactados/descomprimidos, razão contra ZIP bomb, validação de nomes internos e leitura limitada; 18 regressões cobrem também DOCX hostil aninhado.
 
 ### Adicionado
+- `docs/AUDITORIA_MELHORIAS_120.md`: estado factual dos 64 pontos, separando concluído, parcial e dependente de terceiros.
+- `ferramentas/auditar_codigo.py` e `docs/QUALIDADE_CODIGO.md`: linha de base de tipagem, docstrings, exceções amplas e duplicação exata no código de produção.
+- `docs/ROTEIRO_VIDEO.md`: demonstração de 2–5 minutos que exige comandos e limitações reais.
+- `psf_iaminy/recursos.py` e regressões de instalação/dados mutáveis.
 - Seção "Em poucos minutos" no início do `README.md`: o que é, problema, o que já funciona, o que é experimental, demonstração rápida e diferencial — antes da filosofia completa.
 - Seção "Capacidades reais e limitações" no `README.md`: tabela de capacidades com teste correspondente, separação em conhecimento implementado / experimentos / hipóteses / problemas pendentes / validação externa, e limitações reconhecidas abertamente.
 - Explicação do papel de `cao_de_caca/PSF-Calculadora/` no `README.md` (subprojeto externo, por que o nome, por que fica fora da coleta padrão de testes).
@@ -49,6 +57,7 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 - `docs/IMAGENS.md` e cinco capturas reais: interface inicial, pergunta/resposta com origem e limite, mapa, ensino e página estática, todas sem dados persistentes do utilizador.
 - `docs/CANDIDATURA.md` e `docs/DIVULGACAO.md`: pacote factual para atualização somente quando autorizada e texto técnico reutilizável sem alegar publicação externa.
 - Suíte ampliada para 1103 casos em 109 ficheiros; 35 casos classificados como segurança. A execução completa atual passou em 80,10 s.
+- Após regressões de recursos/instalação, a suíte passou a 1106 casos em 110 ficheiros; 1106/1106 passaram em Python 3.13.5 (182,28 s neste ambiente).
 - Este `CHANGELOG.md`.
 
 ### Removido

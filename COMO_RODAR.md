@@ -16,7 +16,16 @@ source .venv/bin/activate
 pip install -e .
 ```
 
-Isto instala o comando único `psf-iaminy` (equivalente a `python -m psf_iaminy`), que delega para a mesma entrada de `main.py` já documentada abaixo. `main.py`, `psf.py`, `psf_chat.py` e `motor_iaminy.py` continuam funcionando exatamente como antes, com ou sem esta instalação -- ela não é obrigatória para rodar os testes ou os exemplos.
+Isto instala em modo editável o comando único `psf-iaminy` (equivalente a `python -m psf_iaminy`), que delega para a mesma entrada de `main.py` já documentada abaixo. `main.py`, `psf.py`, `psf_chat.py` e `motor_iaminy.py` continuam funcionando exatamente como antes, com ou sem esta instalação -- ela não é obrigatória para rodar os testes ou os exemplos.
+
+A construção por wheel também foi validada fora da árvore-fonte. Para inspecionar
+onde uma instalação guarda conversas, auditorias e outros dados mutáveis:
+
+```bash
+python -c "from psf_iaminy.recursos import raiz_dados_usuario; print(raiz_dados_usuario())"
+```
+
+Defina `PSF_IAMINY_DATA_DIR=/caminho/escolhido` para usar outra pasta.
 
 ## Verificar integridade básica
 
@@ -33,7 +42,7 @@ python3 -m pytest -q
 Resultado atual esperado:
 
 ```text
-1103 passed
+1106 passed
 ```
 
 ## Ver uma demonstração rápida

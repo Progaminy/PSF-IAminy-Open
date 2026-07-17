@@ -37,16 +37,16 @@ funcionam como exportação histórica.
 Resultado após substituir um `assert` de runtime por erro explícito:
 
 ```text
-9 alertas de severidade baixa / confiança alta
+11 alertas de severidade baixa / confiança alta
 0 médios
 0 altos
 ```
 
 Triagem:
 
-- seis B404/B603 vêm de `subprocess` com lista fixa, `shell=False` implícito e
-  executável Python atual nos scripts de benchmark, classificação e executor
-  de testes; nenhum recebe comando de texto do utilizador;
+- oito B404/B603 vêm de quatro usos de `subprocess` com lista fixa e
+  `shell=False`: avaliação de limites, benchmark, classificação da suíte e
+  executor de testes; nenhum recebe comando de texto do utilizador;
 - dois B311 vêm de `random.Random(semente)` para exercícios pedagógicos
   reproduzíveis, sem finalidade criptográfica;
 - um B110 vem da tentativa final de matar processo já encerrado, onde falhar

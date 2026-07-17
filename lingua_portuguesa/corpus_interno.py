@@ -39,6 +39,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from psf_iaminy.recursos import caminho_documento
+
 from .conhecimento_puro import CONCEITOS_PORTUGUES_PURO
 from .tipos import TipoToken
 from .tokenizacao import Tokenizador
@@ -88,7 +90,7 @@ def tokens_do_corpus() -> tuple[str, ...]:
 
 
 def _caminhos_prosa_ampla() -> tuple[Path, ...]:
-    caminhos = [_RAIZ / nome for nome in _DOCUMENTOS_PROSA_AMPLA]
+    caminhos = [caminho_documento(nome) for nome in _DOCUMENTOS_PROSA_AMPLA]
     caminhos.extend(sorted((_RAIZ / "conhecimento").glob("*.md")))
     return tuple(p for p in caminhos if p.is_file())
 

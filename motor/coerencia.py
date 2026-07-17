@@ -13,6 +13,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from psf_iaminy.recursos import caminho_documento
+
 RAIZ = Path(__file__).resolve().parents[1]
 
 _PADRAO_ITEM_PLANO = re.compile(r"^(\d+)\.\s", re.MULTILINE)
@@ -26,7 +28,7 @@ def itens_do_plano_fora_de_ordem(caminho: "Path | None" = None) -> tuple[str, ..
     nenhuma checagem automática disto -- foi um erro real, cometido e
     corrigido à mão, na mesma sessão que motivou este verificador.
     """
-    caminho = caminho or (RAIZ / "PLANO_PSF_IAMINY.md")
+    caminho = caminho or caminho_documento("PLANO_PSF_IAMINY.md")
     texto = caminho.read_text(encoding="utf-8")
     numeros = [int(n) for n in _PADRAO_ITEM_PLANO.findall(texto)]
     problemas: list[str] = []
@@ -41,7 +43,7 @@ def itens_do_plano_fora_de_ordem(caminho: "Path | None" = None) -> tuple[str, ..
 
 def numeros_da_auditoria_estrutural_no_readme(caminho: "Path | None" = None) -> dict[str, int | str]:
     """Extrai o bloco ```text ... conceitos: N ... raiz: X ...``` do README."""
-    caminho = caminho or (RAIZ / "README.md")
+    caminho = caminho or caminho_documento("README.md")
     texto = caminho.read_text(encoding="utf-8")
     bloco = re.search(
         r"Auditoria estrutural atual:\s*```text\n(.*?)```",
@@ -93,7 +95,7 @@ def divergencias_lexico_no_readme(caminho: "Path | None" = None) -> tuple[str, .
     """Compara a frase de inventário lexical do README com o dicionário vivo."""
     from lingua_portuguesa.lexico import Dicionario
 
-    caminho = caminho or (RAIZ / "README.md")
+    caminho = caminho or caminho_documento("README.md")
     texto = caminho.read_text(encoding="utf-8")
     encontrado = _PADRAO_LEXICO_NO_README.search(texto)
     if encontrado is None:
@@ -128,8 +130,8 @@ def divergencia_contagem_testes_entre_documentos(
     execução real do pytest (ver nota acima); só garante que os dois
     documentos não se contradizem entre si.
     """
-    readme = readme or (RAIZ / "README.md")
-    como_rodar = como_rodar or (RAIZ / "COMO_RODAR.md")
+    readme = readme or caminho_documento("README.md")
+    como_rodar = como_rodar or caminho_documento("COMO_RODAR.md")
     texto_readme = readme.read_text(encoding="utf-8")
     texto_como_rodar = como_rodar.read_text(encoding="utf-8")
     encontrado_readme = _PADRAO_RESULTADO_TESTES.search(texto_readme)

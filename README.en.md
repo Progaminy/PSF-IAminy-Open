@@ -34,7 +34,7 @@ the hidden foundation of pure PSF knowledge. The governing rule is simple:
   remain partial or vocabulary-bound.
 - **Common engine:** memory, dependency search, auditing, purity checks and
   traceability shared without merging mathematical and linguistic authority.
-- **Evidence:** 1103 automated tests passed locally; the documented line
+- **Evidence:** 1106 automated tests passed locally; the documented line
   coverage snapshot is 63%.
 
 The CI workflow targets Python 3.10–3.13. Its first public
@@ -67,6 +67,15 @@ The public demonstration prints real output from the engines, including a
 recognized limitation. More focused examples are available in
 `exemplos/matematica.py`, `exemplos/portugues.py` and
 `exemplos/rastreabilidade.py`.
+
+## Public-readiness evidence
+
+The Portuguese canonical documents include a factual
+[64-item readiness audit](docs/AUDITORIA_MELHORIAS_120.md), a
+[production-code structural audit](docs/QUALIDADE_CODIGO.md), and a
+[reproducible video script](docs/ROTEIRO_VIDEO.md). External users, stars,
+reproductions and contributions are never marked complete without real
+third-party evidence.
 
 ## Architecture
 

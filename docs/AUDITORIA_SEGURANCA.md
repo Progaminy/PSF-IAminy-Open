@@ -1,7 +1,7 @@
 # Auditoria de segurança
 
 Complemento automatizado: `docs/ANALISE_ESTATICA.md` regista Bandit 1.9.4 com
-9 alertas baixos, 0 médios e 0 altos, além da triagem de cada classe.
+11 alertas baixos, 0 médios e 0 altos, além da triagem de cada classe.
 
 Auditoria manual do código do pacote principal (excluindo `cao_de_caca/PSF-Calculadora`, subprojeto externo com seu próprio ciclo), item 22/23 do plano de melhorias públicas. Não é uma auditoria de terceiros nem certificação — é o que foi verificado, o que foi corrigido e o que continua sendo hipótese de risco não testada.
 

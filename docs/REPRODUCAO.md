@@ -63,3 +63,24 @@ um SLA de cinco segundos. A suíte limpa completa passou depois da mudança.
 O próximo passo válido é repetir este protocolo por terceiro e guardar sistema,
 Python, commit, comandos e resultado sem editar o relato para parecer melhor.
 
+
+## Validação adicional por wheel
+
+Depois da reprodução editável acima, o pacote foi construído como wheel e
+instalado num segundo venv, com o processo iniciado a partir de `/tmp` para
+impedir que imports fossem satisfeitos acidentalmente pela árvore-fonte.
+
+Foram confirmados:
+
+- `psf-iaminy --selftest` e `python -m psf_iaminy --selftest`;
+- léxico e corretor de Português;
+- leitura de `README.md`, plano e regra de versão a partir da área `share`;
+- referências citadas sem ficheiros quebrados;
+- interface estática empacotada;
+- documentos `conhecimento/*.md` e testes citados pela rastreabilidade;
+- dados mutáveis redirecionados por `PSF_IAMINY_DATA_DIR`, sem escrita em
+  `site-packages`.
+
+A suíte integral atual passou 1106/1106 no Python 3.13.5 deste ambiente. Isto
+fortalece a instalação, mas continua sem substituir reprodução independente por
+outra pessoa ou instalação a partir de uma tag publicada.

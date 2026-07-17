@@ -19,8 +19,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from psf_iaminy.recursos import caminho_dado_mutavel
+
 RAIZ = Path(__file__).resolve().parents[1]
-HISTORICO = Path(__file__).resolve().parent / "historico_desempenho.json"
+HISTORICO_BASE = Path(__file__).resolve().parent / "historico_desempenho.json"
+HISTORICO = caminho_dado_mutavel("motor", "historico_desempenho.json")
 
 # Um ficheiro só é sinalizado se ficar pelo menos este múltiplo mais
 # lento que o registo anterior — evita ruído de variação normal de
@@ -44,12 +47,14 @@ MINIMO_DIFERENCA_ABSOLUTA = 1.0
 
 
 def carregar_historico() -> dict[str, float]:
-    if HISTORICO.exists():
-        return json.loads(HISTORICO.read_text(encoding="utf-8"))
+    caminho = HISTORICO if HISTORICO.exists() else HISTORICO_BASE
+    if caminho.exists():
+        return json.loads(caminho.read_text(encoding="utf-8"))
     return {}
 
 
 def guardar_historico(tempos: dict[str, float]) -> None:
+    HISTORICO.parent.mkdir(parents=True, exist_ok=True)
     HISTORICO.write_text(json.dumps(tempos, indent=2, sort_keys=True), encoding="utf-8")
 
 

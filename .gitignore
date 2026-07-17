@@ -43,3 +43,5 @@ graficos_psf/
 *.tmp
 *.temp
 *.bak
+motor/identidade_humana.json
+lingua_portuguesa/dados/memoria_ortografica.tsv

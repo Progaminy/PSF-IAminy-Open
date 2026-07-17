@@ -18,13 +18,14 @@ os exemplos usam a biblioteca padrão do Python.
 
 | Dependência | Uso | Restrição atual | Obrigatória para executar | Licença a confirmar antes da release | Risco principal |
 | --- | --- | --- | --- | --- | --- |
-| setuptools | construir/instalar o pacote | `>=68` | só para build/instalação | sim | limite superior aberto pode alterar builds futuros |
+| setuptools | construir/instalar o pacote e metadados PEP 639 | `>=77` | só para build/instalação | sim | limite superior aberto pode alterar builds futuros |
+| build | frontend de construção do wheel no CI | versão mais recente resolvida pelo pip | só para build | sim | mudança futura do frontend |
 | pytest | executar testes | sem versão fixada | não | MIT indicada pelos metadados do ambiente | atualização incompatível da suíte |
 | pytest-cov | medir cobertura | sem versão fixada | não | sim | métrica variar conforme ferramenta/configuração |
-| Ruff | análise estática informativa | sem versão fixada | não | sim | novas regras alterarem resultados |
-| Bandit | padrões de segurança informativos | sem versão fixada | não | sim | falsos positivos/negativos e regras variáveis |
+| Ruff | análise estática crítica + dívida informativa | `0.15.22` no CI | não | sim | atualizar exige rever a linha de base |
+| Bandit | padrões de segurança; médio/alto bloqueante | `1.9.4` no CI | não | sim | falsos positivos/negativos e regras variáveis |
 
-As versões não estão bloqueadas deliberadamente nesta pré-release. Antes de
+Pytest, pytest-cov, setuptools e build ainda não estão totalmente bloqueados nesta pré-release; Ruff e Bandit estão fixos no CI para tornar a linha de base estática comparável. Antes de
 publicar uma release reproduzível, deve-se registar as versões usadas na
 validação e confirmar licença e origem em fontes oficiais. Fixar versões sem
 processo de atualização também criaria risco de vulnerabilidades antigas.
