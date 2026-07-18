@@ -73,7 +73,7 @@ recognized limitation. More focused examples are available in
 The Portuguese canonical documents include a factual
 [64-item readiness audit](docs/AUDITORIA_MELHORIAS_120.md), a
 [production-code structural audit](docs/QUALIDADE_CODIGO.md), and a
-[reproducible video script](docs/ROTEIRO_VIDEO.md). External users, stars,
+[reproducible video script](docs/ROTEIRO_VIDEO_NARRACAO.md). External users, stars,
 reproductions and contributions are never marked complete without real
 third-party evidence.
 

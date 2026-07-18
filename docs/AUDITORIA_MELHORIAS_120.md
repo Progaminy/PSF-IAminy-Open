@@ -52,7 +52,7 @@ Legenda:
 | 34 | Traduzir documentos essenciais | ✅ | `docs/en/` + `CONTRIBUTING.en.md`; não se finge tradução integral dos documentos científicos longos. |
 | 35 | Página de documentação | 🟡 | `site/` e workflow Pages prontos; falta publicação no GitHub Pages. |
 | 36 | Screenshots/GIFs reais | ✅ | Cinco capturas reais documentadas em `docs/IMAGENS.md`; GIF não é necessário para considerar o item demonstrável. |
-| 37 | Vídeo curto | 🟡 | Roteiro reproduzível em `docs/ROTEIRO_VIDEO.md`; gravação e publicação dependem do mantenedor. |
+| 37 | Vídeo curto | 🟡 | Roteiro reproduzível em `docs/ROTEIRO_VIDEO_NARRACAO.md`; gravação e publicação dependem do mantenedor. |
 | 38 | Benchmarks | ✅ | `benchmarks/benchmark_basico.py` e `docs/DESEMPENHO.md`. |
 | 39 | Avaliação matemática | ✅ | Avaliação executável e resultados em `docs/AVALIACAO_QUALIDADE.md`. |
 | 40 | Avaliação linguística | ✅ | Avaliação executável inclui resultados positivos e falsos positivos, sem maquilhagem. |

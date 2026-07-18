@@ -31,7 +31,7 @@ python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitaç
 ```
 Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
 
-**Auditoria da preparação pública.** [`docs/AUDITORIA_MELHORIAS_120.md`](docs/AUDITORIA_MELHORIAS_120.md) acompanha os 64 pontos sem confundir trabalho técnico com adoção externa. [`docs/QUALIDADE_CODIGO.md`](docs/QUALIDADE_CODIGO.md) mede tipagem, exceções e duplicação de produção; [`docs/ROTEIRO_VIDEO.md`](docs/ROTEIRO_VIDEO.md) deixa pronta uma gravação reproduzível.
+**Auditoria da preparação pública.** [`docs/AUDITORIA_MELHORIAS_120.md`](docs/AUDITORIA_MELHORIAS_120.md) acompanha os 64 pontos sem confundir trabalho técnico com adoção externa. [`docs/QUALIDADE_CODIGO.md`](docs/QUALIDADE_CODIGO.md) mede tipagem, exceções e duplicação de produção; [`docs/ROTEIRO_VIDEO_NARRACAO.md`](docs/ROTEIRO_VIDEO_NARRACAO.md) deixa pronta uma gravação reproduzível.
 
 **Evidência visual real.** [`docs/IMAGENS.md`](docs/IMAGENS.md) reúne a interface inicial, uma entrada e resposta reais com origem/limite explícito, o mapa de conhecimento, a área de ensino e a prévia da página estática. As capturas usam armazenamento temporário isolado e não contêm conversas persistentes do utilizador.
 
