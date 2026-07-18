@@ -2,6 +2,12 @@
 
 Projeto oficial: `PSF-IAminy-Open/`.
 
+## Clonar o repositório
+
+```bash
+git clone https://github.com/Progaminy/PSF-IAminy-Open.git
+```
+
 ## Entrar na pasta
 
 ```bash
@@ -14,6 +20,10 @@ cd PSF-IAminy-Open
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
+```
+
+```bash
+python3 -m interface.servidor
 ```
 
 Isto instala em modo editável o comando único `psf-iaminy` (equivalente a `python -m psf_iaminy`), que delega para a mesma entrada de `main.py` já documentada abaixo. `main.py`, `psf.py`, `psf_chat.py` e `motor_iaminy.py` continuam funcionando exatamente como antes, com ou sem esta instalação -- ela não é obrigatória para rodar os testes ou os exemplos.
@@ -78,9 +88,7 @@ Observação: `dados/base_canonica.jsonl` foi limpo porque continha perguntas, r
 
 ## Abrir interface local
 
-```bash
-python3 -m interface.servidor
-```
+
 
 Depois abrir no navegador:
 
