@@ -33,6 +33,7 @@ Thumbs.db
 
 # Ficheiros temporários/pessoais que nunca devem ser publicados
 confidencial.md
+docs/ROTEIRO_VIDEO_NARRACAO.md
 
 # Conteúdo local, temporário ou pertencente a projeto separado
 interface/dados/conversas/
