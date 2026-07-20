@@ -86,6 +86,11 @@ def _responder_unidade(
     if por_dominio is not None:
         return por_dominio
 
+    resolvida = _responder_resolvedor(texto)
+    if resolvida is not None:
+        resolvida.tom = tom
+        return resolvida
+
     t_norm = texto.casefold().strip()
     seguimentos_curtos = {
         "dá outro exemplo", "da outro exemplo", "dê outro exemplo", "de outro exemplo",
@@ -115,11 +120,6 @@ def _responder_unidade(
         resposta = _formatar_curiosidade(curiosidade, modo)
         resposta.tom = tom
         return resposta
-
-    resolvida = _responder_resolvedor(texto)
-    if resolvida is not None:
-        resolvida.tom = tom
-        return resolvida
 
     if _parece_rota_legada_ensino(texto):
         return _delegar_dialogo(

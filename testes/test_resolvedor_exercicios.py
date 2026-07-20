@@ -130,8 +130,8 @@ def main():
         ok("hipotenusa resposta", r.resposta, "10")
 
         r = resolver("Um triângulo retângulo tem catetos 2 e 3. Calcula a hipotenusa.", caminho_log)
-        ok("hipotenusa honesta quando não é quadrado perfeito", r.resolvida, False)
-        ok("hipotenusa não inventa resposta", r.resposta, None)
+        ok("hipotenusa resolvida quando não é quadrado perfeito (raiz reconstruída)", r.resolvida, True)
+        ok("hipotenusa resposta aproximada", r.resposta, "√13 ≈ 3,6056")
 
         r = resolver("Fatora: x² + 5x + 6.", caminho_log)
         ok("fatorar_quadratica resposta", r.resposta, "(x + 2)(x + 3)")

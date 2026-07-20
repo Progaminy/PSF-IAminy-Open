@@ -12,9 +12,8 @@ tornarem padrões novos depois -- "detectar limite -> corrigir -> integrar"
 (ver PLANO_PSF_IAMINY.md), nunca uma resposta inventada.
 
 Um padrão também pode ser RECONHECIDO mas ainda assim não ter resposta
-segura (ex.: uma hipotenusa cujo resultado não é um quadrado perfeito) --
-nesse caso não é "padrão desconhecido" (não vai para o log de descoberta),
-é uma lacuna de capacidade já identificada e explicada.
+segura -- nesse caso não é "padrão desconhecido" (não vai para o log de
+descoberta), é uma lacuna de capacidade já identificada e explicada.
 """
 from __future__ import annotations
 
@@ -27,6 +26,7 @@ from typing import Callable
 from psf_iaminy.recursos import caminho_dado_mutavel
 
 from lingua_portuguesa.normalizacao import normalizar_texto
+from matematica.raiz import raiz_quadrada
 from modelos.eficiente import (
     divisores_int,
     porcentagem_de_int,
@@ -236,22 +236,23 @@ def _resolver_razao_semelhanca(m: "re.Match[str]") -> tuple[bool, "str | None", 
 
 
 def _resolver_hipotenusa(m: "re.Match[str]") -> tuple[bool, "str | None", str]:
-    a, b = int(m.group(1)), int(m.group(2))
+    grupos = m.groupdict()
+    a, b = int(grupos["a1"] or grupos["a2"]), int(grupos["b1"] or grupos["b2"])
     soma_quadrados = adicionar(multiplicar(a, a), multiplicar(b, b))
     raiz = raiz_quadrada_exata_int(soma_quadrados)
-    if raiz is None:
-        return (
-            False,
-            None,
-            f"Sei o teorema de Pitágoras: hipotenusa² = {a}² + {b}² = {soma_quadrados}. "
-            f"Mas {soma_quadrados} não é um quadrado perfeito, e ainda não tenho raiz real "
-            f"de propósito geral -- não invento um valor aproximado aqui.",
+    if raiz is not None:
+        raciocinio = (
+            f"Sei o teorema de Pitágoras e sei reconhecer quadrados perfeitos. "
+            f"Apliquei: {a}²+{b}²={soma_quadrados}=  {raiz}²."
         )
+        return True, f"{raiz}", raciocinio
+    expansao = raiz_quadrada(soma_quadrados, casas=4, modo="arredondar")
     raciocinio = (
-        f"Sei o teorema de Pitágoras e sei reconhecer quadrados perfeitos. "
-        f"Apliquei: {a}²+{b}²={soma_quadrados}=  {raiz}²."
+        f"Sei o teorema de Pitágoras: hipotenusa² = {a}² + {b}² = {soma_quadrados}. "
+        f"{soma_quadrados} não é um quadrado perfeito, então reconstruí a raiz dígito a "
+        f"dígito (o método de papel): √{soma_quadrados} ≈ {expansao.decimal}."
     )
-    return True, f"{raiz}", raciocinio
+    return True, f"√{soma_quadrados} ≈ {expansao.decimal}", raciocinio
 
 
 def _resolver_fatorar_quadratica(m: "re.Match[str]") -> tuple[bool, "str | None", str]:
@@ -296,19 +297,19 @@ def _resolver_distancia_pontos(m: "re.Match[str]") -> tuple[bool, "str | None", 
     dx, dy = x2 - x1, y2 - y1
     soma_quadrados = adicionar(multiplicar(dx, dx), multiplicar(dy, dy))
     raiz = raiz_quadrada_exata_int(soma_quadrados)
-    if raiz is None:
-        return (
-            False,
-            None,
-            f"Sei a fórmula da distância: dist² = ({dx})² + ({dy})² = {soma_quadrados}. "
-            f"Mas {soma_quadrados} não é um quadrado perfeito, e ainda não tenho raiz real "
-            f"de propósito geral -- não invento um valor aproximado aqui.",
+    if raiz is not None:
+        raciocinio = (
+            f"Sei a fórmula da distância entre dois pontos e sei reconhecer quadrados perfeitos. "
+            f"Apliquei: ({dx})²+({dy})²={soma_quadrados}={raiz}²."
         )
+        return True, f"{raiz}", raciocinio
+    expansao = raiz_quadrada(soma_quadrados, casas=4, modo="arredondar")
     raciocinio = (
-        f"Sei a fórmula da distância entre dois pontos e sei reconhecer quadrados perfeitos. "
-        f"Apliquei: ({dx})²+({dy})²={soma_quadrados}={raiz}²."
+        f"Sei a fórmula da distância: dist² = ({dx})² + ({dy})² = {soma_quadrados}. "
+        f"{soma_quadrados} não é um quadrado perfeito, então reconstruí a raiz dígito a "
+        f"dígito (o método de papel): dist ≈ {expansao.decimal}."
     )
-    return True, f"{raiz}", raciocinio
+    return True, f"√{soma_quadrados} ≈ {expansao.decimal}", raciocinio
 
 
 def _resolver_planos_iguais(m: "re.Match[str]") -> tuple[bool, "str | None", str]:
@@ -475,7 +476,11 @@ PADROES: tuple[Padrao, ...] = (
     ),
     Padrao(
         "hipotenusa_pitagoras",
-        re.compile(r"catetos\s+(\d+)\s+e\s+(\d+).*?hipotenusa", re.IGNORECASE | re.DOTALL),
+        re.compile(
+            r"catetos\s+(?P<a1>\d+)\s+e\s+(?P<b1>\d+).*?hipotenusa"
+            r"|hipotenusa.*?catetos\s+(?P<a2>\d+)\s+e\s+(?P<b2>\d+)",
+            re.IGNORECASE | re.DOTALL,
+        ),
         _resolver_hipotenusa,
     ),
     Padrao(

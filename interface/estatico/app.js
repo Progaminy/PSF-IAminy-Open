@@ -51,6 +51,20 @@
       .replace(/\b[Ee]tapa\b/g, "registro interno");
   }
 
+  function escaparHtml(texto) {
+    const div = document.createElement("div");
+    div.textContent = texto;
+    return div.innerHTML;
+  }
+
+  // Markdown leve: só **negrito**, sem biblioteca externa. O texto é
+  // escapado primeiro (createElement + textContent), então só a marcação
+  // **...** vira <strong> -- nenhum outro HTML do texto original passa.
+  function renderizarMarkdownLite(texto) {
+    const escapado = escaparHtml(texto);
+    return escapado.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  }
+
   async function copiarTexto(texto, botao) {
     try {
       await navigator.clipboard.writeText(texto);
@@ -129,7 +143,11 @@
 
     const corpo = document.createElement("div");
     corpo.className = "mensagem-corpo";
-    corpo.textContent = mensagem.papel === "assistente" ? textoPublico(mensagem.texto) : mensagem.texto;
+    if (mensagem.papel === "assistente") {
+      corpo.innerHTML = renderizarMarkdownLite(textoPublico(mensagem.texto));
+    } else {
+      corpo.textContent = mensagem.texto;
+    }
 
     interior.appendChild(cabecalho);
     interior.appendChild(corpo);

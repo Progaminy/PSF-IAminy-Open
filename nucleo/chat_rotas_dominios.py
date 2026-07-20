@@ -6,6 +6,7 @@ from functools import lru_cache
 import re
 
 from motor import MotorGeralIAMiny
+from nucleo.chat_estilo import resposta_natural
 from nucleo.chat_texto import detectar_tom, normalizar
 from nucleo.chat_tipos import RespostaChat
 
@@ -125,6 +126,13 @@ def _calculo(texto: str) -> RespostaChat | None:
     if correspondencia is None:
         return None
     expressao = correspondencia.group("expressao").strip()
+    if any(c.isalpha() for c in expressao):
+        # A gramática de expressão só reconhece dígitos e operadores -- uma
+        # letra aqui é sinal de problema em português natural (ex.: "calcule
+        # a hipotenusa..."), não de expressão aritmética malformada. Devolve
+        # None para o cascade tentar o resolvedor de exercícios em vez de
+        # devolver um erro de símbolo não suportado.
+        return None
     limite = _limite_operacional_calculo(expressao)
     if limite is not None:
         return _resposta_limite_calculo(texto, limite)
@@ -169,8 +177,14 @@ def _calculo(texto: str) -> RespostaChat | None:
             lacunas=list(resolucao.limites),
         )
     exato = f" (valor exato: {resolucao.resultado_exato})" if resolucao.resultado_exato else ""
+    raciocinio = passos or "Resolvido diretamente pelo motor de matemática."
+    resposta = resposta_natural(
+        raciocinio,
+        f"{resolucao.resultado}{exato}",
+        origem="motor.matematica:calcular",
+    )
     return _resposta(
-        f"Resultado: {resolucao.resultado}{exato}.\n\n{passos}",
+        resposta,
         "calculo_matematico",
         "motor.matematica:calcular",
         lacunas=list(resolucao.limites),

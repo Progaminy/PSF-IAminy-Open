@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import re
 import secrets
+import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -51,6 +52,21 @@ class ArmazemConversas:
     def __init__(self, pasta: "Path | str | None" = None) -> None:
         self.pasta = Path(pasta) if pasta is not None else CAMINHO_PADRAO
         self.pasta.mkdir(parents=True, exist_ok=True)
+        self._trava_global = threading.Lock()
+        self._travas_por_conversa: dict[str, threading.Lock] = {}
+
+    def bloquear_conversa(self, id_conversa: str) -> threading.Lock:
+        """Trava exclusiva por conversa.
+
+        O servidor (`ThreadingHTTPServer`) atende pedidos em threads
+        paralelas; sem isto, duas mensagens na mesma conversa ao mesmo tempo
+        podiam ler o ficheiro, escrever por cima uma da outra e perder uma
+        mensagem. A trava é por `id_conversa` (conversas diferentes não se
+        bloqueiam entre si) e usável direto como `with ...:` -- é um
+        `threading.Lock`, que já implementa o protocolo de contexto.
+        """
+        with self._trava_global:
+            return self._travas_por_conversa.setdefault(id_conversa, threading.Lock())
 
     def _caminho(self, id_conversa: str) -> "Path | None":
         if not _PADRAO_ID_CONVERSA.fullmatch(id_conversa):

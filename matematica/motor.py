@@ -4,6 +4,7 @@ from __future__ import annotations
 from .candidatos import todos_candidatos
 from .conhecimento import ConhecimentoMatematico
 from .expressao import resolver_expressao
+from .raiz import RaizQuadradaPSF, raiz_quadrada
 from .tipos import MonografiaPSF, ProvaFinita, ReconstrucaoMatematica, ResolucaoMatematica
 
 
@@ -36,6 +37,14 @@ class MotorMatematica:
         modo: str = "truncar",
     ) -> ResolucaoMatematica:
         return resolver_expressao(expressao, casas_decimais=casas_decimais, modo=modo)
+
+    def calcular_raiz(
+        self,
+        radicando: int,
+        casas: int | None = None,
+        modo: str = "truncar",
+    ) -> RaizQuadradaPSF:
+        return raiz_quadrada(radicando, casas=casas, modo=modo)
 
     def reconstruir(self, assunto: str) -> ReconstrucaoMatematica:
         conceito = self.conhecimento.buscar(assunto)

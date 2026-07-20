@@ -6,6 +6,7 @@ from typing import Any
 
 from ensino.resolvedor_exercicios import resolver as resolver_exercicio
 from nucleo.chat_base_canonica import obter_registro
+from nucleo.chat_estilo import resposta_natural
 from nucleo.chat_formatacao import _bloco_final, _fonte_publica_registro, _formatar_registro, _limpar_rastro_tecnico
 from nucleo.chat_texto import detectar_modo, detectar_tom, normalizar
 from nucleo.chat_tipos import RespostaChat
@@ -51,11 +52,11 @@ def _responder_resolvedor(texto: str) -> RespostaChat | None:
         return None
     resolucao = resolver_exercicio(texto)
     if resolucao.resolvida:
-        resposta = (
-            f"Resultado: {resolucao.resposta}\n\n"
-            f"Passo PSF:\n1. Padrão reconhecido: {resolucao.padrao}.\n"
-            f"2. {resolucao.raciocinio}\n3. Resposta final: {resolucao.resposta}.\n\n"
-            + _bloco_final(86, "ensino.resolvedor_exercicios", [])
+        resposta = resposta_natural(
+            resolucao.raciocinio,
+            resolucao.resposta,
+            origem="resolvedor_exercicios",
+            padrao=resolucao.padrao,
         )
         return RespostaChat(
             resposta,
