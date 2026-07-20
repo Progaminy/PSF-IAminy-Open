@@ -28,9 +28,16 @@ Em 17 de julho de 2026, no ambiente local de preparação:
 ```text
 python3 verificar_integridade.py → APROVADO
 python3 exemplo_publico.py        → executado com resultado real
-python3 -m pytest -q              → 1106 passed em 182,28 s no Python 3.13.5 (suíte integral atual)
+python3 -m pytest -q              → 1106 passed em 182,28 s no Python 3.13.5 (fotografia de 17 de julho)
 wheel isolado                     → CLI, Português, docs, rastreabilidade e estáticos aprovados
 cobertura de linhas               → 63% na medição documentada
+```
+
+Nova execução integral da candidata em 20 de julho de 2026:
+
+```text
+python3 -m pytest -q              → 1223 passed em 311,29 s no Python 3.13.5
+python3 verificar_integridade.py  → APROVADO
 ```
 
 O workflow de CI testa Python 3.10, 3.11, 3.12 e 3.13. A primeira execução

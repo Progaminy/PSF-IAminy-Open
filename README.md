@@ -6,6 +6,25 @@ Português · [English](README.en.md)
 
 Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investigação, organização e validação.
 
+## OpenAI Build Week 2026
+
+O **PSF-IAminy** foi submetido ao [OpenAI Build Week](https://openai.devpost.com/)
+como projeto open source na categoria escolhida no Devpost. A edição pública do
+repositório foi criada e ampliada durante o período do concurso com apoio do
+**Codex usando GPT-5.6**.
+
+Codex e GPT-5.6 apoiaram auditoria da base, implementação e revisão de código,
+criação de testes de regressão, investigação de falhas, empacotamento,
+documentação, segurança e preparação da demonstração. O mantenedor decidiu o
+que aceitar, executou as verificações e preservou a regra central do projeto:
+modelos externos podem ajudar a desenvolver, comparar e validar, mas não são a
+fonte do conhecimento interno do PSF-IAminy nem uma dependência em tempo de
+execução.
+
+O escopo anterior, o trabalho realizado durante o Build Week, a linha temporal
+de commits e os comandos de verificação estão documentados em
+[`docs/OPENAI_BUILD_WEEK.md`](docs/OPENAI_BUILD_WEEK.md).
+
 ## Em poucos minutos
 
 **O que é.** Um sistema que constrói conhecimento de Matemática e Português a partir do mínimo possível, por construção própria (PSF = "Pensador Sem Fronteiras"), em vez de citar bibliotecas, fórmulas prontas ou respostas de terceiros como fundamento.
@@ -15,7 +34,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 **O que já funciona, com teste automatizado.**
 - Matemática: resolve expressões racionais com precedência, reconstrói divisão por quociente/resto/fração/decimal, executa prova formal no fragmento lógico finito e distingue teste de prova universal — 203 documentos conceituais auditados, todos com dependências ligadas.
 - Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1705 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
-- 1194 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1223 testes automatizados passam localmente (`python3 -m pytest -q`).
 
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
@@ -26,7 +45,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 ```bash
 git clone https://github.com/Progaminy/PSF-IAminy-Open.git
 cd PSF-IAminy-Open
-python3 -m pytest -q                 # 1194 passed
+python3 -m pytest -q                 # 1223 passed
 python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitação -- em segundos
 ```
 Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
@@ -375,6 +394,7 @@ nucleo/catalan_stirling.py
 nucleo/cerebro_unico.py
 nucleo/chat_auditoria.py
 nucleo/chat_base_canonica.py
+nucleo/chat_estilo.py
 nucleo/chat_formatacao.py
 nucleo/chat_rotas.py
 nucleo/chat_rotas_auditoria.py
@@ -442,7 +462,7 @@ python3 motor_iaminy.py --rapido
 Resultado atual esperado:
 
 ```text
-1194 passed na verificação local mais recente
+1223 passed na verificação local mais recente
 ```
 
 ```text

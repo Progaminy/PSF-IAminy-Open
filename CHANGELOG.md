@@ -7,6 +7,7 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 ## [Não lançado]
 
 ### Corrigido
+- Evidência corrente de testes reconciliada entre README, guia de execução, nota científica, release candidata, relatório único, página pública e `docs/TESTES.md`: 1.223/1.223 aprovados em Python 3.13.5.
 - Empacotamento por wheel agora inclui documentos de conhecimento, léxico, interface estática, dados canónicos, testes e documentação compartilhada; a instalação isolada deixou de depender da árvore-fonte.
 - Metadados de licença migrados para expressão SPDX PEP 639 (`Apache-2.0`), build mínimo Setuptools 77 e pacote estático explícito; o wheel final foi construído sem avisos.
 - Conversas, auditorias, identidade, memória ortográfica, padrões não reconhecidos e histórico de desempenho usam uma raiz gravável do utilizador em instalações, com `PSF_IAMINY_DATA_DIR` como substituição explícita, em vez de tentar modificar `site-packages`.
@@ -21,6 +22,8 @@ Ainda não houve nenhuma release marcada (`v0.1.0` ou posterior) — ver item 25
 - `ensino/leitura_documentos.py`: ZIP/DOCX agora têm limites compactados/descomprimidos, razão contra ZIP bomb, validação de nomes internos e leitura limitada; 18 regressões cobrem também DOCX hostil aninhado.
 
 ### Adicionado
+- `docs/OPENAI_BUILD_WEEK.md` e secções bilingues nos READMEs documentam o escopo anterior, a linha temporal pública, o uso de Codex/GPT-5.6 e os comandos de verificação exigidos pelo concurso.
+- A página estática pública passou a apresentar o trabalho do Build Week e a contagem atual de 1.223 testes recolhidos.
 - `docs/AUDITORIA_MELHORIAS_120.md`: estado factual dos 64 pontos, separando concluído, parcial e dependente de terceiros.
 - `ferramentas/auditar_codigo.py` e `docs/QUALIDADE_CODIGO.md`: linha de base de tipagem, docstrings, exceções amplas e duplicação exata no código de produção.
 - `docs/ROTEIRO_VIDEO.md`: demonstração de 2–5 minutos que exige comandos e limitações reais.

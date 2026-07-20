@@ -59,6 +59,11 @@ MODULOS_TECNICOS_NAO_FUNDAMENTO = {
     "base_curiosidades_reais",
     "chat_auditoria",
     "chat_base_canonica",
+    # `chat_rotas_dominios` usa `**` só para checar se a potência literal
+    # pedida no chat (ex.: "calcule 9^9") cabe em LIMITE_RESULTADO_POTENCIA
+    # antes de decidir se aceita o pedido -- é guarda de limite operacional
+    # da interface, não o cálculo em si (que é delegado ao MotorMatematica).
+    "chat_rotas_dominios",
     "indexador_total",
 }
 

@@ -1,11 +1,20 @@
 # Pacote factual para eventual atualização da candidatura
 
-Estado: **material preparado; não enviado por este repositório**.
+Estado: **candidatura ao Codex for Open Source enviada em 20 de julho de 2026; este ficheiro é apenas registo local e material para eventual pedido de informação adicional**.
 
 A candidatura original já foi enviada. Este resumo só deve ser usado se
 existir um canal autorizado para atualização ou se a OpenAI pedir informação
 adicional. Não autoriza um segundo envio, não promete aprovação e não converte
 métricas locais em validação independente.
+
+
+## Relação com o OpenAI Build Week
+
+O mesmo repositório `Progaminy/PSF-IAminy-Open` foi usado na submissão do
+OpenAI Build Week e na candidatura ao Codex for Open Source. Isso não duplica
+nem substitui nenhuma inscrição: são programas independentes, com avaliações
+diferentes. No momento da submissão ao Build Week, a candidatura ao programa
+open source ainda não representava seleção, crédito ou apoio recebido.
 
 ## Resumo de uma página
 
@@ -20,7 +29,7 @@ oculto do conhecimento puro PSF.
 
 ## Evidência verificável atual
 
-- suíte automatizada local e matriz de CI declarada para Python 3.10–3.13;
+- 1.223 testes automatizados aprovados localmente e matriz de CI declarada para Python 3.10–3.13;
 - cobertura de linhas com fotografia e lacunas por módulo documentadas;
 - 203 documentos conceituais matemáticos auditados com pontes fechadas;
 - 1.141 conceitos puros de Português e 2.545 relações de dependência;

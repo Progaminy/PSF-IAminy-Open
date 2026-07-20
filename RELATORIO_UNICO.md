@@ -17,6 +17,7 @@ O PSF-IAminy preserva Matemática, Português, núcleo, motor, busca e comparaç
 
 ## Feito nesta execução
 
+- A edição pública passou a documentar explicitamente o OpenAI Build Week: escopo anterior, linha temporal de commits, uso de Codex com GPT-5.6, limites de autoridade do modelo externo e comandos de reprodução em `docs/OPENAI_BUILD_WEEK.md`, sem transformar ferramenta de desenvolvimento em fundamento do conhecimento PSF.
 - A divisão passou a produzir racionais exatos e expansão decimal construída por quociente, resto e transporte por 10.
 - `12:5` produz `2,4`; com três casas produz `2,400`, sem esconder os passos.
 - Divisões periódicas preservam a fração exata e distinguem truncamento de arredondamento.
@@ -148,7 +149,7 @@ Fronteiras abertas e limites operacionais não foram apagados nem escondidos, po
 
 ```text
 python3 verificar_integridade.py → APROVADO
-python3 -m pytest -q → 1106 testes aprovados
+python3 -m pytest -q → 1223 testes aprovados em 311,29 s (Python 3.13.5, 20 de julho de 2026)
 python3 psf_chat.py --diagnostico → APROVADO
 python3 motor_iaminy.py --rapido → status 0; 0 violações de pureza; 0 suspeitos fora de classificação
 pureza interna do Português → aprovada

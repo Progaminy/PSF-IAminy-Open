@@ -2,20 +2,20 @@
 
 ## Inventário reproduzível
 
-Em 17 de julho de 2026, `pytest --collect-only -q` recolheu 1106 casos em 110
-ficheiros. `python3 ferramentas/classificar_testes.py` reproduz a classificação
-abaixo a partir da coleta real:
+Em 20 de julho de 2026, `pytest --collect-only -q` recolheu **1.223 casos em
+164 ficheiros**. `python3 ferramentas/classificar_testes.py` reproduz a
+classificação abaixo a partir da coleta real:
 
 | Categoria | Testes | Ficheiros |
 | --- | ---: | ---: |
 | Ensino e exercícios | 319 | 4 |
-| Integridade e auditoria | 32 | 7 |
 | Integração e motores | 66 | 8 |
+| Integridade e auditoria | 32 | 7 |
 | Interface | 55 | 6 |
-| Matemática e estruturas finitas | 310 | 55 |
-| Português | 289 | 27 |
+| Matemática e estruturas finitas | 392 | 104 |
+| Português | 324 | 32 |
 | Segurança | 35 | 3 |
-| **Total** | **1106** | **110** |
+| **Total** | **1.223** | **164** |
 
 A unidade de classificação é o ficheiro, seguindo regras explícitas no script.
 Um ficheiro pode exercitar mais de uma camada; portanto, as categorias indicam
@@ -41,11 +41,11 @@ classificação automática.
 ## Concentração e profundidade
 
 O total bruto superestima diversidade quando parametrização gera muitos casos.
-`testes/test_exercicio_real.py` sozinho contém 291 casos coletados (26,3% da
+`testes/test_exercicio_real.py` sozinho contém 291 casos coletados (23,8% da
 suíte), gerados sobre conceitos e sementes. Isso é útil para amplitude de
 exercícios, mas não vale como 291 comportamentos arquiteturalmente distintos.
 
-Passar 1106 casos também não prova:
+Passar 1.223 casos também não prova:
 
 - ausência de duplicação semântica entre asserções;
 - qualidade de cada oráculo esperado;
@@ -55,19 +55,19 @@ Passar 1106 casos também não prova:
 
 ## Auditoria sintática de profundidade mínima
 
-`python3 ferramentas/auditar_testes.py` inspeciona a AST dos 110 ficheiros,
-sem executar o código. Resultado de 17 de julho de 2026:
+`python3 ferramentas/auditar_testes.py` inspeciona a AST dos 164 ficheiros,
+sem executar o código. Resultado de 20 de julho de 2026:
 
 ```text
-778 funções test_*
-1544 instruções assert
-80 usos de pytest.raises
+862 funções test_*
+1681 instruções assert
+85 usos de pytest.raises
 0 funções sem assert/pytest.raises explícito
 0 grupos de corpos AST exatamente duplicados
 0 ficheiros com erro de sintaxe
 ```
 
-Os 778 corpos geram 1106 casos coletados porque parametrizações expandem uma
+Os 862 corpos geram 1.223 casos coletados porque parametrizações expandem uma
 função em várias entradas. O resultado exclui a forma mais superficial de
 teste (só importar/chamar sem evidência explícita) e duplicação textual exata.
 Ele não detecta asserções semanticamente equivalentes escritas de outra forma,
@@ -78,12 +78,12 @@ contenha a verdadeira verificação fora da função de teste.
 
 ```text
 Python 3.13.5
-1106 passed in 182.28s (0:03:02)
+1223 passed in 311.29s (0:05:11)
 ```
 
-A medição anterior de 1103 testes em Python 3.14.4 foi mais rápida; versão do
-interpretador, carga, cache e testes adicionados impedem atribuir a diferença a
-uma regressão sem uma comparação controlada.
+A execução ocorreu na árvore candidata de 20 de julho de 2026. Versão do
+interpretador, carga, cache e testes adicionados impedem comparar diretamente
+a duração com medições anteriores sem uma experiência controlada.
 
 ## Próxima auditoria
 

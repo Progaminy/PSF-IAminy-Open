@@ -13,6 +13,23 @@ The Portuguese [README](README.md) is the canonical and most detailed project
 description. This English document covers the public entry points, evidence
 and limitations needed to evaluate and reproduce the current preview.
 
+## OpenAI Build Week 2026
+
+**PSF-IAminy** was submitted to [OpenAI Build Week](https://openai.devpost.com/)
+as an open-source project. The public repository edition was created and
+expanded during the challenge period with **Codex using GPT-5.6**.
+
+Codex and GPT-5.6 supported codebase auditing, implementation and review,
+regression-test design, debugging, packaging, documentation, security work and
+demo preparation. The maintainer decided which changes to accept, ran the
+checks and preserved the project's core boundary: external models may assist
+development, comparison and validation, but they are neither the source of
+PSF-IAminy's internal knowledge nor a runtime dependency.
+
+The pre-existing scope, Build Week work, commit timeline and verification
+commands are documented in
+[`docs/OPENAI_BUILD_WEEK.md`](docs/OPENAI_BUILD_WEEK.md).
+
 ## The problem
 
 Systems may return polished answers without showing how they were constructed
@@ -34,7 +51,7 @@ the hidden foundation of pure PSF knowledge. The governing rule is simple:
   remain partial or vocabulary-bound.
 - **Common engine:** memory, dependency search, auditing, purity checks and
   traceability shared without merging mathematical and linguistic authority.
-- **Evidence:** 1106 automated tests passed locally; the documented line
+- **Evidence:** 1,223 automated tests pass in the current local suite; the documented line
   coverage snapshot is 63%.
 
 The CI workflow targets Python 3.10–3.13. Its first public
@@ -150,6 +167,7 @@ documented local use.
 
 ## Research and project documents
 
+- [OpenAI Build Week scope and Codex/GPT-5.6 use](docs/OPENAI_BUILD_WEEK.md)
 - [Scientific note](docs/NOTA_CIENTIFICA.md)
 - [Architecture in English](docs/en/ARCHITECTURE.md)
 - [Live demonstration guide in English](docs/en/DEMO.md)

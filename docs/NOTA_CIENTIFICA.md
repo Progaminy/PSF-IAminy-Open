@@ -35,7 +35,7 @@ Ver `docs/ARQUITETURA.md` para o diagrama e a descrição de cada componente (mo
 
 ## Resultados atuais (verificáveis)
 
-- 1106 testes automatizados passam localmente (`python3 -m pytest -q`).
+- 1223 testes automatizados passam localmente (`python3 -m pytest -q`; execução integral de 20 de julho de 2026).
 - 203 documentos conceituais de Matemática auditados, todos com ponte de dependências fechada.
 - 1141 conceitos puros de Português numa única linha canónica, 2545 relações de dependência, 0 lacunas internas conhecidas (124 fronteiras abertas e 179 limites operacionais declarados à parte — ver `README.md`).
 - Divisão reconstruída como fração exata + expansão decimal explícita (quociente, resto, transporte por 10), incluindo divisão por zero tratada como não definida por construção, não como problema aberto nem exceção silenciosa.
