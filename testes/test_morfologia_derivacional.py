@@ -235,17 +235,20 @@ def test_validar_candidatos_sem_oraculo_devolve_taxa_none():
     assert resultado.total == 1
 
 
-def test_validar_candidatos_confirma_palavra_real_conhecida():
-    # "perfeitamente" está listada como entrada própria no dicionário do
-    # sistema (confirmado por auditoria manual) -- serve de exemplo
-    # positivo real. Nota honesta: o oráculo só lê as entradas-raiz do
-    # ficheiro .dic, sem aplicar as regras de afixo do .aff -- muitos
-    # advérbios em -mente igualmente reais ("felizmente", "realmente")
-    # não aparecem como linha própria e por isso não são confirmados por
-    # este oráculo, mesmo sendo palavras corretas (limitação documentada
-    # no módulo, não escondida). Se o oráculo não estiver disponível no
-    # ambiente atual, o teste não falha por isso.
+def test_validar_candidatos_rejeita_arquivo_fora_dos_dados_do_projeto(tmp_path):
+    caminho_externo = tmp_path / "palavras.dic"
+    caminho_externo.write_text("1\nclaramente\n", encoding="utf-8")
+    candidatos = gerar_adverbios_mente((_ADJ_CLARO,))
+
+    resultado = validar_candidatos(candidatos, caminho_oraculo=caminho_externo)
+
+    assert resultado.taxa is None
+    assert resultado.confirmados == 0
+
+
+def test_validar_candidatos_sem_recurso_local_nao_finge_confirmacao():
+    # Sem um recurso lexical explicitamente criado dentro dos dados do
+    # projeto, a validação fica honestamente indisponível.
     resultado = validar_candidatos(gerar_adverbios_mente((_ADJ_PERFEITO,)))
-    if resultado.taxa is None:
-        return
-    assert resultado.confirmados == 1
+    assert resultado.taxa is None
+    assert resultado.confirmados == 0

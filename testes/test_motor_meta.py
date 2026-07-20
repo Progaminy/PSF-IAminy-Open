@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from motor.pureza import _imports_do_modulo, _nomes_importados, REGRAS_PUREZA, auditar_tudo
+from motor.pureza import NUCLEO, _imports_do_modulo, _nomes_importados, REGRAS_PUREZA, auditar_tudo
 from motor.ordem import _imports_relativos
 from motor.fluxo import proxima_etapa_natural, proximos_documentados
 
@@ -106,7 +106,11 @@ def main():
 
     # A repartição de REGRAS_PUREZA em conjuntos partilhados (_PROIB_*) não
     # pode ter mudado nenhuma regra de facto — só a forma como é escrita.
-    verificar("REGRAS_PUREZA cobre todos os módulos puros registados", len(REGRAS_PUREZA), 50)
+    verificar(
+        "todos os módulos registados em REGRAS_PUREZA existem no núcleo",
+        sorted(nome for nome in REGRAS_PUREZA if not (NUCLEO / f"{nome}.py").is_file()),
+        [],
+    )
     verificar(
         "divisibilidade_pura continua com o conjunto completo (aritmética+primos+divisores)",
         REGRAS_PUREZA["divisibilidade_pura"],
@@ -154,3 +158,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def test_programa_principal():
+    assert main() is None

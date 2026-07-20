@@ -47,6 +47,30 @@ _TIPOS_CONTEUDO = {
     ".svg": "image/svg+xml",
 }
 
+LIMITE_CARACTERES_MENSAGEM = 10_000
+LIMITE_CARACTERES_TITULO = 160
+LIMITE_CARACTERES_RESPOSTA_EXERCICIO = 10_000
+LIMITE_CARACTERES_NOME_ANEXO = 255
+LIMITE_CARACTERES_ANEXO_BASE64 = 1_000_000
+
+
+def _validar_texto(
+    valor: object,
+    campo: str,
+    limite: int,
+    *,
+    permitir_vazio: bool = False,
+    limpar: bool = False,
+) -> tuple[str | None, str | None]:
+    if not isinstance(valor, str):
+        return None, f"campo {campo!r} deve ser texto"
+    if len(valor) > limite:
+        return None, f"campo {campo!r} excede o limite de {limite} caracteres"
+    resultado = valor.strip() if limpar else valor
+    if not permitir_vazio and not resultado.strip():
+        return None, f"campo {campo!r} não pode ficar vazio"
+    return resultado, None
+
 
 class Roteador:
     def __init__(
@@ -127,7 +151,30 @@ class Roteador:
             })
         return 200, {"codigo": pacote.codigo, "area": area, "aulas": aulas}
 
-    def verificar_exercicio(self, area: str, conceito: str, tipo: str, resposta: str) -> tuple[int, dict]:
+    def verificar_exercicio(
+        self,
+        area: object,
+        conceito: object,
+        tipo: object,
+        resposta: object,
+    ) -> tuple[int, dict]:
+        area, erro = _validar_texto(area, "area", 40)
+        if erro is not None:
+            return 400, {"erro": erro}
+        conceito, erro = _validar_texto(conceito, "conceito", 240)
+        if erro is not None:
+            return 400, {"erro": erro}
+        tipo, erro = _validar_texto(tipo, "tipo", 80)
+        if erro is not None:
+            return 400, {"erro": erro}
+        resposta, erro = _validar_texto(
+            resposta,
+            "resposta",
+            LIMITE_CARACTERES_RESPOSTA_EXERCICIO,
+            permitir_vazio=True,
+        )
+        if erro is not None:
+            return 400, {"erro": erro}
         gerador = _PACOTES_POR_AREA.get(area)
         if gerador is None:
             return 404, {"erro": f"área desconhecida: {area!r}"}
@@ -208,60 +255,87 @@ class Roteador:
             return 404, {"erro": "conversa não encontrada"}
         return 200, {"removida": id_conversa}
 
-    def renomear_conversa(self, id_conversa: str, titulo: str) -> tuple[int, dict]:
-        titulo_limpo = titulo.strip()
-        if not titulo_limpo:
-            return 400, {"erro": "título não pode ficar vazio"}
-        conversa = self.armazem.renomear(id_conversa, titulo_limpo)
-        if conversa is None:
-            return 404, {"erro": "conversa não encontrada"}
-        return 200, conversa
-
-    def enviar_mensagem(self, id_conversa: str, texto: str) -> tuple[int, dict]:
-        estado_psf = self.armazem.obter_estado(id_conversa, "estado_psf", None)
-        reconhecido = bool(self.armazem.obter_estado(id_conversa, "psf_reconhecido", False))
-        contexto_dialogo = self.armazem.obter_estado(id_conversa, "contexto_dialogo", {})
-        contexto_chat = self.armazem.obter_estado(id_conversa, "contexto_chat_vivo", {})
-        conversa = self.armazem.adicionar_mensagem(id_conversa, "aluno", texto)
-        if conversa is None:
-            return 404, {"erro": "conversa não encontrada"}
-        resposta = responder_chat(
-            estado_psf=estado_psf,
-            reconhecido=reconhecido,
-            contexto=contexto_chat if isinstance(contexto_chat, dict) else {},
-            contexto_dialogo=contexto_dialogo if isinstance(contexto_dialogo, dict) else {},
-            dialogo=self.dialogo,
-            id_conversa=id_conversa,
-            mensagem=texto,
+    def renomear_conversa(self, id_conversa: str, titulo: object) -> tuple[int, dict]:
+        titulo_limpo, erro = _validar_texto(
+            titulo,
+            "titulo",
+            LIMITE_CARACTERES_TITULO,
+            limpar=True,
         )
-        self.armazem.definir_estado(id_conversa, "estado_psf", resposta.estado_psf)
-        if resposta.contexto_dialogo is not None:
-            self.armazem.definir_estado(id_conversa, "contexto_dialogo", resposta.contexto_dialogo)
-        if resposta.contexto_chat is not None:
-            self.armazem.definir_estado(id_conversa, "contexto_chat_vivo", resposta.contexto_chat)
-        if resposta.intencao == "entrevista_psf_concluida":
-            # a entrevista completa NESTA conversa é o que desbloqueia
-            # conhecimento restrito (ver ensino/dialogo.py) -- não é global
-            # nem automático só por o facto existir noutra conversa.
-            self.armazem.definir_estado(id_conversa, "psf_reconhecido", True)
-        conversa = self.armazem.adicionar_mensagem(id_conversa, "assistente", resposta.texto)
-        return 200, conversa
+        if erro is not None:
+            return 400, {"erro": erro}
+        with self.armazem.bloquear_conversa(id_conversa):
+            conversa = self.armazem.renomear(id_conversa, titulo_limpo)
+            if conversa is None:
+                return 404, {"erro": "conversa não encontrada"}
+            return 200, conversa
 
-    def enviar_anexo(self, id_conversa: str, nome: str, conteudo_base64: str) -> tuple[int, dict]:
-        if self.armazem.carregar(id_conversa) is None:
-            return 404, {"erro": "conversa não encontrada"}
-        try:
-            dados = base64.b64decode(conteudo_base64, validate=True)
-            extraidos = ler_anexo_bytes(nome, dados)
-        except Exception as erro:  # noqa: BLE001 -- qualquer falha de leitura vira resposta 400 honesta.
-            return 400, {"erro": f"não consegui ler o anexo {nome!r}: {erro}"}
+    def enviar_mensagem(self, id_conversa: str, texto: object) -> tuple[int, dict]:
+        texto, erro = _validar_texto(texto, "texto", LIMITE_CARACTERES_MENSAGEM)
+        if erro is not None:
+            return 400, {"erro": erro}
+        with self.armazem.bloquear_conversa(id_conversa):
+            estado_psf = self.armazem.obter_estado(id_conversa, "estado_psf", None)
+            reconhecido = bool(self.armazem.obter_estado(id_conversa, "psf_reconhecido", False))
+            contexto_dialogo = self.armazem.obter_estado(id_conversa, "contexto_dialogo", {})
+            contexto_chat = self.armazem.obter_estado(id_conversa, "contexto_chat_vivo", {})
+            conversa = self.armazem.adicionar_mensagem(id_conversa, "aluno", texto)
+            if conversa is None:
+                return 404, {"erro": "conversa não encontrada"}
+            resposta = responder_chat(
+                estado_psf=estado_psf,
+                reconhecido=reconhecido,
+                contexto=contexto_chat if isinstance(contexto_chat, dict) else {},
+                contexto_dialogo=contexto_dialogo if isinstance(contexto_dialogo, dict) else {},
+                dialogo=self.dialogo,
+                id_conversa=id_conversa,
+                mensagem=texto,
+            )
+            self.armazem.definir_estado(id_conversa, "estado_psf", resposta.estado_psf)
+            if resposta.contexto_dialogo is not None:
+                self.armazem.definir_estado(id_conversa, "contexto_dialogo", resposta.contexto_dialogo)
+            if resposta.contexto_chat is not None:
+                self.armazem.definir_estado(id_conversa, "contexto_chat_vivo", resposta.contexto_chat)
+            if resposta.intencao == "entrevista_psf_concluida":
+                # a entrevista completa NESTA conversa é o que desbloqueia
+                # conhecimento restrito (ver ensino/dialogo.py) -- não é global
+                # nem automático só por o facto existir noutra conversa.
+                self.armazem.definir_estado(id_conversa, "psf_reconhecido", True)
+            conversa = self.armazem.adicionar_mensagem(id_conversa, "assistente", resposta.texto)
+            return 200, conversa
 
-        self.armazem.adicionar_mensagem(id_conversa, "aluno", f"[anexo: {nome}]")
-        resposta = responder_chat(
-            f"resolve o anexo {nome}",
-            id_conversa=id_conversa,
-            anexos=extraidos,
-            dialogo=self.dialogo,
+    def enviar_anexo(
+        self,
+        id_conversa: str,
+        nome: object,
+        conteudo_base64: object,
+    ) -> tuple[int, dict]:
+        nome, erro = _validar_texto(nome, "nome", LIMITE_CARACTERES_NOME_ANEXO)
+        if erro is not None:
+            return 400, {"erro": erro}
+        conteudo_base64, erro = _validar_texto(
+            conteudo_base64,
+            "conteudo_base64",
+            LIMITE_CARACTERES_ANEXO_BASE64,
+            permitir_vazio=True,
         )
-        conversa = self.armazem.adicionar_mensagem(id_conversa, "assistente", resposta.texto)
-        return 200, conversa
+        if erro is not None:
+            return 400, {"erro": erro}
+        with self.armazem.bloquear_conversa(id_conversa):
+            if self.armazem.carregar(id_conversa) is None:
+                return 404, {"erro": "conversa não encontrada"}
+            try:
+                dados = base64.b64decode(conteudo_base64, validate=True)
+                extraidos = ler_anexo_bytes(nome, dados)
+            except Exception as erro:  # noqa: BLE001 -- qualquer falha de leitura vira resposta 400 honesta.
+                return 400, {"erro": f"não consegui ler o anexo {nome!r}: {erro}"}
+
+            self.armazem.adicionar_mensagem(id_conversa, "aluno", f"[anexo: {nome}]")
+            resposta = responder_chat(
+                f"resolve o anexo {nome}",
+                id_conversa=id_conversa,
+                anexos=extraidos,
+                dialogo=self.dialogo,
+            )
+            conversa = self.armazem.adicionar_mensagem(id_conversa, "assistente", resposta.texto)
+            return 200, conversa

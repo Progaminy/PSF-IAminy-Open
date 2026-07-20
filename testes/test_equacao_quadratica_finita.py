@@ -125,3 +125,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def test_programa_principal():
+    assert main() is None

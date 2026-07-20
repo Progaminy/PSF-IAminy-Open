@@ -1,4 +1,5 @@
 import os, sys
+from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from ensino import FormatoAula, MotorAulas
@@ -67,7 +68,11 @@ def main():
     ok("motor geral aula", geral.aula("portugues", "POR-005", 3).pacote.titulo, "Palavra")
     ok("motor geral plano visivel", "Plano único do PSF-IAminy" in geral.plano_visivel(), True)
     ok("motor geral regra versao unica", "sobreposição de verdades" in geral.regra_versao_unica(), True)
-    ok("motor geral identidade pasta", geral.identidade()["pasta"], "PSF-IAminy")
+    ok(
+        "motor geral identidade pasta",
+        geral.identidade()["pasta"],
+        Path(__file__).resolve().parents[1].name,
+    )
     ok("motor geral portugues", geral.fluxo_portugues("A palavra é bonita.").oracoes[0].verbo, "é")
     ok("motor geral melhorias", "matematica" in geral.melhorias(), True)
 
@@ -79,3 +84,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def test_programa_principal():
+    assert main() is None

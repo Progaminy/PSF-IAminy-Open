@@ -1,118 +1,12 @@
-"""Morfologia derivacional real: gera palavra nova por composição de raiz +
-afixo produtivo do português -- nunca por listagem manual palavra a palavra.
-Item central da meta de vocabulário (~650 mil formas, zero fonte externa):
-o multiplicador medido hoje com as 8 regras deste módulo é ~3,05x por raiz
-(contagem real sobre os verbos/substantivos/adjetivos únicos do léxico no
-momento da medição, não estimada -- o léxico cresce a cada sessão, então
-este número é um corte, não uma constante) e só cresce de verdade
-adicionando regras de derivação, não só flexão.
+"""Morfologia derivacional construída localmente.
 
-Cada palavra gerada tem significado COMPOSTO -- definição da raiz + função
-do afixo -- nunca inventado do nada. É a resposta honesta a "um motor que
-pega uma palavra qualquer e dá significado": o significado vem da composição
-de partes já conhecidas do próprio léxico, não de adivinhação sobre uma
-sequência de letras solta. Uma sequência de letras sem raiz e sem afixo
-reconhecido não gera candidato nenhum aqui -- não é isso que o projeto
-chama de "conhecer uma palavra".
+As funções deste módulo geram candidatos por composição de uma raiz já
+conhecida com afixos produtivos. Candidato não significa entrada validada:
+nenhuma derivação é incorporada automaticamente ao dicionário padrão.
 
-Validação empírica ("faça teste se isso funciona na prática", pedido direto
-do autor): `/usr/share/hunspell/pt_BR.dic` (pacote hunspell-pt-br, já
-instalado no sistema operacional onde este código roda) é lido aqui só como
-ORÁCULO DE EXISTÊNCIA em tempo de teste -- nunca copiado para dentro do
-repositório, nunca usado para inserir lema novo automaticamente no léxico
-do motor. Serve só para medir, com número real, que fração das palavras
-geradas por cada regra corresponde a palavra portuguesa de verdade. Decisão
-confirmada com o autor: nenhuma palavra gerada aqui entra no léxico do motor
-sozinha -- isso continua exigindo revisão (Fase 4 do plano de léxico).
-
-**Limitação honesta do oráculo, medida, não escondida**: `pt_BR.dic` lista
-só ENTRADAS-RAIZ com flags de afixo (formato hunspell) -- este módulo lê
-apenas a palavra-raiz de cada linha, sem aplicar as regras de expansão do
-`.aff` correspondente. Resultado medido: candidatos gerados aqui como
-"felizmente"/"realmente"/"naturalmente" (advérbios em -mente reais e
-correntes do português) NÃO são confirmados por este oráculo, porque não
-aparecem como linha própria no `.dic` -- só "perfeitamente"/"simplesmente"
-(lexicalizados como entrada própria) são. A taxa de confirmação medida por
-`validar_candidatos` é, por isso, um PISO honesto (subestima a correção
-real das regras), não uma medida completa -- implementar expansão de
-afixo real exigiria reconstruir a lógica do `.aff` do hunspell, fora do
-escopo deste módulo por ora.
-
-**Achado real ao medir `gerar_adjetivos_oso` (não só limitação do
-oráculo)**: rodando contra os ~1300 substantivos do léxico, a taxa de
-confirmação foi de ~0,9% -- MUITO mais baixa que `-mente`/diminutivo, e
-aqui não é só o oráculo raiz-só: "motoroso"/"professoroso"/"alunoso"/
-"exemploso" realmente NÃO soam como palavra portuguesa, porque "-oso" só
-é produtivo sobre uma classe semântica restrita (qualidade, substância,
-condição abstrata -- "perigo"->"perigoso", "valor"->"valoroso"), não sobre
-substantivo concreto/agente/institucional qualquer. A regra continua
-gerando candidato (nunca finge que sabe qual substantivo é "elegível"
-antes de tentar), mas o rendimento prático real é baixo -- validação por
-oráculo é o que evita que isso vire lema fabricado no léxico.
-
-**`gerar_substantivos_mento`: caso oposto, aqui É só limitação do
-oráculo**: 0/48 candidatos confirmados, mas conferido manualmente contra
-`/usr/share/hunspell/pt_BR.dic`: "entendimento"/"ensinamento"/
-"melhoramento"/"aprimoramento" são palavras reais e correntes do
-português, nenhuma aparece como linha própria no `.dic` (mesma causa raiz
-documentada acima para `-mente`). Diferente de `-oso`, aqui a regra em si
-parece genuinamente produtiva -- só o oráculo raiz-só não consegue medir
-isso. Sem um oráculo melhor (expansão de afixo real), não dá pra separar
-com número "candidato -mento realmente ruim" de "candidato -mento bom que
-o oráculo não vê" -- registado honestamente, não estimado às cegas.
-
-**`gerar_agentes_dor` medido contra os verbos do léxico**: 1/188
-confirmados (~0,5%), à primeira vista pior que `-oso`, mas é a MESMA
-limitação raiz-só de `-mente`/`-mento`, não falta de produtividade real:
-conferido manualmente, "trabalhador" (de "trabalhar", palavra correntíssima
-do português) não aparece como linha própria em `pt_BR.dic` -- o oráculo
-só lê a raiz com flag de afixo, não expande. `-dor` continua entre os
-sufixos mais produtivos do português; o número baixo aqui mede o oráculo,
-não a regra.
-
-**`gerar_adjetivos_avel_ivel` medido contra os verbos do léxico**: ~73%
-confirmados pelo oráculo, a taxa mais alta de todas as regras deste
-módulo -- capacidade/possibilidade em -ável/-ível é altamente produtiva
-sobre qualquer verbo regular, sem restrição semântica forte (mesmo verbo
-raro dá candidato plausível: "gostar" -> "gostável"). Os ~27% não
-confirmados são, na maioria, a mesma limitação raiz-só do oráculo já
-documentada acima (ex.: "estudável" é palavra real e corrente, mas não
-tem linha própria no `.dic`).
-
-**Achado real sobre verbo curto demais para regra de raiz** (afeta
-`gerar_agentes_dor`, `gerar_substantivos_mento` e
-`gerar_adjetivos_avel_ivel`, todas as 3 fazem `infinitivo[:-2]`): medido
-com os verbos monossilábicos suplectivos do português ("ser", "ir",
-"ter", "ver", "dar", "ler") -- cortar as 2 últimas letras deles deixa
-raiz de 0-1 letra ("ir"->raiz vazia, "ser"->"s"), e nenhum dos 18
-candidatos gerados a partir desses 6 verbos batia com o oráculo em
-nenhuma das 3 regras ("sível", "idor", "simento" etc., zero confirmado).
-Faz sentido: são os verbos mais irregulares do português, com raiz
-suplectiva (não vem de composição regular raiz+terminação) -- corrigido
-com `_raiz_verbal`, que devolve `None` (candidato nenhum, nunca raiz
-fabricada) pra infinitivo de 3 letras ou menos.
-
-**`gerar_substantivos_ista` medido contra os 1327 substantivos únicos do
-léxico**: só 21/1327 confirmados (~1,6%) -- mesma família de achado que
-`-oso`: "-ista" só é produtivo sobre a classe semântica de profissão/
-doutrina/instrumento praticado ("jornal"->"jornalista", "piano"->
-"pianista"), não sobre substantivo concreto qualquer ("gato"->"gatista"
-não é palavra). A regra continua gerando candidato sempre (nunca finge
-saber de antemão qual substantivo é elegível), o oráculo é o que impede
-isso de virar lema fabricado.
-
-**`gerar_adjetivos_negativos_in` medido contra os 120 adjetivos únicos
-do léxico**: só 10/120 confirmados (~8%) -- a alomorfia (im-/i-/ir-/in-
-conforme a letra inicial) está correta onde a regra se aplica
-("perfeito"->"imperfeito", "restrito"->"irrestrito", ambos confirmados),
-mas boa parte dos adjetivos do português nega por outro caminho, não
-por prefixo "in-": "profundo" nega por antônimo lexical ("raso"), não
-por prefixo ("improfundo" não é palavra); "ordenado" usa o prefixo
-"des-", não "in-" ("desordenado", não "inordenado"). Achado honesto:
-esta regra tem yield baixo não por bug, mas porque a negação
-morfológica por "in-" é produtiva só sobre uma fração dos adjetivos --
-o resto do português nega por antonímia lexical ou por outro prefixo,
-fora do escopo desta regra.
+A validação opcional aceita somente recurso criado dentro de
+``lingua_portuguesa/dados``. Não há busca em dicionário do sistema, rede,
+serviço, corpus externo ou biblioteca linguística.
 """
 from __future__ import annotations
 
@@ -122,8 +16,7 @@ from pathlib import Path
 from .normalizacao import normalizar_chave
 from .tipos import ClasseGramatical, EntradaLexical, Genero
 
-_CAMINHO_ORACULO_PADRAO = Path("/usr/share/hunspell/pt_BR.dic")
-
+_DIRETORIO_DADOS_LOCAL = Path(__file__).resolve().parent / "dados"
 _VOGAIS_ATONAS_FINAIS = ("a", "o", "e")
 
 
@@ -405,17 +298,23 @@ def gerar_adjetivos_negativos_in(entradas: tuple[EntradaLexical, ...]) -> tuple[
     return tuple(candidatos)
 
 
-def _oraculo_dicionario_sistema(caminho: Path | None = None) -> frozenset[str] | None:
-    """Lê o dicionário hunspell do sistema operacional só como oráculo de
-    existência para VALIDAR candidatos já gerados por regra -- nunca
-    copiado para este repositório, nunca fonte de novo lema por si só.
-    Devolve `None` (nunca conjunto vazio fabricado) se o ficheiro não
-    existir no ambiente atual: sinal honesto de "sem dado para validar",
-    distinto de "nenhuma palavra confirmada"."""
-    caminho = caminho or _CAMINHO_ORACULO_PADRAO
-    if not caminho.is_file():
+def _oraculo_lexical_local(caminho: Path | None = None) -> frozenset[str] | None:
+    """Lê somente um oráculo local fornecido explicitamente pelo projeto.
+
+    Não procura dicionários do sistema e rejeita até um caminho explícito se
+    ele sair de ``lingua_portuguesa/dados`` (inclusive por ligação simbólica).
+    ``None`` significa honestamente que não há fonte local para a medição.
+    """
+    if caminho is None:
         return None
-    linhas = caminho.read_text(encoding="utf-8", errors="ignore").splitlines()[1:]
+    try:
+        resolvido = caminho.resolve(strict=True)
+        resolvido.relative_to(_DIRETORIO_DADOS_LOCAL.resolve(strict=True))
+    except (FileNotFoundError, OSError, ValueError):
+        return None
+    if not resolvido.is_file():
+        return None
+    linhas = resolvido.read_text(encoding="utf-8", errors="ignore").splitlines()[1:]
     return frozenset(normalizar_chave(linha.split("/", 1)[0]) for linha in linhas if linha)
 
 
@@ -431,11 +330,12 @@ class ResultadoValidacao:
 def validar_candidatos(
     candidatos: tuple[CandidatoDerivado, ...], caminho_oraculo: Path | None = None
 ) -> ResultadoValidacao:
-    """Mede, com número real, que fração dos candidatos gerados corresponde
-    a palavra portuguesa confirmada pelo oráculo do sistema -- o teste
-    empírico "isso funciona na prática" pedido pelo autor. `taxa=None`
-    (nunca `0.0`) quando o oráculo não está disponível no ambiente atual."""
-    oraculo = _oraculo_dicionario_sistema(caminho_oraculo)
+    """Mede candidatos apenas contra um recurso lexical do próprio projeto.
+
+    ``taxa=None`` (nunca ``0.0``) quando esse recurso local não foi fornecido
+    ou quando o caminho tentaria sair do diretório de dados empacotado.
+    """
+    oraculo = _oraculo_lexical_local(caminho_oraculo)
     total = len(candidatos)
     if oraculo is None:
         return ResultadoValidacao(total, 0, None, (), tuple(c.forma for c in candidatos[:10]))

@@ -76,7 +76,7 @@ def test_combinacoes_respeitam_repeticao_e_podem_exigir_todas_as_letras():
     dicionario = Dicionario.padrao()
 
     assert "casa" not in dicionario.palavras_com_letras("cas", comprimento_minimo=2)
-    assert dicionario.palavras_com_letras("asac", usar_todas=True) == ("casa",)
+    assert dicionario.palavras_com_letras("asac", usar_todas=True) == ("casa", "saca")
 
 
 def test_combinacoes_encontram_ortografia_acentuada_com_letras_base():

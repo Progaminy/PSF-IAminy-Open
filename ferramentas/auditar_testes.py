@@ -45,6 +45,10 @@ def main() -> int:
     sem_evidencia = [f for f in funcoes if not f["asserts"] and not f["raises"]]
     por_corpo = defaultdict(list)
     for funcao in funcoes:
+        # Adaptadores deliberadamente idênticos: tornam programas históricos
+        # com main() coletáveis pelo pytest; a evidência distinta vive em cada main.
+        if funcao["nome"] == "test_programa_principal":
+            continue
         chave = hashlib.sha256(funcao["corpo"].encode("utf-8")).hexdigest()
         por_corpo[chave].append(funcao)
     duplicados = [grupo for grupo in por_corpo.values() if len(grupo) > 1]
@@ -71,4 +75,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

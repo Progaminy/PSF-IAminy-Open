@@ -1,8 +1,7 @@
 """Cobre a otimização de `Dicionario.sugerir()` (Fase 1.3 do corretor):
-antes fazia um scan linear com Levenshtein simples; agora usa uma árvore BK
-(`ArvoreBK`) indexada por Damerau-Levenshtein. Este ficheiro prova que a
-troca de mecanismo é equivalente a uma implementação de referência por
-força bruta, não só "parece funcionar".
+antes fazia um scan linear irrestrito; agora usa um índice exato por
+comprimento com Damerau-Levenshtein. Este ficheiro prova equivalência com
+uma implementação de referência por força bruta, não só aparência.
 """
 from lingua_portuguesa.distancia_edicao import distancia_damerau_levenshtein
 from lingua_portuguesa.lexico import Dicionario
@@ -57,7 +56,7 @@ def test_cache_fuzzy_invalidado_ao_adicionar_forma_nova():
     assert dicionario.buscar("zorblax")
 
     # adicionar uma forma nova e próxima deve aparecer nas sugestões — só
-    # acontece se o cache da árvore BK for de facto invalidado e
+    # acontece se o cache do índice for de facto invalidado e
     # reconstruído após o adicionar() acima.
     dicionario.adicionar(
         EntradaLexical(lema="zorblac", forma="zorblac", classe=ClasseGramatical.SUBSTANTIVO)

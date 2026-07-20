@@ -15,11 +15,10 @@ nenhum texto genuinamente novo.
 como estavam (testados com conteúdo e ordem específicos) -- este módulo só
 GANHOU uma segunda fonte, não substituiu a primeira.
 
-Corpus AMPLO (`tokens_do_corpus_amplo`, item da meta de vocabulário --
-mesma decisão que estava em aberto desde a Fase 3): lê a prosa PT genuína
-já autoral do resto do repositório -- `README.md`, `RELATORIO_UNICO.md`,
-`PLANO_PSF_IAMINY.md`, `COMO_RODAR.md` e todo `conhecimento/*.md`. Zero
-fonte nova: é só ler o que o próprio projeto já escreveu. Blocos de código
+Corpus AMPLO (`tokens_do_corpus_amplo`, item da meta de vocabulário): lê a
+prosa PT genuína já autoral do resto do repositório por um manifesto explícito:
+documentos centrais e etapas `ETAPA_*.md`. Auditorias baseadas em currículos
+externos e renderizações duplicadas ficam excluídas. Blocos de código
 cercados (```...```) e trechos de código inline (`...`) são removidos
 antes de tokenizar -- identificadores de código (`SOMA`, `MULT`, `ITER`)
 e notação de fórmula (`a × k = b`) não são vocabulário de português, e
@@ -54,6 +53,16 @@ _DOCUMENTOS_PROSA_AMPLA: tuple[str, ...] = (
     "RELATORIO_UNICO.md",
     "PLANO_PSF_IAMINY.md",
     "COMO_RODAR.md",
+)
+
+# Só documentos autorais cuja origem é interna. As duas auditorias de
+# currículo ficam deliberadamente fora: elas registram listas externas e,
+# portanto, não podem servir de fonte para um léxico com proveniência local.
+# Renderizações/listas derivadas também ficam fora para não transformar uma
+# única ocorrência em duas evidências artificiais.
+_DOCUMENTOS_CONHECIMENTO_LOCAL: tuple[str, ...] = (
+    "HIPOTESE_DIVISAO_PRIMALIDADE_PSF.md",
+    "PROXIMO_FLUXO_NATURAL.md",
 )
 
 _BLOCO_CODIGO = re.compile(r"```.*?```", re.DOTALL)
@@ -91,7 +100,9 @@ def tokens_do_corpus() -> tuple[str, ...]:
 
 def _caminhos_prosa_ampla() -> tuple[Path, ...]:
     caminhos = [caminho_documento(nome) for nome in _DOCUMENTOS_PROSA_AMPLA]
-    caminhos.extend(sorted((_RAIZ / "conhecimento").glob("*.md")))
+    diretorio_conhecimento = _RAIZ / "conhecimento"
+    caminhos.extend(sorted(diretorio_conhecimento.glob("ETAPA_*.md")))
+    caminhos.extend(diretorio_conhecimento / nome for nome in _DOCUMENTOS_CONHECIMENTO_LOCAL)
     return tuple(p for p in caminhos if p.is_file())
 
 
@@ -106,15 +117,14 @@ def _limpar_codigo(texto: str) -> str:
 
 def frases_da_prosa_autoral_ampla() -> tuple[str, ...]:
     """Texto (fora de blocos/trechos de código) de `README.md`,
-    `RELATORIO_UNICO.md`, `PLANO_PSF_IAMINY.md`, `COMO_RODAR.md` e de todo
-    `conhecimento/*.md` -- prosa real já autoral deste projeto, nenhuma
-    fonte nova."""
+    `RELATORIO_UNICO.md`, `PLANO_PSF_IAMINY.md`, `COMO_RODAR.md` e dos
+    documentos de conhecimento enumerados em `_caminhos_prosa_ampla`."""
     return tuple(_limpar_codigo(caminho.read_text(encoding="utf-8")) for caminho in _caminhos_prosa_ampla())
 
 
 def tokens_do_corpus_amplo(minimo_letras: int = 3) -> tuple[str, ...]:
     """`tokens_do_corpus()` (conhecimento_puro.py) mais a prosa autoral
-    ampla (README/RELATORIO_UNICO/PLANO/COMO_RODAR/conhecimento/*.md).
+    ampla selecionada pelo manifesto local deste módulo.
     Tokens com menos de `minimo_letras` ficam de fora deste corpus amplo
     (ruído de variável de fórmula matemática solta, não palavra real --
     ver docstring do módulo); `tokens_do_corpus()` em si não é filtrado."""
@@ -124,3 +134,33 @@ def tokens_do_corpus_amplo(minimo_letras: int = 3) -> tuple[str, ...]:
             if token.tipo == TipoToken.PALAVRA and len(token.normalizado) >= minimo_letras:
                 tokens.append(token.normalizado)
     return tuple(tokens)
+
+
+def tokens_do_corpus_lexical_local(minimo_letras: int = 3) -> tuple[str, ...]:
+    """Corpus amplo estável para reconstrução lexical.
+
+    Exclui ``README.md`` porque ele documenta as métricas vivas do próprio
+    léxico: usá-lo como fonte faria cada atualização do número acrescentar
+    vocabulário e mudar novamente o número descrito. O conhecimento canônico,
+    plano, relatório, guia de execução e documentos de conhecimento continuam
+    sendo fontes internas.
+    """
+    tokens = list(tokens_do_corpus())
+    for caminho in _caminhos_prosa_ampla():
+        if caminho.name == "README.md":
+            continue
+        frase = _limpar_codigo(caminho.read_text(encoding="utf-8"))
+        for token in _tokenizador.tokenizar(frase):
+            if token.tipo == TipoToken.PALAVRA and len(token.normalizado) >= minimo_letras:
+                tokens.append(token.normalizado)
+    return tuple(tokens)
+
+
+def tokens_do_corpus_reconstrucao_local(minimo_letras: int = 3) -> tuple[str, ...]:
+    """Evidência lexical interna estável aceita na reconstrução.
+
+    Não varre a árvore Python: comentários podem conter exemplos negativos,
+    identificadores ou texto de pacotes instalados ao lado do projeto. A
+    origem fica limitada ao manifesto documental explícito acima.
+    """
+    return tokens_do_corpus_lexical_local(minimo_letras)

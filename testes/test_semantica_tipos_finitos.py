@@ -29,3 +29,7 @@ def main():
         print("FALHAS", falhas); raise SystemExit(1)
     print("Tudo passou.")
 if __name__ == "__main__": main()
+
+
+def test_programa_principal():
+    assert main() is None

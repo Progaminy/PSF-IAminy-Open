@@ -18,6 +18,7 @@ from nucleo.chat_rotas_basicas import (
     _responder_social,
 )
 from nucleo.chat_rotas_corretor import _responder_corrigir
+from nucleo.chat_rotas_dominios import responder_por_dominio
 from nucleo.chat_rotas_materializacao import _responder_comando_adicionar_conhecimento, _responder_fora_escopo_sem_inventar
 from nucleo.chat_rotas_resolvedores import _responder_contexto, _responder_indice_total, _responder_nao_encontrado, _responder_resolvedor
 from nucleo.chat_texto import detectar_modo, detectar_tom, eh_pergunta
@@ -81,6 +82,10 @@ def _responder_unidade(
     if modo == "corrigir":
         return _responder_corrigir(texto, tom)
 
+    por_dominio = responder_por_dominio(texto)
+    if por_dominio is not None:
+        return por_dominio
+
     t_norm = texto.casefold().strip()
     seguimentos_curtos = {
         "dá outro exemplo", "da outro exemplo", "dê outro exemplo", "de outro exemplo",
@@ -134,4 +139,3 @@ def _responder_unidade(
     if social is not None:
         return social
     return _responder_nao_encontrado(texto)
-

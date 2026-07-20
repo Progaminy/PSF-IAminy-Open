@@ -52,7 +52,7 @@ python3 -m pytest -q
 Resultado atual esperado:
 
 ```text
-1106 passed
+1194 passed
 ```
 
 ## Ver uma demonstração rápida

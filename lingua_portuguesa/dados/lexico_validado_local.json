@@ -1,0 +1,29 @@
+[
+  {
+    "lema": "exatamente",
+    "classe": "adverbio",
+    "definicoes": [
+      "De modo exato, preciso ou inteiramente correspondente ao que foi indicado."
+    ]
+  },
+  {
+    "lema": "infelizmente",
+    "classe": "adverbio",
+    "definicoes": [
+      "De modo infeliz ou como avaliação de algo lamentável."
+    ]
+  },
+  {
+    "lema": "desaparecimento",
+    "classe": "substantivo",
+    "definicoes": [
+      "Ação ou resultado de desaparecer."
+    ],
+    "formas": {
+      "desaparecimento": {
+        "genero": "masculino",
+        "numero": "singular"
+      }
+    }
+  }
+]

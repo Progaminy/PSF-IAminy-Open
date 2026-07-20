@@ -14,8 +14,8 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 
 **O que já funciona, com teste automatizado.**
 - Matemática: resolve expressões racionais com precedência, reconstrói divisão por quociente/resto/fração/decimal, executa prova formal no fragmento lógico finito e distingue teste de prova universal — 203 documentos conceituais auditados, todos com dependências ligadas.
-- Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1702 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
-- 1106 testes automatizados passam localmente (`python3 -m pytest -q`).
+- Português: 1141 conceitos puros numa linha canónica, com exemplo mínimo e 0 lacunas internas conhecidas; léxico de 1705 lemas; análise morfológica, correção ortográfica e comparação gramatical finita.
+- 1194 testes automatizados passam localmente (`python3 -m pytest -q`).
 
 **O que ainda é experimental.**
 - A hipótese própria de primalidade por divisão em níveis (`matematica/hipoteses.py`) está guardada, sem investigação ativa nem integração ao motor de primalidade existente.
@@ -26,7 +26,7 @@ Sistema local do projeto Pensador Sem Fronteiras para conhecimento puro, investi
 ```bash
 git clone https://github.com/Progaminy/PSF-IAminy-Open.git
 cd PSF-IAminy-Open
-python3 -m pytest -q                 # 1106 passed
+python3 -m pytest -q                 # 1194 passed
 python3 exemplo_publico.py           # entrada, motor, rastreabilidade, limitação -- em segundos
 ```
 Exemplos mais profundos por domínio: [`exemplos/matematica.py`](exemplos/matematica.py), [`exemplos/portugues.py`](exemplos/portugues.py), [`exemplos/rastreabilidade.py`](exemplos/rastreabilidade.py). Instruções completas (interface local, todos os motores): [`COMO_RODAR.md`](COMO_RODAR.md).
@@ -66,6 +66,8 @@ MotorComumPSF
 ```
 
 Os motores não se sobrepõem. O motor comum presta serviços, mas não produz verdade matemática nem linguística.
+
+A entrada pública `nucleo/chat_vivo.py` aplica autoridade por domínio antes da pesquisa documental: `nucleo/chat_rotas_dominios.py` encaminha cálculo e reconstrução ao `MotorMatematica`, análise e definição ao `MotorPortugues`, e identidade à fonte controlada do `MotorGeralIAMiny`. O índice total permanece apenas como retaguarda.
 
 O `MotorMatematica` inventaria **203 documentos conceituais matemáticos vivos**, resolve expressões racionais não negativas com precedência correta, reconstrói divisão por quociente, resto, fração e expansão decimal, executa prova formal certificada no fragmento lógico finito, distingue teste de prova universal e produz monografia como consolidação PSF.
 
@@ -136,7 +138,7 @@ Tabela de capacidades centrais, cada uma com teste automatizado que a sustenta. 
 | Divisão reconstruída (quociente, resto, fração, decimal) | Implementada | `testes/test_motores_dominio_comum.py::test_divisao_racional_e_decimal_sao_reconstruidas_sem_magia` e `test_divisao_periodica_preserva_fracao_e_controla_precisao` | Divisão por zero fica não definida por construção — não é erro nem problema aberto |
 | Prova formal no fragmento lógico finito | Implementada | `testes/test_motores_dominio_comum.py::test_motor_matematica_prova_finita_certificada` | Restrita ao fragmento lógico finito já construído |
 | Adição | Implementada | `testes/test_adicao.py` (5 testes) | Naturais/inteiros conforme o motor |
-| Segmentação morfológica (prefixo+radical+sufixo) | Parcial | `testes/test_morfemas_afixais.py` (9 testes), `testes/test_morfologia_derivacional.py` (37 testes) | Só reconhece radical já existente como entrada própria no léxico; vocabulário limitado aos 1702 lemas internos |
+| Segmentação morfológica (prefixo+radical+sufixo) | Parcial | `testes/test_morfemas_afixais.py` (9 testes), `testes/test_morfologia_derivacional.py` (37 testes) | Só reconhece radical já existente como entrada própria no léxico; vocabulário limitado aos 1705 lemas internos |
 | Correção ortográfica | Implementada | `testes/test_corretor.py`, `testes/test_corretor_integracao.py` | Léxico e candidatos internos; nenhum dicionário externo como fundamento |
 | Motor auxiliar de validação e otimização | Implementado | `testes/test_motores_dominio_comum.py::test_motor_auxiliar_*` (5 testes) | Nunca decide conhecimento; só compara, mede e cacheia |
 | Hipótese de primalidade por divisão em níveis | Experimental, não integrada | `testes/test_motores_dominio_comum.py::test_hipotese_do_autor_fica_pendente_e_nao_vira_primalidade_pronta` (confirma que fica pendente, não que a hipótese está provada) | Guardada sem investigação ativa; não substitui a primalidade PSF existente nem responde a novos casos automaticamente |
@@ -321,7 +323,7 @@ fronteira aberta = depende de variedade, contexto, comunidade, história ou evid
 limite operacional = o conceito existe, mas a operação automática ainda pode ser parcial
 ```
 
-O léxico interno reconhece **1702 lemas, 4119 formas e 4565 leituras**. O motor expõe busca, dependências diretas e transitivas, temas de consulta, fronteiras abertas, limites operacionais e verificação de mestria conceitual.
+O léxico interno reconhece **1705 lemas, 72824 formas e 4456 leituras**. Das formas reconhecidas, **72.036 são formas atômicas** e **788 são expressões multipalavra**; a cobertura ortográfica atômica real corresponde a **12,0060%** da meta de 600 mil. Entre as formas atômicas, **3238 têm leitura lexical** e **68.798 são somente ortográficas**. A expansão guarda localmente **1322 infinitivos regulares em -ar** e reconstrói por regra **70.066 formas** de seis pessoas, tempos simples, gerúndio e particípio (incluindo concordância de gênero/número e variantes lusófonas declaradas). Essas grafias não recebem definição nem leitura semântica inventada; tokens apenas repetidos no corpus continuam candidatos de revisão e não entram automaticamente no corretor. O motor expõe busca, dependências diretas e transitivas, temas de consulta, fronteiras abertas, limites operacionais e verificação de mestria conceitual.
 
 ## Aproveitamento interno da Matemática no Português
 
@@ -378,6 +380,7 @@ nucleo/chat_rotas.py
 nucleo/chat_rotas_auditoria.py
 nucleo/chat_rotas_basicas.py
 nucleo/chat_rotas_corretor.py
+nucleo/chat_rotas_dominios.py
 nucleo/chat_rotas_materializacao.py
 nucleo/chat_rotas_resolvedores.py
 nucleo/chat_texto.py
@@ -439,7 +442,7 @@ python3 motor_iaminy.py --rapido
 Resultado atual esperado:
 
 ```text
-1106 passed na verificação local mais recente
+1194 passed na verificação local mais recente
 ```
 
 ```text

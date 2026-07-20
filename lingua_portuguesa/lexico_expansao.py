@@ -67,12 +67,21 @@ def _corrigir_ortografia_raiz(formas: dict, raiz: str, infinitivo: str) -> dict:
     "nasço"/"nasça" -- português preserva o som de "c" (=/s/) trocando por
     "ç" sempre que a próxima vogal é "a" ou "o" (senão "c" soaria /k/).
     Mesma disciplina já usada para os plurais em "-al"/"-ção"."""
-    if not infinitivo.endswith(("cer", "cir")):
-        return formas
     corrigidas = {}
     for forma, dado in formas.items():
-        if forma.startswith(raiz) and forma[len(raiz):len(raiz) + 1] in ("a", "o"):
+        proxima = forma[len(raiz):len(raiz) + 1] if forma.startswith(raiz) else ""
+        if infinitivo.endswith(("cer", "cir")) and proxima in ("a", "o"):
             forma = raiz[:-1] + "ç" + forma[len(raiz):]
+        elif infinitivo.endswith("car") and proxima == "e":
+            forma = raiz[:-1] + "qu" + forma[len(raiz):]
+        elif infinitivo.endswith("gar") and proxima == "e":
+            forma = raiz[:-1] + "gu" + forma[len(raiz):]
+        elif infinitivo.endswith("çar") and proxima == "e":
+            forma = raiz[:-1] + "c" + forma[len(raiz):]
+        elif infinitivo.endswith(("ger", "gir")) and proxima in ("a", "o"):
+            forma = raiz[:-1] + "j" + forma[len(raiz):]
+        elif infinitivo.endswith("guir") and proxima in ("a", "o"):
+            forma = raiz[:-1] + forma[len(raiz):]
         corrigidas[forma] = dado
     return corrigidas
 
@@ -839,6 +848,16 @@ _VERBOS: tuple[tuple[str, str], ...] = (
     ("aparecer", "Passar a ser visível ou perceptível."),
 )
 
+# Estes lemas não seguem integralmente o paradigma mecânico de `_verbo`.
+# Mantemos o lema e a definição já curados, mas não fabricamos flexões com a
+# raiz invariável. As formas irregulares serão materializadas em lote próprio.
+_VERBOS_FORA_DO_PARADIGMA_REGULAR = frozenset({
+    "construir",
+    "reconstruir",
+    "referir",
+    "inferir",
+})
+
 
 def entradas_expandidas() -> tuple[EntradaLexical, ...]:
     entradas: list[EntradaLexical] = []
@@ -849,7 +868,12 @@ def entradas_expandidas() -> tuple[EntradaLexical, ...]:
     for lema, definicao in _ADJETIVOS:
         entradas.extend(_forma_adj(lema, definicao))
     for infinitivo, definicao in _VERBOS:
-        entradas.extend(_verbo(infinitivo, definicao))
+        if infinitivo in _VERBOS_FORA_DO_PARADIGMA_REGULAR:
+            entradas.append(
+                EntradaLexical(infinitivo, infinitivo, ClasseGramatical.VERBO, (definicao,))
+            )
+        else:
+            entradas.extend(_verbo(infinitivo, definicao))
     entradas.extend(_PALAVRAS_FUNCIONAIS)
 
     # Todo conceito puro precisa ser consultável no léxico interno. Conceitos já

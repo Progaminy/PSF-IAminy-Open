@@ -151,3 +151,33 @@ def test_estrutura_do_portugues_continua_sem_lacuna_apos_a_extensao():
     auditoria = motor.auditar_estrutura_portugues()
     assert len(auditoria.nomes_duplicados) == 0
     assert len(auditoria.dependencias_ausentes) == 0
+
+
+def test_alternancias_ortograficas_preservam_som_diante_de_e():
+    explicar = {entrada.forma for entrada in _verbo("explicar", "x")}
+    chegar = {entrada.forma for entrada in _verbo("chegar", "x")}
+    comecar = {entrada.forma for entrada in _verbo("começar", "x")}
+
+    assert {"expliquei", "explique", "expliquem"} <= explicar
+    assert not {"explicei", "explice", "explicem"} & explicar
+    assert {"cheguei", "chegue", "cheguem"} <= chegar
+    assert not {"chegei", "chege", "chegem"} & chegar
+    assert {"comecei", "comece", "comecem"} <= comecar
+    assert not {"começei", "começe", "começem"} & comecar
+
+
+def test_g_muda_para_j_diante_de_a_e_o_em_ger_gir():
+    reger = {entrada.forma for entrada in _verbo("reger", "x")}
+    corrigir = {entrada.forma for entrada in _verbo("corrigir", "x")}
+
+    assert {"rejo", "reja", "rejam"} <= reger
+    assert not {"rego", "rega", "regam"} & reger
+    assert {"corrijo", "corrija", "corrijam"} <= corrigir
+    assert not {"corrigo", "corriga", "corrigam"} & corrigir
+
+
+def test_gu_perde_u_diante_de_a_e_o_em_distinguir():
+    distinguir = {entrada.forma for entrada in _verbo("distinguir", "x")}
+
+    assert {"distingo", "distinga", "distingam"} <= distinguir
+    assert not {"distinguo", "distingua", "distinguam"} & distinguir
